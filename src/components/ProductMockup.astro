@@ -1,15 +1,15 @@
 ---
 import { Image } from 'astro:assets'
-import sacCoton from '../assets/images/sac-coton.webp'
-import sacJute from '../assets/images/sac-jute.webp'
-import toteBag from '../assets/images/tote-bag-2.webp'
+import toteBag from '../assets/images/jute.webp'
+import sacJute from '../assets/images/sac-jute-2.webp'
+import sacCoton from '../assets/images/totebag.jpg'
 
 const tags = ['Made in Europe', '+200 g/m²', 'Coton']
 
 const products = [
-  { name: 'Sac shopping coton 220g', verified: true, supplier: 'EcoBag Fabrics', price: '1,24 €', moq: '500', image: sacCoton },
-  { name: 'Sac shopping jute naturel', verified: true, supplier: 'Jute & Co', price: '1,89 €', moq: '250', image: sacJute },
-  { name: 'Sac shopping toile recyclée', verified: false, supplier: 'Recyfil', price: '0,98 €', moq: '1 000', image: toteBag },
+  { name: 'Sac shopping coton 220g', verified: true, supplier: 'EcoBag Fabrics', price: '1,24 €', moq: '500', image: sacCoton, focus: '80% 90%' },
+  { name: 'Sac shopping jute naturel', verified: true, supplier: 'Jute & Co', price: '1,89 €', moq: '250', image: sacJute, focus: 'center' },
+  { name: 'Sac shopping toile recyclée', verified: false, supplier: 'Recyfil', price: '0,98 €', moq: '1 000', image: toteBag, focus: 'center' },
 ]
 ---
 
@@ -38,7 +38,7 @@ const products = [
 					))
 				}
 			</div>
-			<div class="grid grid-cols-[28px_minmax(0,1fr)_64px_54px] items-center gap-2 border-b border-hairline py-2.5 text-caption font-bold uppercase tracking-wide text-text-muted sm:grid-cols-[40px_minmax(0,1fr)_110px_90px_80px] sm:gap-3">
+			<div class="grid grid-cols-[44px_minmax(0,1fr)_64px_54px] items-center gap-2 border-b border-hairline py-2.5 text-caption font-bold uppercase tracking-wide text-text-muted sm:grid-cols-[56px_minmax(0,1fr)_110px_90px_80px] sm:gap-3">
 				<div></div>
 				<div>Produit</div>
 				<div class="hidden sm:block">Fournisseur</div>
@@ -48,9 +48,18 @@ const products = [
 			{
 				products.map((product, i) => (
 					<div
-						class={`grid grid-cols-[28px_minmax(0,1fr)_64px_54px] items-center gap-2 py-3 sm:grid-cols-[40px_minmax(0,1fr)_110px_90px_80px] sm:gap-3 ${i < products.length - 1 ? 'border-b border-hairline' : ''}`}
+						class={`grid grid-cols-[44px_minmax(0,1fr)_64px_54px] items-center gap-2 py-3 sm:grid-cols-[56px_minmax(0,1fr)_110px_90px_80px] sm:gap-3 ${i < products.length - 1 ? 'border-b border-hairline' : ''}`}
 					>
-						<Image src={product.image} alt={product.name} width={32} height={32} class="h-8 w-8 rounded-sm object-cover" />
+						<div class="h-11 w-11 overflow-hidden rounded-sm sm:h-14 sm:w-14">
+							<Image
+								src={product.image}
+								alt={product.name}
+								width={56}
+								height={56}
+								class="h-full w-full object-cover"
+								style={`object-position: ${product.focus};`}
+							/>
+						</div>
 						<div class="min-w-0 text-body-sm font-semibold text-text-primary">
 							{product.name}
 							{product.verified && (
