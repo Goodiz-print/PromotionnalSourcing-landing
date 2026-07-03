@@ -30,7 +30,9 @@ const navItems = [
 			</nav>
 		</div>
 		<div class="flex items-center gap-2">
-			<Button href="#waitlist" class="!px-5 !py-2.5 text-body-sm">Liste d'attente</Button>
+			<div class="hidden md:block">
+				<Button href="#waitlist" class="!px-5 !py-2.5 text-body-sm">Liste d'attente</Button>
+			</div>
 			<button
 				type="button"
 				data-menu-toggle
@@ -60,6 +62,7 @@ const navItems = [
 				)
 			)
 		}
+		<Button href="#waitlist" data-mobile-nav-link class="mt-3 w-full text-center">Liste d'attente</Button>
 	</nav>
 </header>
 
@@ -80,4 +83,7 @@ const navItems = [
 
 	toggle?.addEventListener('click', () => setOpen(Boolean(menu?.hidden)))
 	menu?.querySelectorAll('[data-mobile-nav-link]').forEach((link) => link.addEventListener('click', () => setOpen(false)))
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape' && menu && !menu.hidden) setOpen(false)
+	})
 </script>
