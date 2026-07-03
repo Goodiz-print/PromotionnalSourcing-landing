@@ -1,0 +1,136 @@
+---
+import Layout from '../layouts/Layout.astro'
+import PricingSection from '../components/PricingSection.astro'
+import FinalCta from '../components/FinalCta.astro'
+
+const comparison = [
+	{ feature: 'Accès au catalogue des 300 fournisseurs', light: true, pro: true },
+	{ feature: 'Recherche & comparaison multi-critères', light: true, pro: true },
+	{ feature: 'Demandes de devis', light: '5 / mois', pro: 'Illimitées' },
+	{ feature: 'Recherche par image (IA)', light: false, pro: true },
+	{ feature: 'Comparaison prix, MOQ, délais & certifications', light: true, pro: true },
+	{ feature: 'Support', light: 'Standard', pro: 'Prioritaire' },
+	{ feature: 'Réservé aux professionnels', light: true, pro: true },
+	{ feature: 'Engagement / abonnement obligatoire', light: false, pro: false },
+]
+
+const faqs = [
+	{
+		q: 'Pourquoi la version Light est-elle gratuite ?',
+		a: 'Notre objectif est de devenir le réflexe n°1 des acheteurs européens. La version Light vous laisse rechercher, comparer et demander vos premiers devis sans carte bancaire — vous ne passez au Pro que si vous en avez réellement besoin.',
+	},
+	{
+		q: 'Qui peut s’inscrire ?',
+		a: 'La plateforme est réservée aux professionnels — fournisseurs et revendeurs d’objets publicitaires. L’accès n’est pas ouvert aux particuliers.',
+	},
+	{
+		q: 'Comment fonctionne le tarif « Sur devis » du Pro ?',
+		a: 'L’offre Pro est calibrée selon votre volume et vos besoins. Vous nous contactez, nous échangeons sur votre usage, puis nous vous transmettons une proposition adaptée — sans engagement obligatoire.',
+	},
+	{
+		q: 'Puis-je passer de Light à Pro à tout moment ?',
+		a: 'Oui. Vous commencez gratuitement en Light et basculez vers le Pro quand vos demandes de devis dépassent votre quota ou que vous avez besoin de la recherche par image et du support prioritaire.',
+	},
+	{
+		q: 'Y a-t-il un engagement de durée ?',
+		a: 'Aucun abonnement obligatoire, jamais. La version Light reste gratuite, et le Pro s’adapte à votre activité.',
+	},
+]
+---
+
+<Layout
+	title="Tarifs — Promotional Sourcing.eu"
+	description="Un tarif simple, sans surprise : version Light gratuite et offre Pro sur devis. Réservé aux professionnels — fournisseurs et revendeurs d'objets publicitaires en Europe."
+>
+	<section class="wrapper py-24 text-center">
+		<p class="mb-6 text-eyebrow text-text-brand">Tarifs</p>
+		<h1 class="mx-auto mb-3 max-w-[720px] text-display-lg">Choisissez l'offre qui vous convient.</h1>
+		<p class="mx-auto max-w-[560px] text-body-md text-text-secondary">
+			Commencez gratuitement, sans carte bancaire. Passez au Pro uniquement quand vos besoins grandissent.
+		</p>
+	</section>
+
+	<PricingSection />
+
+	<section class="wrapper py-24">
+		<div class="mb-12 text-center">
+			<p class="mb-6 text-eyebrow text-text-brand">Comparatif</p>
+			<h2 class="mb-3 text-display-md">Ce qui est inclus dans chaque offre</h2>
+			<p class="text-body-md text-text-secondary">Light vs Pro, en un coup d'œil.</p>
+		</div>
+
+		<div data-reveal class="overflow-x-auto">
+			<table class="w-full min-w-[560px] border-collapse">
+				<thead>
+					<tr class="border-b border-hairline">
+						<th class="py-4 pr-4 text-left text-caption font-bold text-text-primary">Fonctionnalité</th>
+						<th class="w-[120px] py-4 px-2 text-center text-caption font-bold text-text-primary">Light</th>
+						<th class="w-[120px] py-4 px-2 text-center text-caption font-bold text-text-brand">Pro</th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						comparison.map((row) => (
+							<tr class="border-b border-hairline">
+								<td class="py-4 pr-4 text-left text-body-md text-text-secondary">{row.feature}</td>
+								<td class="py-4 px-2 text-center text-body-md">
+									{typeof row.light === 'string' ? (
+										<span class="text-text-primary">{row.light}</span>
+									) : row.light ? (
+										<span class="text-text-brand">✓</span>
+									) : (
+										<span class="text-text-muted">—</span>
+									)}
+								</td>
+								<td class="py-4 px-2 text-center text-body-md">
+									{typeof row.pro === 'string' ? (
+										<span class="font-medium text-text-primary">{row.pro}</span>
+									) : row.pro ? (
+										<span class="text-text-brand">✓</span>
+									) : (
+										<span class="text-text-muted">—</span>
+									)}
+								</td>
+							</tr>
+						))
+					}
+				</tbody>
+			</table>
+		</div>
+	</section>
+
+	<section class="bg-sunken px-6 py-24 md:px-10">
+		<div class="mx-auto max-w-[760px]">
+			<div class="mb-12 text-center">
+				<p class="mb-6 text-eyebrow text-text-brand">FAQ</p>
+				<h2 class="mb-3 text-display-md">Questions fréquentes</h2>
+				<p class="text-body-md text-text-secondary">Tout ce qu'il faut savoir avant de commencer.</p>
+			</div>
+
+			<div data-reveal class="flex flex-col gap-3">
+				{
+					faqs.map((faq) => (
+						<details class="group rounded-xl border border-hairline bg-card px-6 py-1 shadow-elevation-1">
+							<summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-heading-md text-text-primary marker:hidden">
+								{faq.q}
+								<svg
+									class="shrink-0 text-text-muted transition-transform duration-200 group-open:rotate-45"
+									width="20"
+									height="20"
+									viewBox="0 0 20 20"
+									fill="none"
+									aria-hidden="true"
+								>
+									<path d="M10 4.5v11M4.5 10h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+								</svg>
+							</summary>
+							<p class="pb-5 text-body-md text-text-muted">{faq.a}</p>
+						</details>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<FinalCta />
+</Layout>
