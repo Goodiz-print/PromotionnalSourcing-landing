@@ -7,6 +7,11 @@
 		h: number
 	}
 
+	interface AnimController {
+		start: () => void
+		stop: () => void
+	}
+
 	function fitCanvas(canvas: HTMLCanvasElement): CanvasState {
 		const ctx = canvas.getContext('2d')!
 		const state: CanvasState = { ctx, w: 1, h: 1 }
@@ -24,8 +29,28 @@
 		return state
 	}
 
+	// Runs `draw` via requestAnimationFrame only while started — lets each anim
+	// pause when its canvas scrolls off-screen instead of burning CPU/battery forever.
+	function loopController(draw: (now: number) => void): AnimController {
+		let rafId = 0
+		const tick = (now: number) => {
+			draw(now)
+			rafId = requestAnimationFrame(tick)
+		}
+		return {
+			start: () => {
+				if (rafId) return
+				rafId = requestAnimationFrame(tick)
+			},
+			stop: () => {
+				cancelAnimationFrame(rafId)
+				rafId = 0
+			},
+		}
+	}
+
 	// Supplier constellation — drifting nodes joined by proximity links.
-	function animNodes(canvas: HTMLCanvasElement) {
+	function animNodes(canvas: HTMLCanvasElement): AnimController {
 		const state = fitCanvas(canvas)
 		const COUNT = 30
 		let nodes: { x: number; y: number; vx: number; vy: number; r: number; pulse: boolean }[] = []
@@ -42,7 +67,7 @@
 		seed()
 		window.addEventListener('resize', seed, { passive: true })
 
-		const draw = () => {
+		return loopController(() => {
 			const { ctx, w, h } = state
 			ctx.clearRect(0, 0, w, h)
 			for (const n of nodes) {
@@ -84,13 +109,11 @@
 				ctx.shadowBlur = 0
 			}
 			ctx.globalAlpha = 1
-			requestAnimationFrame(draw)
-		}
-		requestAnimationFrame(draw)
+		})
 	}
 
 	// Soft particle field drifting behind the AI drop zone.
-	function animScan(canvas: HTMLCanvasElement) {
+	function animScan(canvas: HTMLCanvasElement): AnimController {
 		const state = fitCanvas(canvas)
 		const COUNT = 34
 		let ps: { x: number; y: number; vy: number; r: number; a: number }[] = []
@@ -106,7 +129,7 @@
 		seed()
 		window.addEventListener('resize', seed, { passive: true })
 
-		const draw = () => {
+		return loopController(() => {
 			const { ctx, w, h } = state
 			ctx.clearRect(0, 0, w, h)
 			for (const p of ps) {
@@ -122,13 +145,11 @@
 				ctx.fill()
 			}
 			ctx.globalAlpha = 1
-			requestAnimationFrame(draw)
-		}
-		requestAnimationFrame(draw)
+		})
 	}
 
 	// Live 3-line price chart — three suppliers wandering at different levels.
-	function animChart(canvas: HTMLCanvasElement) {
+	function animChart(canvas: HTMLCanvasElement): AnimController {
 		const state = fitCanvas(canvas)
 		const lines = [
 			{ base: 0.72, amp: 0.05, sp: 0.5, ph: 0.0, color: 'rgba(64,50,200,1)', w: 2 },
@@ -137,7 +158,8 @@
 		]
 		const N = 48
 		const t0 = performance.now()
-		const draw = (now: number) => {
+
+		return loopController((now) => {
 			const { ctx, w, h } = state
 			const t = (now - t0) * 0.001
 			ctx.clearRect(0, 0, w, h)
@@ -169,15 +191,13 @@
 				ctx.arc(w - 1, h - uv * h, ln.w + 1, 0, Math.PI * 2)
 				ctx.fill()
 			}
-			requestAnimationFrame(draw)
-		}
-		requestAnimationFrame(draw)
+		})
 	}
 
 	// Rotating fibonacci-sphere globe with travelling arcs — "global commerce" motif.
-	function animGlobe(canvas: HTMLCanvasElement) {
+	function animGlobe(canvas: HTMLCanvasElement): AnimController | null {
 		const ctx = canvas.getContext('2d')
-		if (!ctx) return
+		if (!ctx) return null
 
 		let w = 1, h = 1, cx = 0, cy = 0, r = 1
 		const resize = () => {
@@ -233,7 +253,8 @@
 
 		const t0 = performance.now()
 		let last = t0
-		const draw = (now: number) => {
+
+		return loopController((now) => {
 			const dt = Math.min(0.05, (now - last) * 0.001)
 			last = now
 			const ang = (now - t0) * 0.001 * 0.16
@@ -306,14 +327,11 @@
 					ctx.shadowBlur = 0
 				}
 			}
-
-			requestAnimationFrame(draw)
-		}
-		requestAnimationFrame(draw)
+		})
 	}
 
 	// Ambient drifting dot field with a slow-roaming soft glow — backdrop for the search card.
-	function animSearchField(canvas: HTMLCanvasElement) {
+	function animSearchField(canvas: HTMLCanvasElement): AnimController {
 		const state = fitCanvas(canvas)
 		const COUNT = 46
 		let dots: { x: number; y: number; vx: number; vy: number; r: number; a: number }[] = []
@@ -331,7 +349,8 @@
 		window.addEventListener('resize', seed, { passive: true })
 
 		const t0 = performance.now()
-		const draw = (now: number) => {
+
+		return loopController((now) => {
 			const { ctx, w, h } = state
 			const t = (now - t0) * 0.001
 			ctx.clearRect(0, 0, w, h)
@@ -358,13 +377,11 @@
 				ctx.fill()
 			}
 			ctx.globalAlpha = 1
-			requestAnimationFrame(draw)
-		}
-		requestAnimationFrame(draw)
+		})
 	}
 
 	// Hero backdrop — Stripe-style drifting aurora blobs with a fine dust of rising particles.
-	function animHero(canvas: HTMLCanvasElement) {
+	function animHero(canvas: HTMLCanvasElement): AnimController {
 		const state = fitCanvas(canvas)
 		const blobs = [
 			{ x: 0.2, y: 0.34, r: 0.46, c: 'rgba(64,50,200,', op: 0.4, sp: 0.16, ph: 0 },
@@ -389,7 +406,8 @@
 		window.addEventListener('resize', seed, { passive: true })
 
 		const t0 = performance.now()
-		const draw = (now: number) => {
+
+		return loopController((now) => {
 			const { ctx, w, h } = state
 			const t = (now - t0) * 0.001
 			ctx.clearRect(0, 0, w, h)
@@ -427,21 +445,18 @@
 			}
 			ctx.shadowBlur = 0
 			ctx.globalAlpha = 1
-
-			requestAnimationFrame(draw)
-		}
-		requestAnimationFrame(draw)
+		})
 	}
 
 	// Request "broadcast" — pulses travelling from the quote request to each supplier node.
-	function animQuoteBroadcast(canvas: HTMLCanvasElement) {
+	function animQuoteBroadcast(canvas: HTMLCanvasElement): AnimController {
 		const state = fitCanvas(canvas)
 		const targets = [0.22, 0.5, 0.78]
 		const originY = 0.95
 		const targetY = 0.12
 		const t0 = performance.now()
 
-		const draw = (now: number) => {
+		return loopController((now) => {
 			const { ctx, w, h } = state
 			const t = (now - t0) * 0.001
 			ctx.clearRect(0, 0, w, h)
@@ -477,21 +492,34 @@
 				ctx.stroke()
 			})
 			ctx.globalAlpha = 1
-			requestAnimationFrame(draw)
-		}
-		requestAnimationFrame(draw)
+		})
 	}
 
 	if (!reduced) {
 		document.querySelectorAll<HTMLCanvasElement>('[data-canvas]').forEach((canvas) => {
 			const kind = canvas.getAttribute('data-canvas')
-			if (kind === 'nodes') animNodes(canvas)
-			else if (kind === 'scan') animScan(canvas)
-			else if (kind === 'chart') animChart(canvas)
-			else if (kind === 'globe') animGlobe(canvas)
-			else if (kind === 'search-field') animSearchField(canvas)
-			else if (kind === 'quote-broadcast') animQuoteBroadcast(canvas)
-			else if (kind === 'hero') animHero(canvas)
+			const controller =
+				kind === 'nodes' ? animNodes(canvas) :
+				kind === 'scan' ? animScan(canvas) :
+				kind === 'chart' ? animChart(canvas) :
+				kind === 'globe' ? animGlobe(canvas) :
+				kind === 'search-field' ? animSearchField(canvas) :
+				kind === 'quote-broadcast' ? animQuoteBroadcast(canvas) :
+				kind === 'hero' ? animHero(canvas) :
+				null
+			if (!controller) return
+
+			// Only run the draw loop while the canvas is on (or near) screen.
+			const observer = new IntersectionObserver(
+				(entries) => {
+					for (const entry of entries) {
+						if (entry.isIntersecting) controller.start()
+						else controller.stop()
+					}
+				},
+				{ rootMargin: '200px' }
+			)
+			observer.observe(canvas)
 		})
 	}
 </script>

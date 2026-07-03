@@ -14,15 +14,15 @@ const rows = [
 	</div>
 
 	<div data-reveal class="mx-auto max-w-[880px] overflow-hidden rounded-lg border border-hairline">
-		<div class="grid grid-cols-[1fr_120px_140px] bg-sunken px-6 py-3.5 text-caption font-bold uppercase tracking-wide text-text-muted sm:grid-cols-[1fr_160px_160px]">
+		<div class="grid grid-cols-[minmax(0,1fr)_84px_104px] gap-2 bg-sunken px-4 py-3.5 text-caption font-bold uppercase tracking-wide text-text-muted sm:grid-cols-[minmax(0,1fr)_160px_160px] sm:gap-0 sm:px-6">
 			<div></div>
 			<div class="text-center text-indigo-600">Nous</div>
 			<div class="text-center">European Sourcing</div>
 		</div>
 		{
 			rows.map((row) => (
-				<div class="grid grid-cols-[1fr_120px_140px] items-center border-t border-hairline px-6 py-[18px] text-body-md sm:grid-cols-[1fr_160px_160px]">
-					<div>{row.label}</div>
+				<div class="grid grid-cols-[minmax(0,1fr)_84px_104px] items-center gap-2 border-t border-hairline px-4 py-[18px] text-body-md sm:grid-cols-[minmax(0,1fr)_160px_160px] sm:gap-0 sm:px-6">
+					<div class="min-w-0">{row.label}</div>
 					<div class="text-center text-lg">
 						<span data-pop style={`transition-delay: ${row.delay};`} class="text-success">
 							✓
