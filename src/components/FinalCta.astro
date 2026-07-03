@@ -1,0 +1,89 @@
+---
+import Button from './Button.astro'
+---
+
+<section id="waitlist" class="bg-indigo-500 px-6 py-[88px] text-center md:px-10">
+	<div data-reveal>
+		<h2 class="mx-auto mb-4 max-w-[640px] text-display-lg text-white">
+			Devenez le réflexe n°1 des acheteurs européens.
+		</h2>
+		<p class="mb-9 text-body-lg text-indigo-100">
+			Gratuit dans sa version light. Aucune carte bancaire requise.
+		</p>
+		<form
+			name="waitlist"
+			method="POST"
+			data-netlify="true"
+			data-netlify-honeypot="bot-field"
+			data-waitlist-form
+			class="mx-auto flex max-w-md flex-wrap justify-center gap-3"
+		>
+			<input type="hidden" name="form-name" value="waitlist" />
+			<p class="hidden">
+				<label>Ne pas remplir : <input name="bot-field" /></label>
+			</p>
+			<input
+				type="email"
+				name="email"
+				required
+				placeholder="vous@entreprise.com"
+				class="text-body-md min-w-[220px] flex-1 rounded-md border border-white/25 bg-white/10 px-4 py-3.5 text-white placeholder-white/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+			/>
+			<Button variant="on-dark">S'inscrire sur la liste d'attente</Button>
+		</form>
+		<p class="mt-4 text-caption text-indigo-100" data-waitlist-status role="status" aria-live="polite">
+			Vous serez prévenu dès l'ouverture de la plateforme.
+		</p>
+	</div>
+</section>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>('[data-waitlist-form]')
+	const status = document.querySelector<HTMLParagraphElement>('[data-waitlist-status]')
+
+	function setStatus(message: string, tone: 'success' | 'error') {
+		if (!status) return
+		status.textContent = message
+		status.classList.toggle('text-indigo-100', tone !== 'error')
+		status.classList.toggle('text-red-300', tone === 'error')
+	}
+
+	form?.addEventListener('submit', async (event) => {
+		event.preventDefault()
+
+		const honeypot = form.querySelector<HTMLInputElement>('input[name="bot-field"]')
+		if (honeypot?.value) return
+
+		const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]')
+		const originalLabel = submitButton?.textContent ?? ''
+		if (submitButton) {
+			submitButton.disabled = true
+			submitButton.textContent = 'Envoi…'
+		}
+
+		try {
+			const body = new URLSearchParams()
+			new FormData(form).forEach((value, key) => body.append(key, String(value)))
+			const response = await fetch('/', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				body,
+			})
+
+			if (!response.ok) throw new Error(`Netlify Forms a répondu ${response.status}`)
+
+			setStatus('Merci ! Vous serez prévenu dès l\'ouverture de la plateforme.', 'success')
+			form.reset()
+		} catch {
+			setStatus(
+				'Une erreur est survenue, réessayez ou écrivez-nous à contact@promotionalsourcing.eu.',
+				'error'
+			)
+		} finally {
+			if (submitButton) {
+				submitButton.disabled = false
+				submitButton.textContent = originalLabel
+			}
+		}
+	})
+</script>

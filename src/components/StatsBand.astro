@@ -1,0 +1,47 @@
+---
+const stats = [
+  { to: '1128349', suffix: '', label: 'produits référencés dans un seul catalogue' },
+  { to: '300', suffix: '+', label: 'fournisseurs européens vérifiés' },
+  { to: '24', suffix: ' h', label: 'de délai de réponse moyen aux devis' },
+  { to: '0', suffix: ' €', label: "d'abonnement obligatoire, jamais" },
+]
+---
+
+<section class="relative overflow-hidden bg-ink-950">
+	<div
+		aria-hidden="true"
+		class="anim-daynight absolute inset-0 z-0"
+		style="background-image: linear-gradient(118deg, #140d38 0%, #2a1c6b 22%, #4032c8 42%, #6b4de6 58%, #35236e 76%, #140d38 100%);"
+	>
+	</div>
+	<div
+		aria-hidden="true"
+		class="absolute inset-0 z-0"
+		style="background: radial-gradient(120% 80% at 78% 30%, rgba(120,90,240,0.32), transparent 60%);"
+	>
+	</div>
+	<div data-reveal class="wrapper relative z-10 grid gap-10 py-[72px] md:grid-cols-2 md:items-center">
+		<div>
+			<h2 class="mb-10 max-w-[420px] text-display-lg text-white">Au cœur du sourcing européen.</h2>
+			<div class="grid max-w-[460px] grid-cols-2 gap-x-10 gap-y-8">
+				{
+					stats.map((stat) => (
+						<div>
+							<div
+								data-count-to={stat.to}
+								data-count-suffix={stat.suffix}
+								class="text-tabular text-stat-figure mb-1.5 text-white"
+							>
+								0
+							</div>
+							<p class="text-body-sm leading-snug text-indigo-100">{stat.label}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+		<div class="relative mx-auto aspect-square w-full max-w-[480px]">
+			<canvas data-canvas="globe" class="absolute inset-0 block h-full w-full"></canvas>
+		</div>
+	</div>
+</section>

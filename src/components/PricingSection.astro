@@ -1,0 +1,55 @@
+---
+import Card from './Card.astro'
+import Button from './Button.astro'
+
+const lightFeatures = ['Recherche & comparaison illimitées', 'Accès aux 300 fournisseurs', '5 demandes de devis / mois']
+const proFeatures = ['Tout Light, sans limite', 'Demandes de devis illimitées', 'Recherche par image (IA)', 'Support prioritaire']
+---
+
+<section id="tarifs" class="bg-sunken px-6 py-24 md:px-10">
+	<div class="mx-auto max-w-[1180px]">
+		<div class="mb-12 text-center">
+			<h2 class="mb-3 text-display-md">Un tarif simple, sans surprise.</h2>
+			<p class="text-body-md text-text-secondary">Réservé aux professionnels — fournisseurs et revendeurs.</p>
+		</div>
+
+		<div class="mx-auto grid max-w-[720px] grid-cols-1 gap-6 sm:grid-cols-2">
+			<Card data-reveal hover class="p-8">
+				<p class="mb-1.5 text-heading-md">Light</p>
+				<p class="text-tabular mb-4 text-[36px] font-semibold tracking-[-0.02em]">Gratuit</p>
+				<div class="mb-4 h-px bg-hairline"></div>
+				{
+					lightFeatures.map((feature) => (
+						<div class="flex gap-2 py-2 text-body-md">
+							<span>✓</span>
+							<span>{feature}</span>
+						</div>
+					))
+				}
+				<Button href="#waitlist" variant="secondary" class="mt-5 block w-full text-center">
+					Commencer gratuitement
+				</Button>
+			</Card>
+
+			<Card data-reveal hover variant="brand" class="relative overflow-hidden p-8" style="transition-delay: 0.08s;">
+				<canvas data-canvas="nodes" class="pointer-events-none absolute inset-0 block h-full w-full opacity-60"></canvas>
+				<div class="relative z-10">
+					<p class="mb-1.5 text-heading-md text-white">Pro</p>
+					<p class="text-tabular mb-4 text-[36px] font-semibold tracking-[-0.02em] text-white">Sur devis</p>
+					<div class="mb-4 h-px bg-white/20"></div>
+					{
+						proFeatures.map((feature) => (
+							<div class="flex gap-2 py-2 text-body-md text-white">
+								<span>✓</span>
+								<span>{feature}</span>
+							</div>
+						))
+					}
+					<Button href="mailto:contact@promotionalsourcing.eu" class="mt-5 block w-full text-center">
+						Contacter l'équipe
+					</Button>
+				</div>
+			</Card>
+		</div>
+	</div>
+</section>

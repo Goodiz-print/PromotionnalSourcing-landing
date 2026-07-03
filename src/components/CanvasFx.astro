@@ -1,0 +1,426 @@
+<script>
+	const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+	interface CanvasState {
+		ctx: CanvasRenderingContext2D
+		w: number
+		h: number
+	}
+
+	function fitCanvas(canvas: HTMLCanvasElement): CanvasState {
+		const ctx = canvas.getContext('2d')!
+		const state: CanvasState = { ctx, w: 1, h: 1 }
+		const resize = () => {
+			const dpr = Math.min(window.devicePixelRatio || 1, 2)
+			const rect = canvas.getBoundingClientRect()
+			state.w = Math.max(1, rect.width)
+			state.h = Math.max(1, rect.height)
+			canvas.width = Math.round(state.w * dpr)
+			canvas.height = Math.round(state.h * dpr)
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+		}
+		resize()
+		window.addEventListener('resize', resize, { passive: true })
+		return state
+	}
+
+	// Supplier constellation — drifting nodes joined by proximity links.
+	function animNodes(canvas: HTMLCanvasElement) {
+		const state = fitCanvas(canvas)
+		const COUNT = 30
+		let nodes: { x: number; y: number; vx: number; vy: number; r: number; pulse: boolean }[] = []
+		const seed = () => {
+			nodes = Array.from({ length: COUNT }, () => ({
+				x: Math.random() * state.w,
+				y: Math.random() * state.h,
+				vx: (Math.random() - 0.5) * 0.22,
+				vy: (Math.random() - 0.5) * 0.22,
+				r: 1.1 + Math.random() * 1.7,
+				pulse: Math.random() < 0.18,
+			}))
+		}
+		seed()
+		window.addEventListener('resize', seed, { passive: true })
+
+		const draw = () => {
+			const { ctx, w, h } = state
+			ctx.clearRect(0, 0, w, h)
+			for (const n of nodes) {
+				n.x += n.vx
+				n.y += n.vy
+				if (n.x < 2 || n.x > w - 2) n.vx *= -1
+				if (n.y < 2 || n.y > h - 2) n.vy *= -1
+			}
+			const MAX = Math.min(96, w * 0.42)
+			for (let i = 0; i < nodes.length; i++) {
+				for (let j = i + 1; j < nodes.length; j++) {
+					const a = nodes[i], b = nodes[j]
+					const dx = a.x - b.x, dy = a.y - b.y
+					const d = Math.hypot(dx, dy)
+					if (d < MAX) {
+						ctx.globalAlpha = (1 - d / MAX) * 0.45
+						ctx.strokeStyle = 'rgba(150,124,255,1)'
+						ctx.lineWidth = 1
+						ctx.beginPath()
+						ctx.moveTo(a.x, a.y)
+						ctx.lineTo(b.x, b.y)
+						ctx.stroke()
+					}
+				}
+			}
+			for (const n of nodes) {
+				ctx.globalAlpha = 1
+				if (n.pulse) {
+					ctx.fillStyle = 'rgba(129,180,255,0.9)'
+					ctx.shadowColor = 'rgba(129,180,255,0.9)'
+					ctx.shadowBlur = 8
+				} else {
+					ctx.fillStyle = 'rgba(255,255,255,0.88)'
+					ctx.shadowBlur = 0
+				}
+				ctx.beginPath()
+				ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2)
+				ctx.fill()
+				ctx.shadowBlur = 0
+			}
+			ctx.globalAlpha = 1
+			requestAnimationFrame(draw)
+		}
+		requestAnimationFrame(draw)
+	}
+
+	// Soft particle field drifting behind the AI drop zone.
+	function animScan(canvas: HTMLCanvasElement) {
+		const state = fitCanvas(canvas)
+		const COUNT = 34
+		let ps: { x: number; y: number; vy: number; r: number; a: number }[] = []
+		const seed = () => {
+			ps = Array.from({ length: COUNT }, () => ({
+				x: Math.random() * state.w,
+				y: Math.random() * state.h,
+				vy: -(0.15 + Math.random() * 0.4),
+				r: 0.6 + Math.random() * 1.6,
+				a: 0.2 + Math.random() * 0.5,
+			}))
+		}
+		seed()
+		window.addEventListener('resize', seed, { passive: true })
+
+		const draw = () => {
+			const { ctx, w, h } = state
+			ctx.clearRect(0, 0, w, h)
+			for (const p of ps) {
+				p.y += p.vy
+				if (p.y < -2) {
+					p.y = h + 2
+					p.x = Math.random() * w
+				}
+				ctx.globalAlpha = p.a
+				ctx.fillStyle = 'rgba(255,255,255,0.9)'
+				ctx.beginPath()
+				ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+				ctx.fill()
+			}
+			ctx.globalAlpha = 1
+			requestAnimationFrame(draw)
+		}
+		requestAnimationFrame(draw)
+	}
+
+	// Live 3-line price chart — three suppliers wandering at different levels.
+	function animChart(canvas: HTMLCanvasElement) {
+		const state = fitCanvas(canvas)
+		const lines = [
+			{ base: 0.72, amp: 0.05, sp: 0.5, ph: 0.0, color: 'rgba(64,50,200,1)', w: 2 },
+			{ base: 0.48, amp: 0.06, sp: 0.7, ph: 1.7, color: 'rgba(170,178,205,1)', w: 1.5 },
+			{ base: 0.26, amp: 0.05, sp: 0.6, ph: 3.1, color: 'rgba(205,210,225,1)', w: 1.5 },
+		]
+		const N = 48
+		const t0 = performance.now()
+		const draw = (now: number) => {
+			const { ctx, w, h } = state
+			const t = (now - t0) * 0.001
+			ctx.clearRect(0, 0, w, h)
+			ctx.strokeStyle = 'rgba(0,0,0,0.05)'
+			ctx.lineWidth = 1
+			for (let g = 1; g <= 3; g++) {
+				const y = (h / 4) * g
+				ctx.beginPath()
+				ctx.moveTo(0, y)
+				ctx.lineTo(w, y)
+				ctx.stroke()
+			}
+			for (const ln of lines) {
+				ctx.beginPath()
+				for (let i = 0; i <= N; i++) {
+					const u = i / N
+					const v = ln.base + ln.amp * Math.sin(u * 6.2 + t * ln.sp + ln.ph) + ln.amp * 0.5 * Math.sin(u * 13 + t * ln.sp * 1.6)
+					const x = u * w, y = h - v * h
+					if (i === 0) ctx.moveTo(x, y)
+					else ctx.lineTo(x, y)
+				}
+				ctx.strokeStyle = ln.color
+				ctx.lineWidth = ln.w
+				ctx.lineJoin = 'round'
+				ctx.stroke()
+				const uv = ln.base + ln.amp * Math.sin(6.2 + t * ln.sp + ln.ph) + ln.amp * 0.5 * Math.sin(13 + t * ln.sp * 1.6)
+				ctx.fillStyle = ln.color
+				ctx.beginPath()
+				ctx.arc(w - 1, h - uv * h, ln.w + 1, 0, Math.PI * 2)
+				ctx.fill()
+			}
+			requestAnimationFrame(draw)
+		}
+		requestAnimationFrame(draw)
+	}
+
+	// Rotating fibonacci-sphere globe with travelling arcs — "global commerce" motif.
+	function animGlobe(canvas: HTMLCanvasElement) {
+		const ctx = canvas.getContext('2d')
+		if (!ctx) return
+
+		let w = 1, h = 1, cx = 0, cy = 0, r = 1
+		const resize = () => {
+			const dpr = Math.min(window.devicePixelRatio || 1, 2)
+			const rect = canvas.getBoundingClientRect()
+			w = Math.max(1, rect.width)
+			h = Math.max(1, rect.height)
+			canvas.width = Math.round(w * dpr)
+			canvas.height = Math.round(h * dpr)
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+			cx = w / 2
+			cy = h / 2
+			r = Math.min(w, h) * 0.4
+		}
+		resize()
+		window.addEventListener('resize', resize, { passive: true })
+
+		const N = 720
+		const pts: [number, number, number][] = []
+		const inc = Math.PI * (3 - Math.sqrt(5))
+		for (let i = 0; i < N; i++) {
+			const y = 1 - (i / (N - 1)) * 2
+			const rad = Math.sqrt(Math.max(0, 1 - y * y))
+			const phi = i * inc
+			pts.push([Math.cos(phi) * rad, y, Math.sin(phi) * rad])
+		}
+		const rndPt = () => pts[(Math.random() * N) | 0]
+		const arcs = Array.from({ length: 9 }, () => ({ a: rndPt(), b: rndPt(), t: Math.random(), sp: 0.15 + Math.random() * 0.3 }))
+
+		const tilt = -0.42
+		const ct = Math.cos(tilt)
+		const st = Math.sin(tilt)
+		const transform = (p: [number, number, number], ca: number, sa: number): [number, number, number] => {
+			const x = p[0] * ca + p[2] * sa
+			const z = -p[0] * sa + p[2] * ca
+			const y = p[1]
+			return [x, y * ct - z * st, y * st + z * ct]
+		}
+		const project = (p: [number, number, number]): [number, number, number, number] => {
+			const persp = 1 + p[2] * 0.16
+			return [cx + p[0] * r * persp, cy - p[1] * r * persp, p[2], persp]
+		}
+		const slerp = (a: [number, number, number], b: [number, number, number], t: number): [number, number, number] => {
+			let d = a[0] * b[0] + a[1] * b[1] + a[2] * b[2]
+			d = Math.max(-1, Math.min(1, d))
+			const th = Math.acos(d)
+			if (th < 1e-4) return [...a]
+			const s = Math.sin(th)
+			const w1 = Math.sin((1 - t) * th) / s
+			const w2 = Math.sin(t * th) / s
+			return [a[0] * w1 + b[0] * w2, a[1] * w1 + b[1] * w2, a[2] * w1 + b[2] * w2]
+		}
+
+		const t0 = performance.now()
+		let last = t0
+		const draw = (now: number) => {
+			const dt = Math.min(0.05, (now - last) * 0.001)
+			last = now
+			const ang = (now - t0) * 0.001 * 0.16
+			const ca = Math.cos(ang)
+			const sa = Math.sin(ang)
+			ctx.clearRect(0, 0, w, h)
+
+			const halo = ctx.createRadialGradient(cx, cy, r * 0.25, cx, cy, r * 1.25)
+			halo.addColorStop(0, 'rgba(139,110,246,0.30)')
+			halo.addColorStop(1, 'rgba(139,110,246,0)')
+			ctx.fillStyle = halo
+			ctx.beginPath()
+			ctx.arc(cx, cy, r * 1.25, 0, Math.PI * 2)
+			ctx.fill()
+
+			for (let i = 0; i < N; i++) {
+				const p = transform(pts[i], ca, sa)
+				const pr = project(p)
+				const z = pr[2]
+				const f = (z + 1) / 2
+				ctx.globalAlpha = z > -0.15 ? 0.2 + 0.7 * f : 0.05
+				ctx.fillStyle = z > 0.25 ? 'rgba(255,255,255,0.92)' : 'rgba(196,205,255,0.82)'
+				const size = 0.5 + 1.0 * f
+				ctx.beginPath()
+				ctx.arc(pr[0], pr[1], size, 0, Math.PI * 2)
+				ctx.fill()
+			}
+			ctx.globalAlpha = 1
+
+			const SEG = 44
+			for (const arc of arcs) {
+				arc.t += arc.sp * dt
+				if (arc.t > 1) {
+					arc.t = 0
+					arc.a = rndPt()
+					arc.b = rndPt()
+				}
+				ctx.beginPath()
+				let started = false
+				for (let s = 0; s <= SEG; s++) {
+					const u = s / SEG
+					const m = slerp(arc.a, arc.b, u)
+					const bump = 1 + 0.34 * Math.sin(Math.PI * u)
+					const p = transform([m[0] * bump, m[1] * bump, m[2] * bump], ca, sa)
+					const pr = project(p)
+					if (p[2] < -0.25) {
+						started = false
+						continue
+					}
+					if (!started) {
+						ctx.moveTo(pr[0], pr[1])
+						started = true
+					} else ctx.lineTo(pr[0], pr[1])
+				}
+				ctx.strokeStyle = 'rgba(160,132,255,0.30)'
+				ctx.lineWidth = 1
+				ctx.stroke()
+
+				const md = slerp(arc.a, arc.b, arc.t)
+				const bd = 1 + 0.34 * Math.sin(Math.PI * arc.t)
+				const pdp = transform([md[0] * bd, md[1] * bd, md[2] * bd], ca, sa)
+				const prd = project(pdp)
+				if (pdp[2] > -0.25) {
+					ctx.fillStyle = '#fff'
+					ctx.shadowColor = 'rgba(160,132,255,0.95)'
+					ctx.shadowBlur = 9
+					ctx.beginPath()
+					ctx.arc(prd[0], prd[1], 2.2, 0, Math.PI * 2)
+					ctx.fill()
+					ctx.shadowBlur = 0
+				}
+			}
+
+			requestAnimationFrame(draw)
+		}
+		requestAnimationFrame(draw)
+	}
+
+	// Ambient drifting dot field with a slow-roaming soft glow — backdrop for the search card.
+	function animSearchField(canvas: HTMLCanvasElement) {
+		const state = fitCanvas(canvas)
+		const COUNT = 46
+		let dots: { x: number; y: number; vx: number; vy: number; r: number; a: number }[] = []
+		const seed = () => {
+			dots = Array.from({ length: COUNT }, () => ({
+				x: Math.random() * state.w,
+				y: Math.random() * state.h,
+				vx: (Math.random() - 0.5) * 0.05,
+				vy: (Math.random() - 0.5) * 0.05,
+				r: 0.6 + Math.random() * 1.3,
+				a: 0.08 + Math.random() * 0.16,
+			}))
+		}
+		seed()
+		window.addEventListener('resize', seed, { passive: true })
+
+		const t0 = performance.now()
+		const draw = (now: number) => {
+			const { ctx, w, h } = state
+			const t = (now - t0) * 0.001
+			ctx.clearRect(0, 0, w, h)
+
+			const gx = w * (0.5 + 0.36 * Math.sin(t * 0.22))
+			const gy = h * (0.5 + 0.36 * Math.cos(t * 0.17))
+			const glow = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(w, h) * 0.6)
+			glow.addColorStop(0, 'rgba(64,50,200,0.10)')
+			glow.addColorStop(1, 'rgba(64,50,200,0)')
+			ctx.fillStyle = glow
+			ctx.fillRect(0, 0, w, h)
+
+			for (const d of dots) {
+				d.x += d.vx
+				d.y += d.vy
+				if (d.x < -2) d.x = w + 2
+				if (d.x > w + 2) d.x = -2
+				if (d.y < -2) d.y = h + 2
+				if (d.y > h + 2) d.y = -2
+				ctx.globalAlpha = d.a
+				ctx.fillStyle = 'rgba(64,50,200,0.9)'
+				ctx.beginPath()
+				ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2)
+				ctx.fill()
+			}
+			ctx.globalAlpha = 1
+			requestAnimationFrame(draw)
+		}
+		requestAnimationFrame(draw)
+	}
+
+	// Request "broadcast" — pulses travelling from the quote request to each supplier node.
+	function animQuoteBroadcast(canvas: HTMLCanvasElement) {
+		const state = fitCanvas(canvas)
+		const targets = [0.22, 0.5, 0.78]
+		const originY = 0.95
+		const targetY = 0.12
+		const t0 = performance.now()
+
+		const draw = (now: number) => {
+			const { ctx, w, h } = state
+			const t = (now - t0) * 0.001
+			ctx.clearRect(0, 0, w, h)
+			const ox = w * 0.5
+			const oy = h * originY
+
+			targets.forEach((tx, i) => {
+				const dx = w * tx
+				const dy = h * targetY
+
+				ctx.strokeStyle = 'rgba(64,50,200,0.12)'
+				ctx.lineWidth = 1
+				ctx.beginPath()
+				ctx.moveTo(ox, oy)
+				ctx.lineTo(dx, dy)
+				ctx.stroke()
+
+				const phase = (t * 0.45 + i * 0.33) % 1
+				const px = ox + (dx - ox) * phase
+				const py = oy + (dy - oy) * phase
+				const fade = Math.sin(phase * Math.PI)
+				ctx.globalAlpha = 0.15 + fade * 0.85
+				ctx.fillStyle = 'rgba(64,50,200,1)'
+				ctx.beginPath()
+				ctx.arc(px, py, 2.4, 0, Math.PI * 2)
+				ctx.fill()
+
+				ctx.globalAlpha = 0.35 + 0.35 * Math.sin(t * 2 + i * 2)
+				ctx.strokeStyle = 'rgba(64,50,200,0.5)'
+				ctx.lineWidth = 1
+				ctx.beginPath()
+				ctx.arc(dx, dy, 4 + 2 * Math.sin(t * 2 + i * 2), 0, Math.PI * 2)
+				ctx.stroke()
+			})
+			ctx.globalAlpha = 1
+			requestAnimationFrame(draw)
+		}
+		requestAnimationFrame(draw)
+	}
+
+	if (!reduced) {
+		document.querySelectorAll<HTMLCanvasElement>('[data-canvas]').forEach((canvas) => {
+			const kind = canvas.getAttribute('data-canvas')
+			if (kind === 'nodes') animNodes(canvas)
+			else if (kind === 'scan') animScan(canvas)
+			else if (kind === 'chart') animChart(canvas)
+			else if (kind === 'globe') animGlobe(canvas)
+			else if (kind === 'search-field') animSearchField(canvas)
+			else if (kind === 'quote-broadcast') animQuoteBroadcast(canvas)
+		})
+	}
+</script>

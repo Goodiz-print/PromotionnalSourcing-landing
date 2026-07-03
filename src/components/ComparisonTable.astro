@@ -1,0 +1,36 @@
+---
+const rows = [
+  { label: 'Interface moderne', delay: '0.05s' },
+  { label: 'Recherche qui fonctionne vraiment', delay: '0.12s' },
+  { label: 'Recherche par image (IA)', delay: '0.19s' },
+  { label: "Pas d'abonnement obligatoire", delay: '0.26s' },
+]
+---
+
+<section id="comparatif" class="wrapper py-24">
+	<div class="mb-12 text-center">
+		<h2 class="mb-3 text-display-md">Pourquoi pas European Sourcing ?</h2>
+		<p class="text-body-md text-text-secondary">Ce que promotionalsourcing.eu fait différemment.</p>
+	</div>
+
+	<div data-reveal class="mx-auto max-w-[880px] overflow-hidden rounded-lg border border-hairline">
+		<div class="grid grid-cols-[1fr_120px_140px] bg-sunken px-6 py-3.5 text-caption font-bold uppercase tracking-wide text-text-muted sm:grid-cols-[1fr_160px_160px]">
+			<div></div>
+			<div class="text-center text-indigo-600">Nous</div>
+			<div class="text-center">European Sourcing</div>
+		</div>
+		{
+			rows.map((row) => (
+				<div class="grid grid-cols-[1fr_120px_140px] items-center border-t border-hairline px-6 py-[18px] text-body-md sm:grid-cols-[1fr_160px_160px]">
+					<div>{row.label}</div>
+					<div class="text-center text-lg">
+						<span data-pop style={`transition-delay: ${row.delay};`} class="text-success">
+							✓
+						</span>
+					</div>
+					<div class="text-center text-lg text-ink-300">✕</div>
+				</div>
+			))
+		}
+	</div>
+</section>

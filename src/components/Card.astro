@@ -1,0 +1,23 @@
+---
+interface Props extends astroHTML.JSX.HTMLAttributes {
+  variant?: 'default' | 'brand' | 'dark'
+  hover?: boolean
+  class?: string
+}
+
+const { variant = 'default', hover = false, class: className = '', ...rest } = Astro.props
+
+const variants = {
+  default: 'border border-hairline bg-card',
+  brand: 'bg-indigo-500',
+  dark: 'bg-ink-950',
+}
+
+const hoverClasses = hover
+  ? 'transition-[transform,box-shadow] duration-250 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1.5 hover:shadow-elevation-2'
+  : ''
+---
+
+<div class={`rounded-xl shadow-elevation-1 ${variants[variant]} ${hoverClasses} ${className}`} {...rest}>
+  <slot />
+</div>
