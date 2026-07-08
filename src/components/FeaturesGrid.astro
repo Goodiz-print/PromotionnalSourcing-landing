@@ -65,7 +65,13 @@ const chartLegend = [
 		</Card>
 
 		<!-- Recherche par image IA -->
-		<Card data-reveal hover variant="brand" class="group col-span-2 flex flex-col p-7 md:col-span-3" style="transition-delay: 0.05s;">
+		<Card
+			data-reveal
+			hover
+			variant="brand"
+			class="group col-span-2 flex flex-col p-7 md:col-span-3"
+			style="transition-delay: 0.05s; background: var(--gradient-brand);"
+		>
 			<p class="mb-2 text-heading-lg text-white">Recherche par image (IA)</p>
 			<p class="mb-5 text-body-md text-indigo-100">
 				Déposez la photo du produit que cherche votre client — l'IA retrouve l'équivalent le plus proche parmi 1M+ références.
@@ -91,7 +97,7 @@ const chartLegend = [
 		</Card>
 
 		<!-- Comparaison instantanée -->
-		<Card data-reveal hover class="group col-span-2 flex flex-col p-6" style="transition-delay: 0.1s;">
+		<Card data-reveal hover class="group col-span-2 flex flex-col p-6 md:col-span-3" style="transition-delay: 0.1s;">
 			<p class="mb-1.5 text-heading-md">Comparaison instantanée</p>
 			<p class="mb-4 text-body-sm text-text-secondary">Prix et MOQ de tous les fournisseurs, côte à côte.</p>
 			<div class="relative min-h-[96px] flex-1">
@@ -112,42 +118,16 @@ const chartLegend = [
 			</p>
 		</Card>
 
-		<!-- Devis en un clic -->
-		<Card data-reveal hover class="group col-span-2 flex flex-col p-6" style="transition-delay: 0.15s;">
-			<p class="mb-1.5 text-heading-md">Devis en un clic</p>
-			<p class="mb-3 text-body-sm text-text-secondary">Une demande, tous les fournisseurs concernés.</p>
-			<p class="mb-2 text-caption font-semibold text-text-muted">Sac coton · 5 000 pcs</p>
-			<div class="relative flex min-h-[96px] flex-1 items-center justify-center overflow-hidden rounded-md">
-				<canvas data-canvas="quote-broadcast" class="pointer-events-none absolute inset-0 z-0 block h-full w-full"></canvas>
-				<span class="bento-state-a absolute rounded-pill bg-indigo-500 px-6 py-2.75 text-caption font-semibold text-white">
-					Demander un devis
-				</span>
-				<span class="bento-state-b absolute flex flex-col items-center gap-2">
-					<span class="flex -space-x-2">
-						<span class="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-indigo-100 text-[10px] font-bold text-indigo-600 shadow-elevation-1">EB</span>
-						<span class="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-brand-subtle text-[10px] font-bold text-indigo-600 shadow-elevation-1">NP</span>
-						<span class="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-ink-100 text-[10px] font-bold text-ink-600 shadow-elevation-1">GW</span>
-					</span>
-					<span class="inline-flex items-center gap-1.5 rounded-pill bg-success-bg px-3.5 py-1.5 text-caption font-bold text-success">
-						✓ Envoyé à 3 fournisseurs
-					</span>
-				</span>
-			</div>
-			<p class="mt-4 text-caption font-semibold text-indigo-600">
-				Voir comment <span class="bento-arrow">→</span>
-			</p>
-		</Card>
-
-		<!-- Fournisseurs vérifiés + sans abonnement -->
-		<Card data-reveal hover variant="dark" class="col-span-2 flex flex-col p-6" style="transition-delay: 0.2s;">
+		<!-- Fournisseurs vérifiés -->
+		<Card data-reveal hover variant="dark" class="col-span-2 flex flex-col p-6 md:col-span-3" style="transition-delay: 0.15s;">
 			<p class="text-tabular text-[28px] font-semibold text-white">300+</p>
 			<p class="mb-3 text-caption text-ink-300">Fournisseurs européens vérifiés</p>
 			<div class="relative -mx-1.5 min-h-[96px] flex-1">
 				<canvas data-canvas="nodes" class="absolute inset-0 block h-full w-full"></canvas>
 			</div>
 			<div class="mt-3 flex items-baseline justify-between">
-				<span class="text-caption text-ink-300">Sans abonnement obligatoire</span>
-				<span class="text-tabular text-heading-md text-white">0 €</span>
+				<span class="text-caption text-ink-300">Sans engagement</span>
+				<span class="text-tabular text-heading-md text-white">✓</span>
 			</div>
 		</Card>
 	</div>

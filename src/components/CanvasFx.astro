@@ -225,7 +225,15 @@
 			pts.push([Math.cos(phi) * rad, y, Math.sin(phi) * rad])
 		}
 		const rndPt = () => pts[(Math.random() * N) | 0]
-		const arcs = Array.from({ length: 9 }, () => ({ a: rndPt(), b: rndPt(), t: Math.random(), sp: 0.15 + Math.random() * 0.3 }))
+		// Violet + warm (orange/yellow) hues cycled across arcs so the globe reads multi-hued, not monochrome.
+		const ARC_COLORS = ['rgba(160,132,255,', 'rgba(246,166,35,', 'rgba(255,204,0,']
+		const arcs = Array.from({ length: 9 }, (_, i) => ({
+			a: rndPt(),
+			b: rndPt(),
+			t: Math.random(),
+			sp: 0.15 + Math.random() * 0.3,
+			color: ARC_COLORS[i % ARC_COLORS.length],
+		}))
 
 		const tilt = -0.42
 		const ct = Math.cos(tilt)
@@ -264,6 +272,7 @@
 
 			const halo = ctx.createRadialGradient(cx, cy, r * 0.25, cx, cy, r * 1.25)
 			halo.addColorStop(0, 'rgba(139,110,246,0.30)')
+			halo.addColorStop(0.6, 'rgba(246,166,35,0.12)')
 			halo.addColorStop(1, 'rgba(139,110,246,0)')
 			ctx.fillStyle = halo
 			ctx.beginPath()
@@ -276,7 +285,8 @@
 				const z = pr[2]
 				const f = (z + 1) / 2
 				ctx.globalAlpha = z > -0.15 ? 0.2 + 0.7 * f : 0.05
-				ctx.fillStyle = z > 0.25 ? 'rgba(255,255,255,0.92)' : 'rgba(196,205,255,0.82)'
+				ctx.fillStyle =
+					z > 0.25 ? (i % 6 === 0 ? 'rgba(255,204,102,0.95)' : 'rgba(255,255,255,0.92)') : 'rgba(196,205,255,0.82)'
 				const size = 0.5 + 1.0 * f
 				ctx.beginPath()
 				ctx.arc(pr[0], pr[1], size, 0, Math.PI * 2)
@@ -309,7 +319,7 @@
 						started = true
 					} else ctx.lineTo(pr[0], pr[1])
 				}
-				ctx.strokeStyle = 'rgba(160,132,255,0.30)'
+				ctx.strokeStyle = arc.color + '0.30)'
 				ctx.lineWidth = 1
 				ctx.stroke()
 
@@ -319,7 +329,7 @@
 				const prd = project(pdp)
 				if (pdp[2] > -0.25) {
 					ctx.fillStyle = '#fff'
-					ctx.shadowColor = 'rgba(160,132,255,0.95)'
+					ctx.shadowColor = arc.color + '0.95)'
 					ctx.shadowBlur = 9
 					ctx.beginPath()
 					ctx.arc(prd[0], prd[1], 2.2, 0, Math.PI * 2)
@@ -448,53 +458,6 @@
 		})
 	}
 
-	// Request "broadcast" — pulses travelling from the quote request to each supplier node.
-	function animQuoteBroadcast(canvas: HTMLCanvasElement): AnimController {
-		const state = fitCanvas(canvas)
-		const targets = [0.22, 0.5, 0.78]
-		const originY = 0.95
-		const targetY = 0.12
-		const t0 = performance.now()
-
-		return loopController((now) => {
-			const { ctx, w, h } = state
-			const t = (now - t0) * 0.001
-			ctx.clearRect(0, 0, w, h)
-			const ox = w * 0.5
-			const oy = h * originY
-
-			targets.forEach((tx, i) => {
-				const dx = w * tx
-				const dy = h * targetY
-
-				ctx.strokeStyle = 'rgba(64,50,200,0.12)'
-				ctx.lineWidth = 1
-				ctx.beginPath()
-				ctx.moveTo(ox, oy)
-				ctx.lineTo(dx, dy)
-				ctx.stroke()
-
-				const phase = (t * 0.45 + i * 0.33) % 1
-				const px = ox + (dx - ox) * phase
-				const py = oy + (dy - oy) * phase
-				const fade = Math.sin(phase * Math.PI)
-				ctx.globalAlpha = 0.15 + fade * 0.85
-				ctx.fillStyle = 'rgba(64,50,200,1)'
-				ctx.beginPath()
-				ctx.arc(px, py, 2.4, 0, Math.PI * 2)
-				ctx.fill()
-
-				ctx.globalAlpha = 0.35 + 0.35 * Math.sin(t * 2 + i * 2)
-				ctx.strokeStyle = 'rgba(64,50,200,0.5)'
-				ctx.lineWidth = 1
-				ctx.beginPath()
-				ctx.arc(dx, dy, 4 + 2 * Math.sin(t * 2 + i * 2), 0, Math.PI * 2)
-				ctx.stroke()
-			})
-			ctx.globalAlpha = 1
-		})
-	}
-
 	if (!reduced) {
 		document.querySelectorAll<HTMLCanvasElement>('[data-canvas]').forEach((canvas) => {
 			const kind = canvas.getAttribute('data-canvas')
@@ -504,7 +467,6 @@
 				kind === 'chart' ? animChart(canvas) :
 				kind === 'globe' ? animGlobe(canvas) :
 				kind === 'search-field' ? animSearchField(canvas) :
-				kind === 'quote-broadcast' ? animQuoteBroadcast(canvas) :
 				kind === 'hero' ? animHero(canvas) :
 				null
 			if (!controller) return

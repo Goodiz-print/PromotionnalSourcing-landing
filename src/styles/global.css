@@ -480,22 +480,6 @@
   opacity: 1;
   transform: none;
 }
-.bento-state-a {
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-.bento-state-b {
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.3s ease 0.12s, transform 0.3s ease 0.12s;
-}
-.group:hover .bento-state-a {
-  opacity: 0;
-  transform: translateY(-6px);
-}
-.group:hover .bento-state-b {
-  opacity: 1;
-  transform: none;
-}
 @media (prefers-reduced-motion: reduce) {
   .bento-demo-row,
   .bento-match,
