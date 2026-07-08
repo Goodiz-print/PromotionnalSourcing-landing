@@ -1,8 +1,11 @@
 @import 'tailwindcss';
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/600.css';
-@import '@fontsource/inter/700.css';
+@import '@fontsource/instrument-sans/400.css';
+@import '@fontsource/instrument-sans/500.css';
+@import '@fontsource/instrument-sans/600.css';
+@import '@fontsource/manrope/400.css';
+@import '@fontsource/manrope/600.css';
+@import '@fontsource/manrope/700.css';
+@import '@fontsource/manrope/800.css';
 
 :root {
   /* Brand — indigo sampled from the logo (RGB 64, 50, 200) */
@@ -56,6 +59,16 @@
   --shadow-1: 0 1px 2px rgba(10, 10, 30, 0.06), 0 1px 1px rgba(10, 10, 30, 0.04);
   --shadow-2: 0 4px 12px rgba(10, 10, 30, 0.08), 0 1px 3px rgba(10, 10, 30, 0.06);
   --shadow-3: 0 12px 32px rgba(10, 10, 30, 0.12), 0 4px 8px rgba(10, 10, 30, 0.06);
+
+  /* Accent — warm counterpoint to indigo, used sparingly (targeted accents only) */
+  --orange-500: #f6a623;
+  --amber-600: #e08900;
+  --yellow-400: #ffcc00;
+  --gradient-brand: linear-gradient(100deg, var(--indigo-500) 0%, #7a3fd4 45%, var(--orange-500) 100%);
+
+  /* Fonts */
+  --font-heading-family: 'Manrope', sans-serif;
+  --font-sans-family: 'Instrument Sans', system-ui, sans-serif;
 }
 
 @theme {
@@ -80,6 +93,10 @@
   --color-success: var(--state-success);
   --color-success-bg: var(--state-success-bg);
 
+  --color-orange-500: var(--orange-500);
+  --color-amber-600: var(--amber-600);
+  --color-yellow-400: var(--yellow-400);
+
   --color-canvas: var(--surface-canvas);
   --color-sunken: var(--surface-sunken);
   --color-card: var(--surface-card);
@@ -99,7 +116,8 @@
   --radius-xl: var(--radius-xl);
   --radius-pill: var(--radius-pill);
 
-  --font-sans: 'Inter', 'SF Pro Display', system-ui, sans-serif;
+  --font-sans: var(--font-sans-family);
+  --font-heading: var(--font-heading-family);
 }
 
 /* Nommé "wrapper" et non "container" : Tailwind v4 a un utility "container" natif
@@ -162,10 +180,17 @@
   line-height: 1.4;
 }
 @utility text-eyebrow {
+  font-family: var(--font-heading);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+@utility text-gradient-brand {
+  background: var(--gradient-brand);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 @utility text-stat-figure {
   font-size: 40px;
@@ -213,6 +238,7 @@
   h5,
   h6 {
     color: var(--text-primary);
+    font-family: var(--font-heading);
     font-weight: 600;
     margin: 0;
   }
@@ -336,6 +362,15 @@
     top: 8%;
   }
 }
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(246, 166, 35, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(246, 166, 35, 0);
+  }
+}
 .anim-rise {
   animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -374,6 +409,9 @@
   animation-play-state: running;
   opacity: 1;
 }
+.anim-pulse-dot {
+  animation: pulse-dot 2.4s infinite;
+}
 @media (prefers-reduced-motion: reduce) {
   .anim-rise,
   .anim-mesh,
@@ -383,7 +421,8 @@
   .anim-marquee,
   .anim-daynight,
   .anim-caret,
-  .anim-scan-line {
+  .anim-scan-line,
+  .anim-pulse-dot {
     animation: none !important;
   }
 }
@@ -468,6 +507,7 @@
 
 .nav-link {
   cursor: pointer;
+  font-family: var(--font-heading);
   padding-bottom: 4px;
   background-image: linear-gradient(var(--indigo-500), var(--indigo-500));
   background-repeat: no-repeat;
