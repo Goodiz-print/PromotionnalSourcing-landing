@@ -22,6 +22,9 @@ export const ui = {
     'nav.cta': 'Nous contacter',
     'nav.menuAria': 'Ouvrir le menu',
     'nav.switchTo': 'English',
+    'nav.login': 'Connexion',
+    'nav.loginTitle': 'Disponible au lancement',
+    'nav.soon': 'Bientôt',
 
     'hero.badge': '300 fournisseurs européens · 1M+ produits',
     'hero.titleBeforeBreak': "Le sourcing d'objets",
@@ -120,12 +123,10 @@ export const ui = {
 
     'productMockup.tags': ['Matière recyclée', 'Certifié GRS', 'Stock Europe'],
     'productMockup.colProduct': 'Produit',
-    'productMockup.colSupplier': 'Fournisseur',
     'productMockup.colPrice': 'Prix',
-    'productMockup.colMoq': 'MOQ',
     'productMockup.verifiedBadge': 'Vérifié',
     'productMockup.ariaLabel':
-      'Aperçu de la recherche promotionalsourcing.eu/recherche : un sac tote en coton bio, un sac isotherme en polyester recyclé et une serviette de plage recyclée, filtrés par matière recyclée, certification GRS et stock Europe, avec fournisseur, prix et quantité minimale de commande.',
+      'Aperçu de la recherche promotionalsourcing.eu/recherche : un sac tote en coton bio, un sac isotherme en polyester recyclé et une serviette de plage recyclée, filtrés par matière recyclée, certification GRS et stock Europe, avec fournisseur et prix.',
   },
   en: {
     'seo.title': 'Promotional Sourcing.eu — Sourcing promotional products, finally reliable',
@@ -138,6 +139,9 @@ export const ui = {
     'nav.cta': 'Contact us',
     'nav.menuAria': 'Open menu',
     'nav.switchTo': 'Français',
+    'nav.login': 'Log in',
+    'nav.loginTitle': 'Available at launch',
+    'nav.soon': 'Soon',
 
     'hero.badge': '300 European suppliers · 1M+ products',
     'hero.titleBeforeBreak': 'Sourcing promotional',
@@ -236,11 +240,9 @@ export const ui = {
 
     'productMockup.tags': ['Recycled material', 'GRS certified', 'Europe stock'],
     'productMockup.colProduct': 'Product',
-    'productMockup.colSupplier': 'Supplier',
     'productMockup.colPrice': 'Price',
-    'productMockup.colMoq': 'MOQ',
     'productMockup.verifiedBadge': 'Verified',
     'productMockup.ariaLabel':
-      'Preview of a promotionalsourcing.eu/search result: an organic cotton tote bag, a recycled polyester cooler bag and a recycled beach towel, filtered by recycled material, GRS certification and Europe stock, with supplier, price and minimum order quantity.',
+      'Preview of a promotionalsourcing.eu/search result: an organic cotton tote bag, a recycled polyester cooler bag and a recycled beach towel, filtered by recycled material, GRS certification and Europe stock, with supplier and price.',
   },
 } as const
