@@ -1,15 +1,15 @@
 ---
 import { Image } from 'astro:assets'
-import toteBag from '../assets/images/jute.webp'
-import sacJute from '../assets/images/sac-jute-2.webp'
-import sacCoton from '../assets/images/totebag.jpg'
+import toteBagCoton from '../assets/images/mo2197-09.jpg'
+import sacIsotherme from '../assets/images/impr_1515772-PDP_12.webp'
+import serviettePlage from '../assets/images/mo2059-12.jpg'
 
-const tags = ['Made in Europe', '+200 g/m²', 'Coton']
+const tags = ['Matière recyclée', 'Certifié GRS', 'Stock Europe']
 
 const products = [
-  { name: 'Sac shopping coton 220g', verified: true, supplier: 'EcoBag Fabrics', price: '1,24 €', moq: '500', image: sacCoton, focus: '80% 90%' },
-  { name: 'Sac shopping jute naturel', verified: true, supplier: 'Jute & Co', price: '1,89 €', moq: '250', image: sacJute, focus: 'center' },
-  { name: 'Sac shopping toile recyclée', verified: false, supplier: 'Recyfil', price: '0,98 €', moq: '1 000', image: toteBag, focus: 'center' },
+  { name: 'Sac tote coton bio 220g', verified: true, supplier: 'EcoBag Fabrics', price: '2,10 €', moq: '250', image: toteBagCoton, focus: 'center' },
+  { name: 'Sac isotherme polyester recyclé', verified: true, supplier: 'Nordic Print', price: '6,90 €', moq: '100', image: sacIsotherme, focus: 'center' },
+  { name: 'Serviette de plage recyclée', verified: false, supplier: 'Textilia Iberia', price: '4,50 €', moq: '150', image: serviettePlage, focus: 'center' },
 ]
 ---
 
@@ -17,7 +17,7 @@ const products = [
 	data-reveal
 	class="anim-float relative mx-auto max-w-[880px] overflow-hidden rounded-xl border border-hairline bg-card text-left shadow-elevation-3"
 	role="img"
-	aria-label="Aperçu de la recherche promotionalsourcing.eu/recherche : trois sacs shopping filtrés par Made in Europe, +200 g/m² et coton, avec fournisseur, prix et quantité minimale de commande."
+	aria-label="Aperçu de la recherche promotionalsourcing.eu/recherche : un sac tote en coton bio, un sac isotherme en polyester recyclé et une serviette de plage recyclée, filtrés par matière recyclée, certification GRS et stock Europe, avec fournisseur, prix et quantité minimale de commande."
 >
 	<div aria-hidden="true">
 		<div class="flex items-center gap-1.5 border-b border-hairline bg-sunken px-[18px] py-3.5">
