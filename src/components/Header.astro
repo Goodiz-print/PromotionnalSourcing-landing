@@ -1,11 +1,19 @@
 ---
 import Button from './Button.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import { useTranslations } from '../i18n/utils'
+
+const t = useTranslations(Astro.currentLocale)
 
 const navItems = [
-  { label: 'Catalogue' },
-  { label: 'Fournisseurs', href: '#fournisseurs' },
-  { label: 'Ressources' },
+  { label: t('nav.catalogue') },
+  { label: t('nav.fournisseurs'), href: '#fournisseurs' },
+  { label: t('nav.ressources') },
 ]
+
+const currentLocale = Astro.currentLocale ?? 'fr'
+const otherLocale = currentLocale === 'fr' ? 'en' : 'fr'
+const otherLocaleHref = getRelativeLocaleUrl(otherLocale, '/')
 ---
 
 <header data-nav class="sticky top-0 z-50 border-b border-hairline backdrop-blur-md">
@@ -29,15 +37,16 @@ const navItems = [
 			</nav>
 		</div>
 		<div class="flex items-center gap-2">
+			<a href={otherLocaleHref} hreflang={otherLocale} class="nav-link hidden md:inline-flex">{t('nav.switchTo')}</a>
 			<div class="hidden md:block">
-				<Button href="#contact" class="!px-5 !py-2.5 text-body-sm">Nous contacter</Button>
+				<Button href="#contact" class="!px-5 !py-2.5 text-body-sm">{t('nav.cta')}</Button>
 			</div>
 			<button
 				type="button"
 				data-menu-toggle
 				aria-expanded="false"
 				aria-controls="mobile-nav"
-				aria-label="Ouvrir le menu"
+				aria-label={t('nav.menuAria')}
 				class="flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-text-primary md:hidden"
 			>
 				<svg data-menu-icon-open width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -61,7 +70,8 @@ const navItems = [
 				)
 			)
 		}
-		<Button href="#contact" data-mobile-nav-link class="mt-3 w-full text-center">Nous contacter</Button>
+		<Button href="#contact" data-mobile-nav-link class="mt-3 w-full text-center">{t('nav.cta')}</Button>
+		<a href={otherLocaleHref} hreflang={otherLocale} data-mobile-nav-link class="rounded-md px-2 py-3 text-body-md font-medium text-text-primary">{t('nav.switchTo')}</a>
 	</nav>
 </header>
 

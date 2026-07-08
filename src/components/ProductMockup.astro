@@ -3,8 +3,11 @@ import { Image } from 'astro:assets'
 import toteBagCoton from '../assets/images/mo2197-09.jpg'
 import sacIsotherme from '../assets/images/impr_1515772-PDP_12.webp'
 import serviettePlage from '../assets/images/mo2059-12.jpg'
+import { useTranslations } from '../i18n/utils'
 
-const tags = ['Matière recyclée', 'Certifié GRS', 'Stock Europe']
+const t = useTranslations(Astro.currentLocale)
+
+const tags = t('productMockup.tags')
 
 const products = [
   { name: 'Sac tote coton bio 220g', verified: true, supplier: 'EcoBag Fabrics', price: '2,10 €', moq: '250', image: toteBagCoton, focus: 'center' },
@@ -17,7 +20,7 @@ const products = [
 	data-reveal
 	class="anim-float relative mx-auto max-w-[880px] overflow-hidden rounded-xl border border-hairline bg-card text-left shadow-elevation-3"
 	role="img"
-	aria-label="Aperçu de la recherche promotionalsourcing.eu/recherche : un sac tote en coton bio, un sac isotherme en polyester recyclé et une serviette de plage recyclée, filtrés par matière recyclée, certification GRS et stock Europe, avec fournisseur, prix et quantité minimale de commande."
+	aria-label={t('productMockup.ariaLabel')}
 >
 	<div aria-hidden="true">
 		<div class="flex items-center gap-1.5 border-b border-hairline bg-sunken px-[18px] py-3.5">
@@ -40,10 +43,10 @@ const products = [
 			</div>
 			<div class="grid grid-cols-[44px_minmax(0,1fr)_64px_54px] items-center gap-2 border-b border-hairline py-2.5 text-caption font-bold uppercase tracking-wide text-text-muted sm:grid-cols-[56px_minmax(0,1fr)_110px_90px_80px] sm:gap-3">
 				<div></div>
-				<div>Produit</div>
-				<div class="hidden sm:block">Fournisseur</div>
-				<div class="text-right">Prix</div>
-				<div class="text-right">MOQ</div>
+				<div>{t('productMockup.colProduct')}</div>
+				<div class="hidden sm:block">{t('productMockup.colSupplier')}</div>
+				<div class="text-right">{t('productMockup.colPrice')}</div>
+				<div class="text-right">{t('productMockup.colMoq')}</div>
 			</div>
 			{
 				products.map((product, i) => (
@@ -64,7 +67,7 @@ const products = [
 							{product.name}
 							{product.verified && (
 								<span class="ml-1.5 rounded-pill bg-success-bg px-[7px] py-0.5 text-[11px] font-bold text-success">
-									Vérifié
+									{t('productMockup.verifiedBadge')}
 								</span>
 							)}
 						</div>

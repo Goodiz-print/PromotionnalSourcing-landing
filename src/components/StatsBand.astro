@@ -1,9 +1,13 @@
 ---
+import { useTranslations } from '../i18n/utils'
+
+const t = useTranslations(Astro.currentLocale)
+
 const stats = [
-  { to: '1128349', suffix: '', label: 'produits référencés dans un seul catalogue' },
-  { to: '300', suffix: '+', label: 'fournisseurs européens vérifiés' },
-  { to: '24', suffix: ' h', label: 'de délai de réponse moyen des fournisseurs' },
-  { to: '0', suffix: ' €', label: 'de frais cachés, jamais' },
+  { to: '1128349', suffix: '', label: t('stats.stat1') },
+  { to: '300', suffix: '+', label: t('stats.stat2') },
+  { to: '24', suffix: ' h', label: t('stats.stat3') },
+  { to: '0', suffix: ' €', label: t('stats.stat4') },
 ]
 ---
 
@@ -22,7 +26,7 @@ const stats = [
 	</div>
 	<div data-reveal class="wrapper relative z-10 grid gap-10 py-[72px] md:grid-cols-2 md:items-center">
 		<div>
-			<h2 class="mb-10 max-w-[420px] text-display-lg text-white">Au cœur du sourcing européen.</h2>
+			<h2 class="mb-10 max-w-[420px] text-display-lg text-white">{t('stats.heading')}</h2>
 			<div class="grid max-w-[460px] grid-cols-2 gap-x-10 gap-y-8">
 				{
 					stats.map((stat) => (

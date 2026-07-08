@@ -1,17 +1,21 @@
 ---
+import { useTranslations } from '../i18n/utils'
+
+const t = useTranslations(Astro.currentLocale)
+
 const productLinks = [
-  { label: 'Catalogue', href: '#fonctionnalites' },
-  { label: 'Recherche par image', href: '#fonctionnalites' },
+  { label: t('footer.linkCatalogue'), href: '#fonctionnalites' },
+  { label: t('footer.linkImageSearch'), href: '#fonctionnalites' },
 ]
 
-const companyLinks = [{ label: 'Fournisseurs', href: '#fournisseurs' }]
+const companyLinks = [{ label: t('footer.linkSuppliers'), href: '#fournisseurs' }]
 
-const resourceLinks = [{ label: 'Contact', href: 'mailto:contact@promotionalsourcing.eu' }]
+const resourceLinks = [{ label: t('footer.linkContact'), href: 'mailto:contact@promotionalsourcing.eu' }]
 
 const columns = [
-  { title: 'Produit', links: productLinks },
-  { title: 'Entreprise', links: companyLinks },
-  { title: 'Ressources', links: resourceLinks },
+  { title: t('footer.columnProduct'), links: productLinks },
+  { title: t('footer.columnCompany'), links: companyLinks },
+  { title: t('footer.columnResources'), links: resourceLinks },
 ]
 ---
 
@@ -20,7 +24,7 @@ const columns = [
 		<div>
 			<img src="/logo.png" alt="promotionalsourcing.eu" width="776" height="310" class="mb-3 h-6 w-auto" />
 			<p class="max-w-[220px] text-caption text-text-muted">
-				La plateforme de sourcing B2B pour les objets publicitaires en Europe.
+				{t('footer.tagline')}
 			</p>
 		</div>
 		{
@@ -37,7 +41,7 @@ const columns = [
 		}
 	</div>
 	<div class="flex flex-wrap justify-between gap-2 border-t border-hairline pt-6 text-caption text-text-muted">
-		<span>© 2026 Promotional Sourcing.eu</span>
-		<span>Fait pour les acheteurs et fournisseurs européens</span>
+		<span>{t('footer.copyright')}</span>
+		<span>{t('footer.madeFor')}</span>
 	</div>
 </footer>

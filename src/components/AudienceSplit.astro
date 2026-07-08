@@ -1,31 +1,24 @@
 ---
 import Card from './Card.astro'
 import Button from './Button.astro'
+import { useTranslations } from '../i18n/utils'
 
-const agencyPoints = [
-	'Recherche multi-critères et par image (IA)',
-	'Comparaison instantanée entre fournisseurs',
-	'Mise en relation directe, réponse sous 24 h',
-]
+const t = useTranslations(Astro.currentLocale)
 
-const supplierPoints = [
-	'Référencement gratuit de votre catalogue',
-	'Intégration de vos données prise en charge (API, CSV, Excel)',
-	'Visibilité immédiate dès le lancement',
-	'Zéro abonnement, zéro coût d’entrée',
-]
+const agencyPoints = t('audience.agency.points')
+const supplierPoints = t('audience.supplier.points')
 ---
 
 <section id="fournisseurs" class="wrapper py-24">
 	<div data-reveal class="mx-auto mb-12 max-w-[640px] text-center">
-		<p class="mb-4 text-eyebrow text-text-brand">Deux publics, une seule plateforme</p>
-		<h2 class="text-display-lg">Que vous cherchiez ou fournissiez, on a pensé à vous.</h2>
+		<p class="mb-4 text-eyebrow text-text-brand">{t('audience.eyebrow')}</p>
+		<h2 class="text-display-lg">{t('audience.heading')}</h2>
 	</div>
 
 	<div class="grid gap-6 md:grid-cols-2">
 		<Card data-reveal hover class="flex flex-col p-8">
-			<p class="mb-2 text-eyebrow text-text-muted">Pour les agences &amp; revendeurs</p>
-			<h3 class="mb-4 text-heading-lg">Trouvez le bon produit en quelques secondes.</h3>
+			<p class="mb-2 text-eyebrow text-text-muted">{t('audience.agency.eyebrow')}</p>
+			<h3 class="mb-4 text-heading-lg">{t('audience.agency.heading')}</h3>
 			<ul class="mb-6 flex flex-1 flex-col gap-2.5">
 				{
 					agencyPoints.map((point) => (
@@ -37,15 +30,15 @@ const supplierPoints = [
 				}
 			</ul>
 			<a class="inline-flex items-center gap-2 text-body-md font-semibold text-indigo-600" href="#fonctionnalites">
-				Voir toutes les fonctionnalités <span aria-hidden="true">→</span>
+				{t('audience.agency.cta')} <span aria-hidden="true">→</span>
 			</a>
 		</Card>
 
 		<Card data-reveal hover variant="brand" class="relative flex flex-col overflow-hidden p-8" style="transition-delay: 0.08s;">
 			<canvas data-canvas="nodes" class="pointer-events-none absolute inset-0 block h-full w-full opacity-60"></canvas>
 			<div class="relative z-10 flex flex-1 flex-col">
-				<p class="mb-2 text-eyebrow text-indigo-100">Pour les fournisseurs</p>
-				<h3 class="mb-4 text-heading-lg text-white">Vendez à des milliers d'agences européennes.</h3>
+				<p class="mb-2 text-eyebrow text-indigo-100">{t('audience.supplier.eyebrow')}</p>
+				<h3 class="mb-4 text-heading-lg text-white">{t('audience.supplier.heading')}</h3>
 				<ul class="mb-6 flex flex-1 flex-col gap-2.5">
 					{
 						supplierPoints.map((point) => (
@@ -57,7 +50,7 @@ const supplierPoints = [
 					}
 				</ul>
 				<Button href="mailto:contact@promotionalsourcing.eu" variant="on-dark" class="self-start">
-					Référencer mon catalogue
+					{t('audience.supplier.cta')}
 				</Button>
 			</div>
 		</Card>

@@ -1,23 +1,26 @@
 ---
 import Card from './Card.astro'
+import { useTranslations } from '../i18n/utils'
+
+const t = useTranslations(Astro.currentLocale)
 
 const steps = [
   {
     num: '01',
-    title: 'Recherchez',
-    desc: 'Recherche multi-critères ou par image (IA) parmi 300 fournisseurs européens et 1M+ produits, dans un seul catalogue.',
+    title: t('howItWorks.step1Title'),
+    desc: t('howItWorks.step1Desc'),
     delay: '0.05s',
   },
   {
     num: '02',
-    title: 'Comparez',
-    desc: 'Prix, MOQ, délais et certifications côte à côte — instantanément, sans feuilleter cent catalogues.',
+    title: t('howItWorks.step2Title'),
+    desc: t('howItWorks.step2Desc'),
     delay: '0.14s',
   },
   {
     num: '03',
-    title: 'Commandez',
-    desc: 'Contactez le fournisseur en un clic, réponse sous 24 h.',
+    title: t('howItWorks.step3Title'),
+    desc: t('howItWorks.step3Desc'),
     delay: '0.23s',
   },
 ]
@@ -25,9 +28,9 @@ const steps = [
 
 <section id="fonctionnement" class="wrapper py-24">
 	<div class="mb-12 text-center">
-		<p class="mb-6 text-eyebrow text-text-brand">Comment ça marche</p>
-		<h2 class="mb-3 text-display-md">Du besoin au fournisseur en trois étapes</h2>
-		<p class="text-body-md text-text-secondary">Le sourcing d'objets publicitaires, enfin simple.</p>
+		<p class="mb-6 text-eyebrow text-text-brand">{t('howItWorks.eyebrow')}</p>
+		<h2 class="mb-3 text-display-md">{t('howItWorks.heading')}</h2>
+		<p class="text-body-md text-text-secondary">{t('howItWorks.subheading')}</p>
 	</div>
 
 	<div data-reveal class="grid gap-6 md:grid-cols-3">

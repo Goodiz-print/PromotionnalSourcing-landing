@@ -1,11 +1,15 @@
 ---
+import { useTranslations } from '../i18n/utils'
+
+const t = useTranslations(Astro.currentLocale)
+
 const suppliers = ['EcoBag Fabrics', 'Jute & Co', 'Greenweave', 'NW Textiles', 'Recyfil', 'PlumaPress', 'Nordic Print', 'Textilia Iberia']
 const track = [...suppliers, ...suppliers]
 ---
 
 <section data-reveal class="wrapper py-20 sm:py-24">
 	<p class="mb-7 text-center text-eyebrow text-text-muted">
-		Déjà utilisé par des revendeurs dans toute l'Europe
+		{t('logoStrip.eyebrow')}
 	</p>
 	<div class="overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
 		<div class="anim-marquee flex w-max gap-3.5">

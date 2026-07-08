@@ -8,12 +8,12 @@ import StatsBand from '../components/StatsBand.astro'
 import HowItWorks from '../components/HowItWorks.astro'
 import AudienceSplit from '../components/AudienceSplit.astro'
 import FinalCta from '../components/FinalCta.astro'
+import { useTranslations } from '../i18n/utils'
+
+const t = useTranslations(Astro.currentLocale)
 ---
 
-<Layout
-	title="Promotional Sourcing.eu — Le sourcing d'objets publicitaires, enfin fiable"
-	description="Plateforme B2B européenne de sourcing d'objets publicitaires : 300 fournisseurs, 1M+ produits, recherche multi-critères qui fonctionne vraiment — contrairement aux solutions existantes."
->
+<Layout title={t('seo.title')} description={t('seo.description')}>
 	<Hero />
 	<LogoStrip />
 	<ProblemSection />
