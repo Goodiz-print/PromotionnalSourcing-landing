@@ -1,12 +1,12 @@
 ---
-interface Props {
+interface Props extends astroHTML.JSX.HTMLAttributes {
   href?: string
   variant?: 'primary' | 'secondary' | 'on-dark'
   type?: 'submit' | 'button'
   class?: string
 }
 
-const { href, variant = 'primary', type = 'submit', class: className = '' } = Astro.props
+const { href, variant = 'primary', type = 'submit', class: className = '', ...rest } = Astro.props
 
 const variants = {
   primary: 'bg-indigo-500 text-white hover:bg-indigo-600 active:scale-[0.94]',
@@ -15,16 +15,16 @@ const variants = {
   'on-dark': 'bg-white text-indigo-600 hover:-translate-y-0.5 active:scale-[0.94]',
 }
 
-const classes = `inline-block rounded-pill px-7 py-3.5 text-body-md font-semibold transition-all duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 ${variants[variant]} ${className}`
+const classes = `font-heading inline-block rounded-pill px-7 py-3.5 text-body-md font-semibold transition-all duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 ${variants[variant]} ${className}`
 ---
 
 {
   href ? (
-    <a href={href} class={classes}>
+    <a href={href} class={classes} {...rest}>
       <slot />
     </a>
   ) : (
-    <button type={type} class={classes}>
+    <button type={type} class={classes} {...rest}>
       <slot />
     </button>
   )

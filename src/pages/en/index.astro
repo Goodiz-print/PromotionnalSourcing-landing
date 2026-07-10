@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Hero from '../../components/Hero.astro'
+import FeaturesGrid from '../../components/FeaturesGrid.astro'
+import StatsBand from '../../components/StatsBand.astro'
+import Suppliers from '../../components/Suppliers.astro'
+import FinalCta from '../../components/FinalCta.astro'
+import { useTranslations } from '../../i18n/utils'
+
+const t = useTranslations(Astro.currentLocale)
+---
+
+<Layout title={t('seo.title')} description={t('seo.description')}>
+	<Hero />
+	<FeaturesGrid />
+	<StatsBand />
+	<Suppliers />
+	<FinalCta />
+</Layout>
