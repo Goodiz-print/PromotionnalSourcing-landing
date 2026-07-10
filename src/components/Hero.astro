@@ -14,8 +14,8 @@ const t = useTranslations(Astro.currentLocale)
 	>
 	</div>
 
-	<div class="relative z-10 mx-auto grid max-w-[1140px] items-center gap-12 text-left md:grid-cols-[1.05fr_0.95fr] md:gap-10">
-		<div class="text-center md:text-left">
+	<div class="relative z-10 mx-auto grid max-w-[1140px] items-center gap-12 text-left md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] md:gap-10">
+		<div class="min-w-0 text-center md:text-left">
 			<div class="anim-rise mb-7 inline-flex items-center gap-2 rounded-pill border border-indigo-100 bg-brand-subtle px-4 py-1.5 text-eyebrow text-indigo-600">
 				<span class="anim-pulse-dot inline-block h-2 w-2 rounded-full bg-orange-500" aria-hidden="true"></span>
 				{t('hero.eyebrow')}
@@ -41,7 +41,7 @@ const t = useTranslations(Astro.currentLocale)
 			</div>
 		</div>
 
-		<div class="relative md:rotate-[1.5deg]">
+		<div class="relative min-w-0 md:rotate-[1.5deg]">
 			<ProductMockup />
 		</div>
 	</div>
