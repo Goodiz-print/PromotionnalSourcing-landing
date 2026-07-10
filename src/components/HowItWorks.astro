@@ -1,6 +1,6 @@
 ---
-import Card from './Card.astro'
 import { useTranslations } from '../i18n/utils'
+import Card from './Card.astro'
 
 const t = useTranslations(Astro.currentLocale)
 
@@ -33,19 +33,117 @@ const steps = [
 		<p class="text-body-md text-text-secondary">{t('howItWorks.subheading')}</p>
 	</div>
 
-	<div data-reveal class="grid gap-6 md:grid-cols-3">
+	<div class="grid gap-6 md:grid-cols-3">
 		{
-			steps.map((step) => (
-				<Card class="p-8">
-					<span
-						data-pop
-						style={`transition-delay: ${step.delay};`}
-						class="text-tabular text-stat-figure block text-indigo-600"
-					>
+			steps.map((step, i) => (
+				<Card
+					data-reveal
+					hover
+					style={`transition-delay: ${step.delay};`}
+					class="step-card group relative flex flex-col p-8"
+				>
+					<span class="step-ghost" aria-hidden="true">
 						{step.num}
 					</span>
-					<h3 class="mb-2 mt-5 text-heading-md text-text-primary">{step.title}</h3>
-					<p class="text-body-md text-text-muted">{step.desc}</p>
+
+					<div class="relative z-10 flex flex-1 flex-col">
+						<span
+							data-pop
+							style={`transition-delay: ${step.delay}; background: var(--gradient-brand); box-shadow: 0 8px 20px rgba(64,50,200,0.24);`}
+							class="step-icon mb-6 flex h-12 w-12 items-center justify-center rounded-xl text-white"
+						>
+							{i === 0 && (
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+									<circle cx="11" cy="11" r="7" />
+									<path d="m21 21-4.3-4.3" />
+								</svg>
+							)}
+							{i === 1 && (
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+									<path d="M6 20V10M12 20V4M18 20v-6" />
+								</svg>
+							)}
+							{i === 2 && (
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+									<path d="M22 2 11 13" />
+									<path d="M22 2 15 22l-4-9-9-4 20-7Z" />
+								</svg>
+							)}
+						</span>
+
+						<h3 class="mb-2 text-heading-lg text-text-primary">{step.title}</h3>
+						<p class="mb-6 text-body-md text-text-muted">{step.desc}</p>
+
+						{/* Mini-illustration — animates on hover */}
+						<div class="step-fx mt-auto">
+							{i === 0 && (
+								<div class="rounded-lg border border-hairline bg-sunken p-3">
+									<div class="flex items-center gap-2 rounded-md border border-hairline bg-white px-3 py-2 shadow-elevation-1">
+										<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--indigo-500)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+											<circle cx="11" cy="11" r="7" />
+											<path d="m21 21-4.3-4.3" />
+										</svg>
+										<span class="text-body-sm font-medium text-text-secondary">{t('howItWorks.step1Query')}</span>
+										<span class="anim-caret ml-auto h-[15px] w-0.5 bg-indigo-500" />
+									</div>
+									<div class="step-result mt-2 inline-flex items-center gap-1.5 rounded-pill bg-brand-subtle px-3 py-1 text-[12px] font-semibold text-indigo-600">
+										<span class="inline-block h-1.5 w-1.5 rounded-full bg-success" />
+										{t('howItWorks.step1Result')}
+									</div>
+								</div>
+							)}
+							{i === 1 && (
+								<div class="rounded-lg border border-hairline bg-sunken p-3">
+									<div class="flex items-end gap-3">
+										<div class="flex flex-1 flex-col items-center gap-1.5">
+											<div class="step-bar w-full rounded-t-sm bg-indigo-500" style="height: 58px;" />
+											<span class="text-tabular text-[11px] font-bold text-indigo-600">0,98 €</span>
+										</div>
+										<div class="flex flex-1 flex-col items-center gap-1.5">
+											<div class="step-bar w-full rounded-t-sm bg-ink-200" style="height: 40px;" />
+											<span class="text-tabular text-[11px] font-medium text-text-muted">1,24 €</span>
+										</div>
+										<div class="flex flex-1 flex-col items-center gap-1.5">
+											<div class="step-bar w-full rounded-t-sm bg-ink-200" style="height: 26px;" />
+											<span class="text-tabular text-[11px] font-medium text-text-muted">1,89 €</span>
+										</div>
+									</div>
+									<div class="mt-2.5 inline-flex items-center gap-1.5 rounded-pill bg-brand-subtle px-3 py-1 text-[12px] font-semibold text-indigo-600">
+										<span class="inline-block h-1.5 w-1.5 rounded-full bg-indigo-500" />
+										{t('howItWorks.step2Best')}
+									</div>
+								</div>
+							)}
+							{i === 2 && (
+								<div class="flex flex-col items-start gap-2 rounded-lg border border-hairline bg-sunken p-3">
+									<span
+										class="inline-flex items-center gap-1.5 self-end rounded-pill px-3.5 py-2 text-[12px] font-semibold text-white"
+										style="background: var(--gradient-brand);"
+									>
+										<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+											<path d="M22 2 11 13" />
+											<path d="M22 2 15 22l-4-9-9-4 20-7Z" />
+										</svg>
+										{t('howItWorks.step3Cta')}
+									</span>
+									<span class="step-confirm inline-flex items-center gap-1.5 self-start whitespace-nowrap rounded-pill bg-success-bg px-3 py-2 text-[12px] font-semibold text-success">
+										<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+											<path d="M20 6 9 17l-5-5" />
+										</svg>
+										{t('howItWorks.step3Confirm')}
+									</span>
+								</div>
+							)}
+						</div>
+					</div>
+
+					{i < steps.length - 1 && (
+						<span class="step-arrow pointer-events-none absolute -right-5 top-1/2 z-20 hidden -translate-y-1/2 text-indigo-300 md:block" aria-hidden="true">
+							<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M5 12h14M13 6l6 6-6 6" />
+							</svg>
+						</span>
+					)}
 				</Card>
 			))
 		}

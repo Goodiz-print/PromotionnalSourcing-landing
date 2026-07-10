@@ -78,6 +78,11 @@ export const ui = {
       'Prix, MOQ, délais et certifications côte à côte — instantanément, sans feuilleter cent catalogues.',
     'howItWorks.step3Title': 'Commandez',
     'howItWorks.step3Desc': 'Contactez le fournisseur en un clic, réponse sous 24 h.',
+    'howItWorks.step1Query': 'sac coton bio 220g',
+    'howItWorks.step1Result': '98 % · 12 résultats',
+    'howItWorks.step2Best': 'Meilleur prix',
+    'howItWorks.step3Cta': 'Contacter',
+    'howItWorks.step3Confirm': 'Réponse sous 24 h',
 
     'stats.heading': 'Au cœur du sourcing européen.',
     'stats.stat1': 'produits référencés dans un seul catalogue',
@@ -195,6 +200,11 @@ export const ui = {
       'Prices, MOQ, lead times and certifications side by side — instantly, no more flipping through catalogues.',
     'howItWorks.step3Title': 'Order',
     'howItWorks.step3Desc': 'Contact the supplier in one click, response within 24h.',
+    'howItWorks.step1Query': 'organic cotton bag 220g',
+    'howItWorks.step1Result': '98% · 12 results',
+    'howItWorks.step2Best': 'Best price',
+    'howItWorks.step3Cta': 'Contact',
+    'howItWorks.step3Confirm': 'Reply within 24h',
 
     'stats.heading': 'At the heart of European sourcing.',
     'stats.stat1': 'products listed in a single catalogue',

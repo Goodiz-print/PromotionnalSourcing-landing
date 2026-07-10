@@ -64,7 +64,10 @@
   --orange-500: #f6a623;
   --amber-600: #e08900;
   --yellow-400: #ffcc00;
-  --gradient-brand: linear-gradient(100deg, var(--indigo-500) 0%, #7a3fd4 45%, var(--orange-500) 100%);
+  /* Surfaces : violet dominant, l'orange n'apparaît qu'en pointe adoucie */
+  --gradient-brand: linear-gradient(110deg, var(--indigo-500) 0%, #6d3ccf 48%, #a058bb 76%, #d99a55 100%);
+  /* Texte : extrémités assombries pour rester lisible sur fond clair */
+  --gradient-brand-text: linear-gradient(100deg, var(--indigo-600) 0%, #7a3fd4 55%, var(--amber-600) 100%);
 
   /* Fonts */
   --font-heading-family: 'Manrope', sans-serif;
@@ -187,7 +190,7 @@
   text-transform: uppercase;
 }
 @utility text-gradient-brand {
-  background: var(--gradient-brand);
+  background: var(--gradient-brand-text);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -362,6 +365,32 @@
     top: 8%;
   }
 }
+@keyframes blob-morph {
+  0%,
+  100% {
+    border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%;
+  }
+  25% {
+    border-radius: 40% 60% 58% 42% / 48% 62% 38% 52%;
+  }
+  50% {
+    border-radius: 55% 45% 38% 62% / 42% 55% 45% 58%;
+  }
+  75% {
+    border-radius: 46% 54% 60% 40% / 58% 40% 60% 42%;
+  }
+}
+@keyframes blob-drift {
+  0%,
+  100% {
+    transform: rotate(-4deg) scale(1);
+    background-position: 0% 50%;
+  }
+  50% {
+    transform: rotate(3deg) scale(1.06);
+    background-position: 100% 50%;
+  }
+}
 @keyframes pulse-dot {
   0%,
   100% {
@@ -412,6 +441,13 @@
 .anim-pulse-dot {
   animation: pulse-dot 2.4s infinite;
 }
+.anim-blob {
+  /* Forme de repos : sert aussi de fallback quand les animations sont coupées */
+  border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%;
+  background-size: 180% 180%;
+  animation: blob-morph 18s ease-in-out infinite, blob-drift 26s ease-in-out infinite;
+  will-change: border-radius, transform;
+}
 @media (prefers-reduced-motion: reduce) {
   .anim-rise,
   .anim-mesh,
@@ -422,7 +458,8 @@
   .anim-daynight,
   .anim-caret,
   .anim-scan-line,
-  .anim-pulse-dot {
+  .anim-pulse-dot,
+  .anim-blob {
     animation: none !important;
   }
 }
@@ -486,6 +523,149 @@
   .bento-product-card {
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+/* ============ HowItWorks — rich step cards ============ */
+.step-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ghost watermark number — contained in the top-right corner */
+.step-ghost {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  z-index: 0;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 84px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--indigo-500);
+  opacity: 0.08;
+  pointer-events: none;
+  transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.step-card:hover .step-ghost {
+  opacity: 0.13;
+  transform: scale(1.06);
+}
+
+/* Soft brand wash that fades in on hover */
+.step-wash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(360px 240px at 12% -10%, rgba(64, 50, 200, 0.1), transparent 70%);
+  transition: opacity 0.45s ease;
+}
+.step-card:hover .step-wash {
+  opacity: 1;
+}
+
+/* Gradient icon tile */
+.step-icon {
+  /* Override [data-pop]'s display:inline-block so flex centering works */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.45s ease;
+}
+.step-card:hover .step-icon {
+  transform: translateY(-3px) rotate(-5deg);
+  box-shadow: 0 12px 26px rgba(64, 50, 200, 0.3);
+}
+.step-icon svg {
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.step-card:hover .step-icon svg {
+  transform: scale(1.08);
+}
+
+/* Arrow connector between cards (desktop) */
+.step-arrow {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.step-card:hover .step-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Mini-illustration strip — settles in when the card scrolls into view */
+.step-fx {
+  opacity: 0.6;
+  transform: translateY(8px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+.step-card.is-visible .step-fx {
+  opacity: 1;
+  transform: none;
+}
+
+/* Step 1 — search result chip slides in */
+.step-result {
+  opacity: 0;
+  transform: translateY(8px) scale(0.96);
+  transition: opacity 0.4s ease 0.55s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.55s;
+}
+.step-card.is-visible .step-result {
+  opacity: 1;
+  transform: none;
+}
+
+/* Step 2 — comparison bars grow from the baseline, cheapest highlighted */
+.step-bar {
+  transform: scaleY(0.35);
+  transform-origin: bottom;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
+}
+.step-card.is-visible .step-bar {
+  transform: scaleY(1);
+}
+.step-card.is-visible .step-bar:nth-child(2) {
+  transition-delay: 0.42s;
+}
+.step-card.is-visible .step-bar:nth-child(3) {
+  transition-delay: 0.49s;
+}
+
+/* Step 3 — confirmation badge slides in like an incoming reply */
+.step-confirm {
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.4s ease 0.55s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.55s;
+}
+.step-card.is-visible .step-confirm {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-ghost,
+  .step-wash,
+  .step-icon,
+  .step-icon svg,
+  .step-arrow,
+  .step-fx,
+  .step-result,
+  .step-bar,
+  .step-confirm {
+    transition: none;
+  }
+  .step-fx,
+  .step-result,
+  .step-confirm {
+    opacity: 1;
+    transform: none;
+  }
+  .step-bar {
+    transform: none;
   }
 }
 
