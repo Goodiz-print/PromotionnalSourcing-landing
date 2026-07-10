@@ -67,7 +67,7 @@ export const ui = {
     'stats.stat1': 'produits référencés dans un seul catalogue',
     'stats.stat2': 'fournisseurs européens vérifiés',
     'stats.stat3': 'de délai de réponse moyen des fournisseurs',
-    'stats.stat4': 'de frais cachés, jamais',
+    'stats.stat4': 'Free access',
 
     'suppliers.kicker': 'Pour les fournisseurs',
     'suppliers.heading': "Rendez vos produits visibles auprès de milliers d'agences européennes.",
@@ -105,6 +105,11 @@ export const ui = {
     'footer.domain': 'promotional-sourcing.eu',
 
     'productMockup.tags': ['Matière recyclée', 'Certifié GRS', 'Stock Europe'],
+    'productMockup.products': [
+      { name: 'Sac tote coton bio 220g', country: 'France' },
+      { name: 'Sac isotherme polyester recyclé', country: 'Suède' },
+      { name: 'Serviette de plage recyclée', country: 'Espagne' },
+    ],
     'productMockup.aiChip': 'Recherche IA',
     'productMockup.verifiedLabel': 'Fournisseur vérifié',
     'productMockup.supplierLabel': 'Fournisseur',
@@ -171,7 +176,7 @@ export const ui = {
     'stats.stat1': 'products listed in a single catalogue',
     'stats.stat2': 'verified European suppliers',
     'stats.stat3': 'average supplier response time',
-    'stats.stat4': 'hidden fees, ever',
+    'stats.stat4': 'Free access',
 
     'suppliers.kicker': 'For suppliers',
     'suppliers.heading': 'Make your products visible to thousands of European agencies.',
@@ -206,6 +211,11 @@ export const ui = {
     'footer.domain': 'promotional-sourcing.eu',
 
     'productMockup.tags': ['Recycled material', 'GRS certified', 'Europe stock'],
+    'productMockup.products': [
+      { name: 'Organic cotton tote bag 220g', country: 'France' },
+      { name: 'Recycled polyester cooler bag', country: 'Sweden' },
+      { name: 'Recycled beach towel', country: 'Spain' },
+    ],
     'productMockup.aiChip': 'AI search',
     'productMockup.verifiedLabel': 'Verified supplier',
     'productMockup.supplierLabel': 'Supplier',

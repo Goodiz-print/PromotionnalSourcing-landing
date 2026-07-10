@@ -7,7 +7,6 @@ const stats = [
   { to: '1128349', suffix: '', label: t('stats.stat1') },
   { to: '300', suffix: '+', label: t('stats.stat2') },
   { to: '24', suffix: ' h', label: t('stats.stat3') },
-  { to: '0', suffix: ' €', label: t('stats.stat4') },
 ]
 ---
 
@@ -42,6 +41,9 @@ const stats = [
 						</div>
 					))
 				}
+				<div>
+					<div class="text-tabular text-stat-figure mb-1.5 text-white">{t('stats.stat4')}</div>
+				</div>
 			</div>
 		</div>
 		<div class="relative mx-auto aspect-square w-full max-w-[480px]">

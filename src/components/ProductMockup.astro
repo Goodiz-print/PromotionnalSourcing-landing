@@ -8,11 +8,12 @@ import { useTranslations } from '../i18n/utils'
 const t = useTranslations(Astro.currentLocale)
 
 const tags = t('productMockup.tags')
+const productLabels = t('productMockup.products')
 
 const products = [
-  { name: 'Sac tote coton bio 220g', verified: true, country: 'France', price: '2,10', image: toteBagCoton, focus: 'center' },
-  { name: 'Sac isotherme polyester recyclé', verified: true, country: 'Suède', price: '6,90', image: sacIsotherme, focus: 'center' },
-  { name: 'Serviette de plage recyclée', verified: false, country: 'Espagne', price: '4,50', image: serviettePlage, focus: 'center' },
+  { ...productLabels[0], verified: true, price: '2,10', image: toteBagCoton, focus: 'center' },
+  { ...productLabels[1], verified: true, price: '6,90', image: sacIsotherme, focus: 'center' },
+  { ...productLabels[2], verified: false, price: '4,50', image: serviettePlage, focus: 'center' },
 ]
 ---
 
