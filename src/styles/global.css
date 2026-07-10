@@ -39,7 +39,7 @@
   --surface-brand-subtle: var(--indigo-50);
 
   /* Semantic — text */
-  --text-primary: var(--ink-950);
+  --text-primary: var(--ink-800);
   --text-secondary: var(--ink-600);
   --text-muted: var(--ink-400);
   --text-brand: var(--indigo-500);
