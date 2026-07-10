@@ -3,45 +3,49 @@ import { useTranslations } from '../i18n/utils'
 
 const t = useTranslations(Astro.currentLocale)
 
-const productLinks = [
-  { label: t('footer.linkCatalogue'), href: '#agences' },
-  { label: t('footer.linkImageSearch'), href: '#agences' },
+const platformLinks = [
+  { label: t('footer.linkAgencies'), href: '#agences' },
+  { label: t('footer.linkSuppliers'), href: '#fournisseurs' },
+  { label: t('footer.linkContact'), href: '#contact' },
 ]
 
-const companyLinks = [{ label: t('footer.linkSuppliers'), href: '#fournisseurs' }]
-
-const resourceLinks = [{ label: t('footer.linkContact'), href: 'mailto:contact@promotionalsourcing.eu' }]
+const legalLinks = [
+  { label: t('footer.linkLegalMentions'), href: '#' },
+  { label: t('footer.linkPrivacy'), href: '#' },
+]
 
 const columns = [
-  { title: t('footer.columnProduct'), links: productLinks },
-  { title: t('footer.columnCompany'), links: companyLinks },
-  { title: t('footer.columnResources'), links: resourceLinks },
+  { title: t('footer.columnPlatform'), links: platformLinks },
+  { title: t('footer.columnLegal'), links: legalLinks },
 ]
 ---
 
 <footer class="wrapper py-16">
-	<div class="mb-12 grid grid-cols-1 gap-8 sm:grid-cols-[1.4fr_repeat(3,1fr)]">
+	<div class="mb-12 flex flex-wrap justify-between gap-10">
 		<div>
 			<img src="/logo.png" alt="promotionalsourcing.eu" width="776" height="310" class="mb-3 h-6 w-auto" />
-			<p class="max-w-[220px] text-caption text-text-muted">
-				{t('footer.tagline')}
-			</p>
+			<p class="text-caption text-text-muted">{t('footer.location')}</p>
 		</div>
-		{
-			columns.map((column) => (
-				<div>
-					<p class="mb-3.5 text-caption font-bold text-text-primary">{column.title}</p>
-					{column.links.map((link) => (
-						<a href={link.href} class="block py-1.5 text-caption text-text-muted hover:text-text-primary">
-							{link.label}
-						</a>
-					))}
-				</div>
-			))
-		}
+		<div class="flex flex-wrap gap-14">
+			{
+				columns.map((column) => (
+					<div>
+						<p class="mb-3.5 text-caption font-bold text-text-primary">{column.title}</p>
+						{column.links.map((link) => (
+							<a href={link.href} class="block py-1.5 text-caption text-text-muted hover:text-text-primary">
+								{link.label}
+							</a>
+						))}
+					</div>
+				))
+			}
+		</div>
 	</div>
 	<div class="flex flex-wrap justify-between gap-2 border-t border-hairline pt-6 text-caption text-text-muted">
 		<span>{t('footer.copyright')}</span>
-		<span>{t('footer.madeFor')}</span>
+		<span class="inline-flex items-center gap-2 font-semibold">
+			<span class="inline-block h-2.5 w-2.5 rounded-full" style="background: var(--gradient-brand);" />
+			{t('footer.domain')}
+		</span>
 	</div>
 </footer>

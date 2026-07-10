@@ -1,0 +1,78 @@
+---
+import Card from './Card.astro'
+import Button from './Button.astro'
+import { useTranslations } from '../i18n/utils'
+
+const t = useTranslations(Astro.currentLocale)
+
+const points = [
+	{
+		title: t('suppliers.point1Title'),
+		desc: t('suppliers.point1Desc'),
+		iconBg: 'bg-orange-500',
+		iconFg: 'text-white',
+		path: 'M20 10.5 12.5 3H5a2 2 0 0 0-2 2v7.5l8.5 8.5a2 2 0 0 0 2.8 0L20 13.3a2 2 0 0 0 0-2.8Z',
+		dot: true,
+	},
+	{
+		title: t('suppliers.point2Title'),
+		desc: t('suppliers.point2Desc'),
+		iconBg: 'bg-indigo-500',
+		iconFg: 'text-white',
+		path: 'M12 15V4M12 4 8 8M12 4l4 4M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3',
+	},
+	{
+		title: t('suppliers.point3Title'),
+		desc: t('suppliers.point3Desc'),
+		iconBg: '',
+		iconFg: 'text-white',
+		iconStyle: 'background: var(--gradient-brand);',
+		path: 'M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z',
+		circle: true,
+	},
+	{
+		title: t('suppliers.point4Title'),
+		desc: t('suppliers.point4Desc'),
+		iconBg: 'bg-yellow-400',
+		iconFg: 'text-ink-950',
+		path: 'M13 2 4 14h6l-1 8 9-12h-6l1-8Z',
+	},
+]
+---
+
+<section id="fournisseurs" class="wrapper py-24">
+	<div data-reveal class="mx-auto mb-12 max-w-[640px] text-center">
+		<p class="mb-4 text-eyebrow text-text-brand">{t('suppliers.kicker')}</p>
+		<h2 class="mb-3 text-display-lg">{t('suppliers.heading')}</h2>
+		<p class="text-body-md text-text-secondary">{t('suppliers.intro')}</p>
+	</div>
+
+	<div class="mb-10 grid gap-5 md:grid-cols-2">
+		{
+			points.map((point, i) => (
+				<Card data-reveal hover style={`transition-delay: ${i * 0.06}s;`} class="flex gap-4 p-6">
+					<span
+						class={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[11px] ${point.iconBg} ${point.iconFg}`}
+						style={point.iconStyle}
+					>
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d={point.path} />
+							{point.dot && <circle cx="8.5" cy="8.5" r="1.25" fill="currentColor" stroke="none" />}
+							{point.circle && <circle cx="12" cy="12" r="3" />}
+						</svg>
+					</span>
+					<div>
+						<p class="mb-1 text-heading-md">{point.title}</p>
+						<p class="text-body-sm text-text-secondary">{point.desc}</p>
+					</div>
+				</Card>
+			))
+		}
+	</div>
+
+	<div data-reveal class="text-center">
+		<Button href="#contact" style="background: var(--gradient-brand); box-shadow: 0 8px 24px rgba(64,50,200,0.35);">
+			{t('suppliers.cta')} <span aria-hidden="true">→</span>
+		</Button>
+	</div>
+</section>

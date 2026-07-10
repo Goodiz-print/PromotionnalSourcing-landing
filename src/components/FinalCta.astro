@@ -5,13 +5,22 @@ import { useTranslations } from '../i18n/utils'
 const t = useTranslations(Astro.currentLocale)
 ---
 
-<section id="contact" class="px-6 py-[88px] text-center md:px-10" style="background: var(--gradient-brand);">
-	<div data-reveal>
+<section id="contact" class="relative overflow-hidden px-6 py-[88px] text-center md:px-10" style="background: var(--gradient-brand);">
+	<div
+		aria-hidden="true"
+		class="pointer-events-none absolute -left-[140px] -bottom-[190px] z-0 h-[420px] w-[420px] rounded-full opacity-[0.14] blur-[2px]"
+		style="background: #ffffff; transform: rotate(-14deg);"
+	>
+	</div>
+	<div data-reveal class="relative z-10">
+		<span class="mb-6 inline-block rounded-pill border border-white/35 bg-white/[0.16] px-5 py-2 text-eyebrow text-white">
+			{t('finalCta.badge')}
+		</span>
 		<h2 class="mx-auto mb-4 max-w-[640px] text-display-lg text-white">
 			{t('finalCta.heading')}
 		</h2>
-		<p class="mb-9 text-body-lg text-indigo-100">
-			{t('finalCta.description')}
+		<p class="mx-auto mb-9 max-w-[560px] text-body-lg text-indigo-100">
+			{t('finalCta.descriptionBefore')}<b class="text-yellow-300">{t('finalCta.descriptionHighlight')}</b>{t('finalCta.descriptionAfter')}
 		</p>
 		<Button href="mailto:contact@promotionalsourcing.eu" variant="on-dark">{t('finalCta.cta')}</Button>
 	</div>
