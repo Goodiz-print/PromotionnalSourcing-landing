@@ -16,9 +16,9 @@ export const ui = {
     'seo.description':
       "Plateforme B2B européenne de sourcing d'objets publicitaires : 300 fournisseurs, 1M+ produits, recherche multi-critères qui fonctionne vraiment — contrairement aux solutions existantes.",
 
-    'nav.catalogue': 'Catalogue',
+    'nav.agences': 'Agences',
     'nav.fournisseurs': 'Fournisseurs',
-    'nav.ressources': 'Ressources',
+    'nav.contact': 'Contact',
     'nav.cta': 'Nous contacter',
     'nav.menuAria': 'Ouvrir le menu',
     'nav.switchTo': 'English',
@@ -26,16 +26,16 @@ export const ui = {
     'nav.loginTitle': 'Disponible au lancement',
     'nav.soon': 'Bientôt',
 
-    'hero.badge': '300 fournisseurs européens · 1M+ produits',
-    'hero.titleBeforeBreak': "Le sourcing d'objets",
-    'hero.titleBeforeHighlight': 'publicitaires, ',
-    'hero.titleHighlight': 'simplifié',
-    'hero.titleEnd': '.',
-    'hero.description':
-      'Recherche intelligente, comparaison instantanée, mise en relation directe — fini les cent catalogues à feuilleter.',
-    'hero.ctaPrimary': 'Nous contacter',
-    'hero.ctaSecondary': 'Voir le catalogue',
-    'hero.dots': ['Recherche par image (IA)', 'Fournisseurs vérifiés', 'Catalogue européen'],
+    'hero.eyebrow': 'Lancement : janvier 2027',
+    'hero.titleLine1': "Le sourcing d'objets promotionnels.",
+    'hero.titleWord1': 'Simplifié.',
+    'hero.titleWord2': 'Intelligent.',
+    'hero.titleWord3': 'Européen.',
+    'hero.lead':
+      "Une plateforme unique pour connecter fournisseurs et agences de communication par l'objet à travers l'Europe.",
+    'hero.sub': 'Recherche avancée. Résultats pertinents. IA intégrée.',
+    'hero.ctaPrimary': 'Découvrir',
+    'hero.ctaSecondary': 'Nous contacter',
 
     'logoStrip.eyebrow': "Déjà utilisé par des revendeurs dans toute l'Europe",
 
@@ -127,20 +127,24 @@ export const ui = {
     'footer.madeFor': 'Fait pour les acheteurs et fournisseurs européens',
 
     'productMockup.tags': ['Matière recyclée', 'Certifié GRS', 'Stock Europe'],
-    'productMockup.colProduct': 'Produit',
-    'productMockup.colPrice': 'Prix',
-    'productMockup.verifiedBadge': 'Vérifié',
+    'productMockup.aiChip': 'Recherche IA',
+    'productMockup.verifiedLabel': 'Fournisseur vérifié',
+    'productMockup.supplierLabel': 'Fournisseur',
+    'productMockup.priceFrom': 'dès',
+    'productMockup.priceSuffix': '€ HT',
+    'productMockup.footerCompare': 'Comparaison instantanée entre fournisseurs',
+    'productMockup.footerFlag': "Aperçu de l'interface",
     'productMockup.ariaLabel':
-      'Aperçu de la recherche promotionalsourcing.eu/recherche : un sac tote en coton bio, un sac isotherme en polyester recyclé et une serviette de plage recyclée, filtrés par matière recyclée, certification GRS et stock Europe, avec fournisseur et prix.',
+      "Aperçu d'une recherche sur promotionalsourcing.eu : un sac tote en coton bio, un sac isotherme en polyester recyclé et une serviette de plage recyclée, filtrés par matière recyclée, certification GRS et stock Europe, avec fournisseur vérifié, pays et prix.",
   },
   en: {
     'seo.title': 'Promotional Sourcing.eu — Sourcing promotional products, finally reliable',
     'seo.description':
       'European B2B sourcing platform for promotional products: 300 suppliers, 1M+ products, multi-criteria search that actually works — unlike existing tools.',
 
-    'nav.catalogue': 'Catalogue',
+    'nav.agences': 'Agencies',
     'nav.fournisseurs': 'Suppliers',
-    'nav.ressources': 'Resources',
+    'nav.contact': 'Contact',
     'nav.cta': 'Contact us',
     'nav.menuAria': 'Open menu',
     'nav.switchTo': 'Français',
@@ -148,16 +152,16 @@ export const ui = {
     'nav.loginTitle': 'Available at launch',
     'nav.soon': 'Soon',
 
-    'hero.badge': '300 European suppliers · 1M+ products',
-    'hero.titleBeforeBreak': 'Sourcing promotional',
-    'hero.titleBeforeHighlight': 'products, ',
-    'hero.titleHighlight': 'simplified',
-    'hero.titleEnd': '.',
-    'hero.description':
-      'Smart search, instant comparison, direct supplier contact — no more flipping through a hundred catalogues.',
-    'hero.ctaPrimary': 'Contact us',
-    'hero.ctaSecondary': 'See the catalogue',
-    'hero.dots': ['Image search (AI)', 'Verified suppliers', 'European catalogue'],
+    'hero.eyebrow': 'Launching: January 2027',
+    'hero.titleLine1': 'Sourcing promotional products.',
+    'hero.titleWord1': 'Simplified.',
+    'hero.titleWord2': 'Intelligent.',
+    'hero.titleWord3': 'European.',
+    'hero.lead':
+      'A single platform connecting suppliers and communication agencies through promotional products across Europe.',
+    'hero.sub': 'Advanced search. Relevant results. Built-in AI.',
+    'hero.ctaPrimary': 'Discover',
+    'hero.ctaSecondary': 'Contact us',
 
     'logoStrip.eyebrow': 'Already used by resellers across Europe',
 
@@ -249,10 +253,14 @@ export const ui = {
     'footer.madeFor': 'Made for European buyers and suppliers',
 
     'productMockup.tags': ['Recycled material', 'GRS certified', 'Europe stock'],
-    'productMockup.colProduct': 'Product',
-    'productMockup.colPrice': 'Price',
-    'productMockup.verifiedBadge': 'Verified',
+    'productMockup.aiChip': 'AI search',
+    'productMockup.verifiedLabel': 'Verified supplier',
+    'productMockup.supplierLabel': 'Supplier',
+    'productMockup.priceFrom': 'from',
+    'productMockup.priceSuffix': '€ excl. VAT',
+    'productMockup.footerCompare': 'Instant comparison across suppliers',
+    'productMockup.footerFlag': 'Interface preview',
     'productMockup.ariaLabel':
-      'Preview of a promotionalsourcing.eu/search result: an organic cotton tote bag, a recycled polyester cooler bag and a recycled beach towel, filtered by recycled material, GRS certification and Europe stock, with supplier and price.',
+      'Preview of a search on promotionalsourcing.eu: an organic cotton tote bag, a recycled polyester cooler bag and a recycled beach towel, filtered by recycled material, GRS certification and Europe stock, with verified supplier, country and price.',
   },
 } as const

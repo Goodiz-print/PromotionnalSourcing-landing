@@ -1,81 +1,43 @@
 ---
 import Button from './Button.astro'
-import GradientMesh from './GradientMesh.astro'
 import ProductMockup from './ProductMockup.astro'
 import { useTranslations } from '../i18n/utils'
 
 const t = useTranslations(Astro.currentLocale)
-const dots = t('hero.dots')
 ---
 
-<section class="relative overflow-hidden px-6 pb-16 pt-16 md:px-10 md:pb-24 md:pt-20">
-	<GradientMesh />
-
-	<canvas data-canvas="hero" class="pointer-events-none absolute inset-0 z-0 block h-full w-full" aria-hidden="true"></canvas>
-
+<section class="relative overflow-hidden bg-white px-6 pb-16 pt-16 md:px-10 md:pb-24 md:pt-20">
 	<div
 		aria-hidden="true"
 		class="anim-blob pointer-events-none absolute left-[52%] right-[-16%] top-[-24%] bottom-[10%] z-0 hidden md:block"
-		style="background-image: var(--gradient-brand); opacity: 0.96;"
+		style="background-image: radial-gradient(45% 45% at 50% 30%, rgba(255,255,255,0.4), transparent 70%), linear-gradient(135deg, var(--indigo-500) 0%, #7a3fd4 32%, #c957c2 62%, var(--orange-500) 100%); background-size: 100% 100%; opacity: 0.96;"
 	>
-	</div>
-	<div
-		aria-hidden="true"
-		class="pointer-events-none absolute -right-[120px] -top-20 z-0 hidden h-[420px] w-[420px] rounded-full blur-[10px] md:block"
-		style="background: radial-gradient(circle at 30% 30%, rgba(255,204,0,0.55), transparent 65%);"
-	>
-	</div>
-
-	<div aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[170px] overflow-hidden leading-[0]">
-		<div class="anim-wave absolute -bottom-4 left-0 h-full w-[200%]">
-			<svg viewBox="0 0 2880 320" preserveAspectRatio="none" class="block h-full w-full">
-				<path
-					d="M0,180 C120,140 240,220 360,180 C480,140 600,220 720,180 C840,140 960,220 1080,180 C1200,140 1320,220 1440,180 C1560,140 1680,220 1800,180 C1920,140 2040,220 2160,180 C2280,140 2400,220 2520,180 C2640,140 2760,220 2880,180 L2880,320 L0,320 Z"
-					fill="var(--indigo-500)"
-					opacity="0.07"></path>
-			</svg>
-		</div>
-		<div class="anim-wave-reverse absolute -bottom-2 left-0 h-full w-[200%]">
-			<svg viewBox="0 0 2880 320" preserveAspectRatio="none" class="block h-full w-full">
-				<path
-					d="M0,210 C120,180 240,240 360,210 C480,180 600,240 720,210 C840,180 960,240 1080,210 C1200,180 1320,240 1440,210 C1560,180 1680,240 1800,210 C1920,180 2040,240 2160,210 C2280,180 2400,240 2520,210 C2640,180 2760,240 2880,210 L2880,320 L0,320 Z"
-					fill="var(--indigo-500)"
-					opacity="0.12"></path>
-			</svg>
-		</div>
 	</div>
 
 	<div class="relative z-10 mx-auto grid max-w-[1140px] items-center gap-12 text-left md:grid-cols-[1.05fr_0.95fr] md:gap-10">
 		<div class="text-center md:text-left">
-			<div class="anim-rise mb-7 inline-flex items-center gap-2 rounded-pill bg-brand-subtle px-4 py-1.5 text-eyebrow text-indigo-600">
+			<div class="anim-rise mb-7 inline-flex items-center gap-2 rounded-pill border border-indigo-100 bg-brand-subtle px-4 py-1.5 text-eyebrow text-indigo-600">
 				<span class="anim-pulse-dot inline-block h-2 w-2 rounded-full bg-orange-500" aria-hidden="true"></span>
-				{t('hero.badge')}
+				{t('hero.eyebrow')}
 			</div>
 			<h1 class="anim-rise mb-6 text-display-lg sm:text-display-xl" style="animation-delay: 0.06s;">
-				{t('hero.titleBeforeBreak')}<br />{t('hero.titleBeforeHighlight')}<span class="text-gradient-brand">{t('hero.titleHighlight')}</span>{t('hero.titleEnd')}
+				{t('hero.titleLine1')}<br />
+				<span class="text-indigo-600">{t('hero.titleWord1')}</span> <span class="text-amber-600">{t('hero.titleWord2')}</span> <span class="text-gradient-brand">{t('hero.titleWord3')}</span>
 			</h1>
-			<p class="anim-rise mb-10 max-w-[540px] text-body-lg text-text-secondary" style="animation-delay: 0.12s;">
-				{t('hero.description')}
+			<p class="anim-rise mb-3.5 max-w-[540px] text-body-lg text-text-secondary" style="animation-delay: 0.12s;">
+				{t('hero.lead')}
+			</p>
+			<p class="anim-rise mb-9 font-semibold text-text-primary" style="animation-delay: 0.15s;">
+				{t('hero.sub')}
 			</p>
 
-			<div class="anim-rise mb-5 flex flex-wrap items-center justify-center gap-4 md:justify-start" style="animation-delay: 0.18s;">
-				<Button href="#contact" class="hover:-translate-y-0.5" style="box-shadow: 0 8px 24px rgba(64,50,200,0.35);">
-					{t('hero.ctaPrimary')}
+			<div class="anim-rise flex flex-wrap items-center justify-center gap-4 md:justify-start" style="animation-delay: 0.18s;">
+				<Button href="#agences" class="hover:-translate-y-0.5" style="background: var(--gradient-brand); box-shadow: 0 8px 24px rgba(64,50,200,0.35);">
+					{t('hero.ctaPrimary')} <span aria-hidden="true">→</span>
 				</Button>
-				<Button href="#fonctionnalites" variant="secondary" style="border: 2px solid var(--indigo-500); color: var(--indigo-500); background: #fff;">
+				<Button href="#contact" variant="secondary" style="border: 2px solid var(--indigo-500); color: var(--indigo-500); background: #fff;">
 					{t('hero.ctaSecondary')}
 				</Button>
-			</div>
-
-			<div class="anim-rise flex flex-wrap justify-center gap-2.5 text-caption md:justify-start" style="animation-delay: 0.22s;">
-				{
-					dots.map((dot) => (
-						<span class="inline-flex items-center gap-1.5 rounded-pill border border-white/60 bg-white/70 px-3 py-1.5 font-medium text-text-secondary shadow-elevation-1 backdrop-blur-sm">
-							<span class="inline-block h-1.5 w-1.5 rounded-full bg-indigo-500" />
-							{dot}
-						</span>
-					))
-				}
 			</div>
 		</div>
 
