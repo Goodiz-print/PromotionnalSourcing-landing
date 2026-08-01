@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://promotionalsourcing.eu/sitemap-index.xml
+Sitemap: https://promotional-sourcing.eu/sitemap-index.xml
