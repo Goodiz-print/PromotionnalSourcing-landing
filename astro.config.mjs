@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://promotionalsourcing.eu',
+  site: 'https://promotional-sourcing.eu',
   integrations: [
     sitemap({
       i18n: {

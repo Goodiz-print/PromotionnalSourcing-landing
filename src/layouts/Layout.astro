@@ -6,6 +6,7 @@ import ScrollFx from '../components/ScrollFx.astro'
 import CanvasFx from '../components/CanvasFx.astro'
 import { getAbsoluteLocaleUrl } from 'astro:i18n'
 import { ogLocales, defaultLang } from '../i18n/ui'
+import { useTranslations } from '../i18n/utils'
 
 interface Props {
   title: string
@@ -13,33 +14,85 @@ interface Props {
   image?: string
 }
 
-const { title, description, image = '/logo.png' } = Astro.props
-
 const lang = Astro.currentLocale ?? defaultLang
+const t = useTranslations(lang)
+
+const { title, description, image = `/og-${lang}.png` } = Astro.props
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const ogImageURL = new URL(image, Astro.site)
+const siteURL = Astro.site!.toString()
 
-const organizationSchema = {
+// Kept separate from the page's og:image: this is the image Google reads as the
+// company logo, so it must stay the same whatever social card a page overrides.
+const logoURL = new URL('/logo-schema.png', Astro.site)
+
+const BRAND = 'Promotional Sourcing.eu'
+
+const structuredData = {
 	'@context': 'https://schema.org',
-	'@type': 'Organization',
-	name: 'Promotional Sourcing.eu',
-	url: Astro.site?.toString(),
-	logo: ogImageURL.toString(),
-	description,
-	email: 'contact@promotionalsourcing.eu',
-	areaServed: 'EU',
+	'@graph': [
+		{
+			'@type': 'Organization',
+			'@id': `${siteURL}#organization`,
+			name: BRAND,
+			url: siteURL,
+			// Deliberately not the page description — the entity must not change
+			// meaning from one page to the next.
+			description: t('org.description'),
+			logo: {
+				'@type': 'ImageObject',
+				'@id': `${siteURL}#logo`,
+				url: logoURL.toString(),
+				contentUrl: logoURL.toString(),
+				width: 1200,
+				height: 630,
+				caption: BRAND,
+			},
+			image: { '@id': `${siteURL}#logo` },
+			email: 'contact@promotional-sourcing.eu',
+			address: {
+				'@type': 'PostalAddress',
+				addressLocality: 'Bordeaux',
+				addressCountry: 'FR',
+			},
+			areaServed: 'EU',
+		},
+		{
+			'@type': 'WebSite',
+			'@id': `${siteURL}#website`,
+			url: siteURL,
+			name: BRAND,
+			description,
+			inLanguage: ogLocales[lang].replace('_', '-'),
+			publisher: { '@id': `${siteURL}#organization` },
+		},
+	],
 }
 ---
 
 <html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#4032c8" />
 		<meta name="generator" content={Astro.generator} />
+
+		{/* Browsers prefer the SVG; crawlers fall back to the PNGs. Google wants a
+		    square favicon whose size is a multiple of 48px. */}
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+		<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		{/* Without max-image-preview:large, Google may never show a large thumbnail. */}
+		<meta
+			name="robots"
+			content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+		/>
 		<link rel="canonical" href={canonicalURL} />
 		<link rel="alternate" hreflang="fr" href={getAbsoluteLocaleUrl('fr', '/')} />
 		<link rel="alternate" hreflang="en" href={getAbsoluteLocaleUrl('en', '/')} />
@@ -51,15 +104,22 @@ const organizationSchema = {
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
+		{/* Several platforms skip the preview entirely when the dimensions are absent. */}
 		<meta property="og:image" content={ogImageURL} />
+		<meta property="og:image:secure_url" content={ogImageURL} />
+		<meta property="og:image:type" content="image/png" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={t('og.imageAlt')} />
 
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:url" content={canonicalURL} />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageURL} />
+		<meta name="twitter:image:alt" content={t('og.imageAlt')} />
 
-		<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 	</head>
 	<body class="overflow-x-hidden bg-canvas text-text-primary">
 		<Header />

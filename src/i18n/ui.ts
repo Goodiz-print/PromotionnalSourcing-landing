@@ -16,6 +16,13 @@ export const ui = {
     'seo.description':
       "Plateforme B2B européenne de sourcing d'objets publicitaires : 300 fournisseurs, 1M+ produits, recherche multi-critères qui fonctionne vraiment — contrairement aux solutions existantes.",
 
+    // Identité de l'entreprise pour les données structurées : doit rester stable
+    // d'une page à l'autre, contrairement à seo.description.
+    'org.description':
+      "Plateforme B2B européenne qui connecte les agences de communication par l'objet aux fournisseurs d'objets publicitaires à travers l'Europe.",
+    'og.imageAlt':
+      "Promotional Sourcing.eu — Le sourcing d'objets promotionnels. Simplifié. Intelligent. Européen.",
+
     'nav.agences': 'Agences',
     'nav.fournisseurs': 'Fournisseurs',
     'nav.contact': 'Contact',
@@ -118,12 +125,17 @@ export const ui = {
     'productMockup.footerCompare': 'Comparaison instantanée entre fournisseurs',
     'productMockup.footerFlag': "Aperçu de l'interface",
     'productMockup.ariaLabel':
-      "Aperçu d'une recherche sur promotionalsourcing.eu : un sac tote en coton bio, un sac isotherme en polyester recyclé et une serviette de plage recyclée, filtrés par matière recyclée, certification GRS et stock Europe, avec fournisseur vérifié, pays et prix.",
+      "Aperçu d'une recherche sur promotional-sourcing.eu : un sac tote en coton bio, un sac isotherme en polyester recyclé et une serviette de plage recyclée, filtrés par matière recyclée, certification GRS et stock Europe, avec fournisseur vérifié, pays et prix.",
   },
   en: {
     'seo.title': 'Promotional Sourcing.eu — Sourcing promotional products, finally reliable',
     'seo.description':
       'European B2B sourcing platform for promotional products: 300 suppliers, 1M+ products, multi-criteria search that actually works — unlike existing tools.',
+
+    'org.description':
+      'European B2B platform connecting promotional product agencies with suppliers across Europe.',
+    'og.imageAlt':
+      'Promotional Sourcing.eu — Sourcing promotional products. Simplified. Intelligent. European.',
 
     'nav.agences': 'Agencies',
     'nav.fournisseurs': 'Suppliers',
@@ -224,6 +236,6 @@ export const ui = {
     'productMockup.footerCompare': 'Instant comparison across suppliers',
     'productMockup.footerFlag': 'Interface preview',
     'productMockup.ariaLabel':
-      'Preview of a search on promotionalsourcing.eu: an organic cotton tote bag, a recycled polyester cooler bag and a recycled beach towel, filtered by recycled material, GRS certification and Europe stock, with verified supplier, country and price.',
+      'Preview of a search on promotional-sourcing.eu: an organic cotton tote bag, a recycled polyester cooler bag and a recycled beach towel, filtered by recycled material, GRS certification and Europe stock, with verified supplier, country and price.',
   },
 } as const
