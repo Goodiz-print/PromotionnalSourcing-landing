@@ -5,6 +5,8 @@ export const languages = {
 
 export const defaultLang = 'fr' as const
 
+export type Lang = keyof typeof languages
+
 export const ogLocales = {
   fr: 'fr_FR',
   en: 'en_US',
@@ -110,6 +112,54 @@ export const ui = {
     'footer.linkPrivacy': 'Confidentialité',
     'footer.copyright': '© 2026 Promotional Sourcing',
     'footer.domain': 'promotional-sourcing.eu',
+
+    'contact.seoTitle': 'Contact — Promotional Sourcing.eu',
+    'contact.seoDescription':
+      "Agence ou fournisseur d'objets publicitaires ? Parlons de votre besoin de sourcing en Europe. Réponse sous 48 h.",
+    'contact.eyebrow': 'Contact',
+    'contact.heading': 'Parlons de votre besoin.',
+    'contact.intro':
+      "Agence à la recherche du bon produit, ou fournisseur qui veut rejoindre la plateforme : dites-nous en quelques lignes ce que vous cherchez, nous revenons vers vous sous 48 h.",
+    'contact.asideTitle': 'Nous écrire directement',
+    'contact.asideAddressTitle': 'Nos bureaux',
+    'contact.asideResponseTitle': 'Délai de réponse',
+    'contact.asideResponse': 'Sous 48 h ouvrées.',
+    'contact.formHeading': 'Votre demande',
+    'contact.fieldName': 'Nom et prénom',
+    'contact.fieldCompany': 'Société',
+    'contact.fieldRole': 'Vous êtes',
+    'contact.fieldRolePlaceholder': 'Sélectionnez…',
+    'contact.fieldRoleAgency': 'Agence / acheteur',
+    'contact.fieldRoleSupplier': 'Fournisseur / fabricant',
+    'contact.fieldRoleOther': 'Autre',
+    'contact.fieldEmail': 'E-mail professionnel',
+    'contact.fieldPhone': 'Téléphone',
+    'contact.fieldPhoneOptional': 'facultatif',
+    'contact.fieldMessage': 'Votre besoin',
+    'contact.fieldMessagePlaceholder':
+      'Type de produit, quantité, délai, marché visé…',
+    'contact.honeypot': 'Ne remplissez pas ce champ',
+    'contact.submit': 'Envoyer ma demande',
+    'contact.requiredHint': 'Les champs marqués d’un astérisque (*) sont obligatoires.',
+    'contact.privacyBefore': 'Vos données servent uniquement à traiter votre demande. Voir notre ',
+    'contact.privacyLink': 'politique de confidentialité',
+    'contact.privacyAfter': '.',
+
+    'thanks.seoTitle': 'Message bien reçu — Promotional Sourcing.eu',
+    'thanks.seoDescription': 'Votre demande a bien été transmise à notre équipe.',
+    'thanks.eyebrow': 'Message envoyé',
+    'thanks.heading': 'Merci, votre message est bien parti.',
+    'thanks.body':
+      'Notre équipe revient vers vous sous 48 h ouvrées. En attendant, vous pouvez nous écrire directement à',
+    'thanks.backHome': "Retour à l'accueil",
+
+    'legal.seoTitle': 'Mentions légales — Promotional Sourcing.eu',
+    'legal.seoDescription':
+      'Mentions légales du site promotional-sourcing.eu : éditeur, hébergeur, propriété intellectuelle.',
+    'privacy.seoTitle': 'Politique de confidentialité — Promotional Sourcing.eu',
+    'privacy.seoDescription':
+      'Comment PROMOTIONAL SOURCING collecte, utilise et protège vos données personnelles, conformément au RGPD.',
+    'legal.updatedOn': 'Dernière mise à jour :',
 
     'productMockup.tags': ['Matière recyclée', 'Certifié GRS', 'Stock Europe'],
     'productMockup.products': [
@@ -221,6 +271,53 @@ export const ui = {
     'footer.linkPrivacy': 'Privacy',
     'footer.copyright': '© 2026 Promotional Sourcing',
     'footer.domain': 'promotional-sourcing.eu',
+
+    'contact.seoTitle': 'Contact — Promotional Sourcing.eu',
+    'contact.seoDescription':
+      'Agency or supplier of promotional products? Let’s talk about your sourcing needs in Europe. Reply within 48 h.',
+    'contact.eyebrow': 'Contact',
+    'contact.heading': 'Tell us what you need.',
+    'contact.intro':
+      'Whether you are an agency looking for the right product or a supplier who wants to join the platform, tell us briefly what you are after — we get back to you within 48 hours.',
+    'contact.asideTitle': 'Email us directly',
+    'contact.asideAddressTitle': 'Our office',
+    'contact.asideResponseTitle': 'Response time',
+    'contact.asideResponse': 'Within 48 business hours.',
+    'contact.formHeading': 'Your enquiry',
+    'contact.fieldName': 'Full name',
+    'contact.fieldCompany': 'Company',
+    'contact.fieldRole': 'You are',
+    'contact.fieldRolePlaceholder': 'Select…',
+    'contact.fieldRoleAgency': 'Agency / buyer',
+    'contact.fieldRoleSupplier': 'Supplier / manufacturer',
+    'contact.fieldRoleOther': 'Other',
+    'contact.fieldEmail': 'Work email',
+    'contact.fieldPhone': 'Phone',
+    'contact.fieldPhoneOptional': 'optional',
+    'contact.fieldMessage': 'Your needs',
+    'contact.fieldMessagePlaceholder': 'Product type, quantity, deadline, target market…',
+    'contact.honeypot': 'Do not fill in this field',
+    'contact.submit': 'Send my enquiry',
+    'contact.requiredHint': 'Fields marked with an asterisk (*) are required.',
+    'contact.privacyBefore': 'Your data is only used to handle your enquiry. See our ',
+    'contact.privacyLink': 'privacy policy',
+    'contact.privacyAfter': '.',
+
+    'thanks.seoTitle': 'Message received — Promotional Sourcing.eu',
+    'thanks.seoDescription': 'Your enquiry has been sent to our team.',
+    'thanks.eyebrow': 'Message sent',
+    'thanks.heading': 'Thanks — your message is on its way.',
+    'thanks.body':
+      'Our team will get back to you within 48 business hours. In the meantime, you can email us directly at',
+    'thanks.backHome': 'Back to home',
+
+    'legal.seoTitle': 'Legal notice — Promotional Sourcing.eu',
+    'legal.seoDescription':
+      'Legal notice for promotional-sourcing.eu: publisher, host, intellectual property.',
+    'privacy.seoTitle': 'Privacy policy — Promotional Sourcing.eu',
+    'privacy.seoDescription':
+      'How PROMOTIONAL SOURCING collects, uses and protects your personal data, in accordance with the GDPR.',
+    'legal.updatedOn': 'Last updated:',
 
     'productMockup.tags': ['Recycled material', 'GRS certified', 'Europe stock'],
     'productMockup.products': [

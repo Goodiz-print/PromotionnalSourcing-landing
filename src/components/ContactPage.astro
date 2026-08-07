@@ -1,0 +1,43 @@
+---
+import ContactForm from './ContactForm.astro'
+import { useTranslations } from '../i18n/utils'
+
+const t = useTranslations(Astro.currentLocale)
+const email = 'contact@promotional-sourcing.eu'
+---
+
+<section class="wrapper py-24">
+	<div class="mb-14 max-w-[640px]">
+		<p class="mb-3 text-eyebrow text-text-brand">{t('contact.eyebrow')}</p>
+		<h1 class="mb-4 text-display-lg">{t('contact.heading')}</h1>
+		<p class="text-body-lg text-text-secondary">{t('contact.intro')}</p>
+	</div>
+
+	<div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-16">
+		<div data-reveal>
+			<h2 class="mb-6 text-heading-lg">{t('contact.formHeading')}</h2>
+			<ContactForm variant="default" idPrefix="page" />
+		</div>
+
+		<aside class="flex flex-col gap-8 rounded-xl border border-hairline bg-sunken p-7 lg:self-start">
+			<div>
+				<p class="mb-2 text-eyebrow text-text-muted">{t('contact.asideTitle')}</p>
+				<a class="text-body-md font-semibold text-text-brand underline underline-offset-2" href={`mailto:${email}`}>
+					{email}
+				</a>
+			</div>
+			<div>
+				<p class="mb-2 text-eyebrow text-text-muted">{t('contact.asideAddressTitle')}</p>
+				<address class="text-body-md not-italic text-text-secondary">
+					PROMOTIONAL SOURCING<br />
+					72 quai de Bacalan<br />
+					33300 Bordeaux — France
+				</address>
+			</div>
+			<div>
+				<p class="mb-2 text-eyebrow text-text-muted">{t('contact.asideResponseTitle')}</p>
+				<p class="text-body-md text-text-secondary">{t('contact.asideResponse')}</p>
+			</div>
+		</aside>
+	</div>
+</section>

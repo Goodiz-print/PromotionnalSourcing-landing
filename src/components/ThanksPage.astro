@@ -1,0 +1,27 @@
+---
+import Button from './Button.astro'
+import { useTranslations } from '../i18n/utils'
+import { localizedPath } from '../i18n/routes'
+
+const t = useTranslations(Astro.currentLocale)
+const lang = Astro.currentLocale
+const email = 'contact@promotional-sourcing.eu'
+---
+
+<section class="wrapper flex min-h-[60vh] flex-col items-center justify-center py-24 text-center">
+	<span
+		class="mb-7 inline-flex h-14 w-14 items-center justify-center rounded-pill bg-success-bg text-success"
+		aria-hidden="true"
+	>
+		<svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+			<path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+		</svg>
+	</span>
+	<p class="mb-3 text-eyebrow text-text-brand">{t('thanks.eyebrow')}</p>
+	<h1 class="mb-4 max-w-[560px] text-display-lg">{t('thanks.heading')}</h1>
+	<p class="mb-9 max-w-[520px] text-body-lg text-text-secondary">
+		{t('thanks.body')}{' '}
+		<a class="text-text-brand underline underline-offset-2" href={`mailto:${email}`}>{email}</a>.
+	</p>
+	<Button href={localizedPath('home', lang)}>{t('thanks.backHome')}</Button>
+</section>

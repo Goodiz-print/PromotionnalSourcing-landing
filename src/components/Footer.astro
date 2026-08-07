@@ -1,17 +1,19 @@
 ---
 import { useTranslations } from '../i18n/utils'
+import { localizedPath, homeAnchor } from '../i18n/routes'
 
 const t = useTranslations(Astro.currentLocale)
+const lang = Astro.currentLocale
 
 const platformLinks = [
-  { label: t('footer.linkAgencies'), href: '#agences' },
-  { label: t('footer.linkSuppliers'), href: '#fournisseurs' },
-  { label: t('footer.linkContact'), href: '#contact' },
+  { label: t('footer.linkAgencies'), href: homeAnchor('agences', lang) },
+  { label: t('footer.linkSuppliers'), href: homeAnchor('fournisseurs', lang) },
+  { label: t('footer.linkContact'), href: localizedPath('contact', lang) },
 ]
 
 const legalLinks = [
-  { label: t('footer.linkLegalMentions'), href: '#' },
-  { label: t('footer.linkPrivacy'), href: '#' },
+  { label: t('footer.linkLegalMentions'), href: localizedPath('legal', lang) },
+  { label: t('footer.linkPrivacy'), href: localizedPath('privacy', lang) },
 ]
 
 const columns = [

@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import ContactPage from '../../components/ContactPage.astro'
+import { useTranslations } from '../../i18n/utils'
+
+const t = useTranslations(Astro.currentLocale)
+---
+
+<Layout title={t('contact.seoTitle')} description={t('contact.seoDescription')} route="contact">
+	<ContactPage />
+</Layout>

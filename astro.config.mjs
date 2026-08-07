@@ -8,6 +8,9 @@ export default defineConfig({
   site: 'https://promotional-sourcing.eu',
   integrations: [
     sitemap({
+      // Les pages de confirmation de formulaire sont en noindex : les exclure du sitemap
+      // évite d'envoyer à Google des URLs qu'on lui demande par ailleurs d'ignorer.
+      filter: (page) => !/\/(merci|thank-you)\/$/.test(page),
       i18n: {
         defaultLocale: 'fr',
         locales: {

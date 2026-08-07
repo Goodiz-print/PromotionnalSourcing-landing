@@ -1,0 +1,29 @@
+---
+import Layout from './Layout.astro'
+import { useTranslations } from '../i18n/utils'
+import type { RouteKey } from '../i18n/routes'
+
+interface Props {
+  title: string
+  description: string
+  heading: string
+  route: RouteKey
+  /** Date de dernière mise à jour, déjà formatée dans la langue de la page. */
+  updatedAt: string
+}
+
+const { title, description, heading, route, updatedAt } = Astro.props
+const t = useTranslations(Astro.currentLocale)
+---
+
+<Layout title={title} description={description} route={route}>
+	<section class="wrapper py-24">
+		<div class="mx-auto max-w-[720px]">
+			<h1 class="mb-3 text-display-lg">{heading}</h1>
+			<p class="mb-12 text-caption text-text-muted">{t('legal.updatedOn')} {updatedAt}</p>
+			<div class="legal-prose">
+				<slot />
+			</div>
+		</div>
+	</section>
+</Layout>

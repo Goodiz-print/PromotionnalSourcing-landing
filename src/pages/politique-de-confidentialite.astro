@@ -1,0 +1,151 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro'
+import { useTranslations } from '../i18n/utils'
+import { localizedPath } from '../i18n/routes'
+
+const t = useTranslations(Astro.currentLocale)
+const lang = Astro.currentLocale
+const email = 'contact@promotional-sourcing.eu'
+---
+
+<LegalLayout
+	title={t('privacy.seoTitle')}
+	description={t('privacy.seoDescription')}
+	heading="Politique de confidentialité"
+	route="privacy"
+	updatedAt="7 août 2026"
+>
+	<p>
+		La présente politique décrit comment PROMOTIONAL SOURCING collecte, utilise et protège les
+		données personnelles des visiteurs du site promotional-sourcing.eu, conformément au Règlement
+		général sur la protection des données (RGPD) et à la loi « Informatique et Libertés ».
+	</p>
+
+	<h2>1. Responsable du traitement</h2>
+	<address>
+		PROMOTIONAL SOURCING, société par actions simplifiée<br />
+		72 quai de Bacalan, 33300 Bordeaux — France<br />
+		SIREN 108 093 790 — RCS Bordeaux<br />
+		E-mail : <a href={`mailto:${email}`}>{email}</a>
+	</address>
+	<p>
+		Compte tenu de sa taille et de la nature de ses traitements, PROMOTIONAL SOURCING n'est pas
+		tenue de désigner un délégué à la protection des données. Toute question relative à vos
+		données peut être adressée à l'adresse ci-dessus.
+	</p>
+
+	<h2>2. Données collectées</h2>
+	<p>Nous collectons uniquement les données que vous nous transmettez volontairement :</p>
+	<ul>
+		<li>
+			<strong>Via le formulaire de contact</strong> : nom et prénom, société, qualité (agence,
+			fournisseur ou autre), adresse e-mail professionnelle, numéro de téléphone (facultatif) et
+			le contenu de votre message.
+		</li>
+		<li>
+			<strong>Données techniques</strong> : les journaux de connexion générés automatiquement par
+			notre hébergeur (adresse IP, date et heure de la requête, pages consultées, type de
+			navigateur), à des fins de sécurité et de bon fonctionnement du site.
+		</li>
+	</ul>
+	<p>
+		Aucun champ n'est obligatoire au-delà de ce qui est strictement nécessaire au traitement de
+		votre demande. Nous ne collectons aucune donnée sensible au sens de l'article 9 du RGPD.
+	</p>
+
+	<h2>3. Finalités et bases légales</h2>
+	<ul>
+		<li>
+			<strong>Répondre à votre demande de contact et gérer la relation commerciale</strong> —
+			base légale : l'intérêt légitime de PROMOTIONAL SOURCING (article 6.1.f du RGPD) à répondre
+			à une sollicitation professionnelle que vous avez vous-même initiée.
+		</li>
+		<li>
+			<strong>Assurer la sécurité et la disponibilité du site</strong> — base légale : intérêt
+			légitime (article 6.1.f du RGPD).
+		</li>
+	</ul>
+	<p>
+		Vos données ne sont ni vendues, ni louées, ni cédées à des tiers à des fins de prospection.
+	</p>
+
+	<h2>4. Destinataires et sous-traitants</h2>
+	<p>
+		Vos données sont traitées par les personnes habilitées au sein de PROMOTIONAL SOURCING. Nous
+		faisons appel aux sous-traitants suivants :
+	</p>
+	<ul>
+		<li>
+			<strong>Netlify, Inc.</strong> (512 2nd Street, Suite 200, San Francisco, CA 94107,
+			États-Unis) — hébergement du site et collecte des soumissions du formulaire de contact. Ce
+			traitement implique un transfert de données hors de l'Union européenne, encadré par les
+			clauses contractuelles types de la Commission européenne et par la certification de Netlify
+			au titre du <span>EU–U.S. Data Privacy Framework</span>.
+		</li>
+	</ul>
+	<p>
+		Vos données peuvent également être communiquées aux autorités administratives ou judiciaires
+		lorsque la loi l'exige.
+	</p>
+
+	<h2>5. Durée de conservation</h2>
+	<ul>
+		<li>
+			<strong>Demandes de contact</strong> : 3 ans à compter du dernier échange avec vous,
+			conformément à la recommandation de la CNIL en matière de prospection commerciale B2B.
+		</li>
+		<li><strong>Journaux de connexion</strong> : 12 mois maximum.</li>
+	</ul>
+	<p>
+		À l'issue de ces durées, vos données sont supprimées ou anonymisées.
+	</p>
+
+	<h2>6. Cookies et mesure d'audience</h2>
+	<p>
+		<strong>Le site promotional-sourcing.eu ne dépose aucun cookie</strong> et n'utilise aucun
+		outil de mesure d'audience, de publicité ou de traçage tiers. Aucun consentement préalable
+		n'est donc requis pour la simple consultation du site, et aucun bandeau cookies n'est
+		nécessaire.
+	</p>
+
+	<h2>7. Sécurité</h2>
+	<p>
+		Le site est intégralement servi en HTTPS. L'accès aux demandes reçues via le formulaire est
+		restreint aux personnes habilitées de PROMOTIONAL SOURCING et protégé par authentification.
+	</p>
+
+	<h2>8. Vos droits</h2>
+	<p>
+		Conformément aux articles 15 à 22 du RGPD, vous disposez des droits suivants sur vos données :
+	</p>
+	<ul>
+		<li>droit d'accès et d'obtention d'une copie de vos données ;</li>
+		<li>droit de rectification des données inexactes ou incomplètes ;</li>
+		<li>droit à l'effacement (« droit à l'oubli ») ;</li>
+		<li>droit à la limitation du traitement ;</li>
+		<li>droit d'opposition au traitement fondé sur l'intérêt légitime ;</li>
+		<li>droit à la portabilité de vos données ;</li>
+		<li>droit de définir des directives relatives au sort de vos données après votre décès.</li>
+	</ul>
+	<p>
+		Pour exercer ces droits, écrivez-nous à <a href={`mailto:${email}`}>{email}</a> ou à l'adresse
+		postale indiquée au point 1. Une réponse vous sera apportée dans un délai d'un mois. Une pièce
+		justificative d'identité pourra vous être demandée en cas de doute raisonnable sur votre
+		identité.
+	</p>
+
+	<h2>9. Réclamation</h2>
+	<p>
+		Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous pouvez
+		introduire une réclamation auprès de la Commission Nationale de l'Informatique et des Libertés
+		(CNIL) — 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 —
+		<a href="https://www.cnil.fr" rel="noopener noreferrer" target="_blank">cnil.fr</a>.
+	</p>
+
+	<h2>10. Modification de la présente politique</h2>
+	<p>
+		Cette politique peut être amenée à évoluer, notamment lors du lancement de la plateforme. La
+		date de dernière mise à jour figure en haut de cette page. Voir également nos
+		<a href={localizedPath('legal', lang)}>mentions légales</a>.
+	</p>
+</LegalLayout>

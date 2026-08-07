@@ -2,24 +2,38 @@
 import Button from './Button.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { useTranslations } from '../i18n/utils'
+import { routes, localizedPath, homeAnchor, type RouteKey } from '../i18n/routes'
+
+interface Props {
+  route?: RouteKey
+}
+
+const { route = 'home' } = Astro.props
 
 const t = useTranslations(Astro.currentLocale)
+const lang = Astro.currentLocale
 
+/* Le header est rendu sur toutes les pages : les ancres de section doivent donc être
+   préfixées par l'accueil, sinon elles ne mènent nulle part depuis une page légale. */
 const navItems = [
-  { label: t('nav.agences'), href: '#agences' },
-  { label: t('nav.fournisseurs'), href: '#fournisseurs' },
-  { label: t('nav.contact'), href: '#contact' },
+  { label: t('nav.agences'), href: homeAnchor('agences', lang) },
+  { label: t('nav.fournisseurs'), href: homeAnchor('fournisseurs', lang) },
+  { label: t('nav.contact'), href: localizedPath('contact', lang) },
 ]
+
+const homeHref = localizedPath('home', lang)
+const contactHref = localizedPath('contact', lang)
 
 const currentLocale = Astro.currentLocale ?? 'fr'
 const otherLocale = currentLocale === 'fr' ? 'en' : 'fr'
-const otherLocaleHref = getRelativeLocaleUrl(otherLocale, '/')
+/* Changer de langue garde la page courante au lieu de retomber sur l'accueil. */
+const otherLocaleHref = getRelativeLocaleUrl(otherLocale, routes[route][otherLocale])
 ---
 
 <header data-nav class="sticky top-0 z-50 border-b border-hairline backdrop-blur-md">
 	<div class="flex h-[76px] items-center justify-between px-6 md:px-10">
 		<div class="flex items-center gap-11">
-			<a href="/" class="shrink-0">
+			<a href={homeHref} class="shrink-0">
 				<img src="/logo.png" alt="Promotional Sourcing.eu" width="776" height="310" class="h-12 w-auto" />
 			</a>
 			<nav class="hidden items-center gap-7 text-body-sm font-bold text-text-secondary md:flex">
@@ -53,7 +67,7 @@ const otherLocaleHref = getRelativeLocaleUrl(otherLocale, '/')
 				<span class="rounded-pill bg-yellow-400 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-ink-950">{t('nav.soon')}</span>
 			</span>
 			<div class="hidden md:block">
-				<Button href="#contact" class="!px-5 !py-2.5 text-body-sm">{t('nav.cta')}</Button>
+				<Button href={contactHref} class="!px-5 !py-2.5 text-body-sm">{t('nav.cta')}</Button>
 			</div>
 			<button
 				type="button"
@@ -80,7 +94,7 @@ const otherLocaleHref = getRelativeLocaleUrl(otherLocale, '/')
 				</a>
 			))
 		}
-		<Button href="#contact" data-mobile-nav-link class="mt-3 w-full text-center">{t('nav.cta')}</Button>
+		<Button href={contactHref} data-mobile-nav-link class="mt-3 w-full text-center">{t('nav.cta')}</Button>
 		<a
 			href={otherLocaleHref}
 			hreflang={otherLocale}

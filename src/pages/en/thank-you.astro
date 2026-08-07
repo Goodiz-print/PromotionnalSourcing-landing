@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import ThanksPage from '../../components/ThanksPage.astro'
+import { useTranslations } from '../../i18n/utils'
+
+const t = useTranslations(Astro.currentLocale)
+---
+
+<Layout title={t('thanks.seoTitle')} description={t('thanks.seoDescription')} route="thanks" noindex>
+	<ThanksPage />
+</Layout>

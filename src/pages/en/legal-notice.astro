@@ -1,0 +1,70 @@
+---
+import LegalLayout from '../../layouts/LegalLayout.astro'
+import { useTranslations } from '../../i18n/utils'
+import { localizedPath } from '../../i18n/routes'
+
+const t = useTranslations(Astro.currentLocale)
+const lang = Astro.currentLocale
+const email = 'contact@promotional-sourcing.eu'
+---
+
+<LegalLayout
+	title={t('legal.seoTitle')}
+	description={t('legal.seoDescription')}
+	heading="Legal notice"
+	route="legal"
+	updatedAt="7 August 2026"
+>
+	<h2>Publisher of promotional-sourcing.eu</h2>
+	<p>PROMOTIONAL SOURCING, société par actions simplifiée (French simplified joint-stock company)</p>
+
+	<h2>Registered office</h2>
+	<address>
+		PROMOTIONAL SOURCING<br />
+		72 quai de Bacalan<br />
+		33300 Bordeaux — France
+	</address>
+
+	<h2>Company registration</h2>
+	<p>
+		SIREN 108 093 790 — Bordeaux Trade and Companies Register<br />
+		SIRET (registered office): 108 093 790 00013<br />
+		NAF/APE code: 6312Z — Web portals
+	</p>
+
+	<h2>Intra-community VAT number</h2>
+	<p>FR03 108 093 790</p>
+
+	<h2>Business activity</h2>
+	<p>
+		Publishing and operating a web platform for sourcing promotional products, connecting
+		professional buyers with suppliers.
+	</p>
+
+	<h2>Website host</h2>
+	<address>
+		Netlify, Inc.<br />
+		512 2nd Street, Suite 200<br />
+		San Francisco, CA 94107 — United States<br />
+		<a href="https://www.netlify.com" rel="noopener noreferrer" target="_blank">netlify.com</a>
+	</address>
+
+	<h2>Contact us</h2>
+	<p>Email: <a href={`mailto:${email}`}>{email}</a></p>
+
+	<h2>Intellectual property</h2>
+	<p>
+		All elements making up the promotional-sourcing.eu website (text, graphics, logos, images,
+		structure) are the exclusive property of PROMOTIONAL SOURCING or are used under licence. Any
+		reproduction, representation or distribution, in whole or in part, without prior written
+		authorisation is prohibited and constitutes infringement under Articles L.335-2 et seq. of the
+		French Intellectual Property Code.
+	</p>
+
+	<h2>Personal data</h2>
+	<p>
+		PROMOTIONAL SOURCING attaches great importance to the protection and security of your personal
+		data. To find out more about how your data is collected and processed, please read our
+		<a href={localizedPath('privacy', lang)}>Privacy policy</a>.
+	</p>
+</LegalLayout>
