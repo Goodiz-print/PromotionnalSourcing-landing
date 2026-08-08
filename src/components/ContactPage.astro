@@ -1,5 +1,5 @@
 ---
-import ContactForm from './ContactForm.astro'
+import ContactCta from './ContactCta.astro'
 import { useTranslations } from '../i18n/utils'
 
 const t = useTranslations(Astro.currentLocale)
@@ -16,7 +16,7 @@ const email = 'contact@promotional-sourcing.eu'
 	<div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-16">
 		<div data-reveal>
 			<h2 class="mb-6 text-heading-lg">{t('contact.formHeading')}</h2>
-			<ContactForm variant="default" idPrefix="page" />
+			<ContactCta variant="default" />
 		</div>
 
 		<aside class="flex flex-col gap-8 rounded-xl border border-hairline bg-sunken p-7 lg:self-start">

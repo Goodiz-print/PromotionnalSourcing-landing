@@ -1,5 +1,5 @@
 ---
-import ContactForm from './ContactForm.astro'
+import ContactCta from './ContactCta.astro'
 import { useTranslations } from '../i18n/utils'
 
 const t = useTranslations(Astro.currentLocale)
@@ -22,6 +22,6 @@ const t = useTranslations(Astro.currentLocale)
 		<p class="mx-auto mb-9 max-w-[560px] text-body-lg text-indigo-100">
 			{t('finalCta.descriptionBefore')}<b class="text-yellow-300">{t('finalCta.descriptionHighlight')}</b>{t('finalCta.descriptionAfter')}
 		</p>
-		<ContactForm variant="on-dark" idPrefix="cta" />
+		<ContactCta variant="on-dark" />
 	</div>
 </section>
