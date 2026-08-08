@@ -155,6 +155,14 @@ export const ui = {
     'privacy.seoDescription':
       'Comment PROMOTIONAL SOURCING collecte, utilise et protège vos données personnelles, conformément au RGPD.',
     'legal.updatedOn': 'Dernière mise à jour :',
+    'legal.breadcrumbAria': "Fil d'ariane",
+    'legal.breadcrumbHome': 'Accueil',
+    'legal.tocTitle': 'Sur cette page',
+    'legal.helpEyebrow': 'Une question ?',
+    'legal.helpHeading': 'Besoin d’une précision sur ce document ?',
+    'legal.helpBody':
+      'Notre équipe répond aux demandes juridiques et aux questions sur vos données sous 48 h ouvrées.',
+    'legal.helpCta': 'Nous contacter',
 
     'productMockup.tags': ['Matière recyclée', 'Certifié GRS', 'Stock Europe'],
     'productMockup.products': [
@@ -309,6 +317,14 @@ export const ui = {
     'privacy.seoDescription':
       'How PROMOTIONAL SOURCING collects, uses and protects your personal data, in accordance with the GDPR.',
     'legal.updatedOn': 'Last updated:',
+    'legal.breadcrumbAria': 'Breadcrumb',
+    'legal.breadcrumbHome': 'Home',
+    'legal.tocTitle': 'On this page',
+    'legal.helpEyebrow': 'Any questions?',
+    'legal.helpHeading': 'Need clarification on this document?',
+    'legal.helpBody':
+      'Our team answers legal enquiries and questions about your data within 48 business hours.',
+    'legal.helpCta': 'Contact us',
 
     'productMockup.tags': ['Recycled material', 'GRS certified', 'Europe stock'],
     'productMockup.products': [

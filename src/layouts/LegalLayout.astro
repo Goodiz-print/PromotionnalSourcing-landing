@@ -1,29 +1,219 @@
 ---
 import Layout from './Layout.astro'
+import GradientMesh from '../components/GradientMesh.astro'
+import Button from '../components/Button.astro'
 import { useTranslations } from '../i18n/utils'
-import type { RouteKey } from '../i18n/routes'
+import { localizedPath, type RouteKey } from '../i18n/routes'
+
+/** Une entrée du sommaire : le même tableau alimente le sommaire et les cartes LegalSection. */
+interface LegalSectionEntry {
+  id: string
+  title: string
+}
 
 interface Props {
   title: string
   description: string
   heading: string
+  /** Sur-titre court affiché au-dessus du titre (« Informations légales »…). */
+  eyebrow: string
+  /** Chapô du bandeau : résume le document en une ou deux phrases. */
+  intro: string
   route: RouteKey
   /** Date de dernière mise à jour, déjà formatée dans la langue de la page. */
   updatedAt: string
+  /** Sections du document, dans l'ordre : alimente le sommaire et la numérotation. */
+  sections: readonly LegalSectionEntry[]
 }
 
-const { title, description, heading, route, updatedAt } = Astro.props
+const { title, description, heading, eyebrow, intro, route, updatedAt, sections } = Astro.props
 const t = useTranslations(Astro.currentLocale)
+const lang = Astro.currentLocale
+const email = 'contact@promotional-sourcing.eu'
+
+/* L'autre document légal : les deux pages se renvoient l'une vers l'autre depuis le bloc d'aide. */
+const relatedRoute: RouteKey = route === 'privacy' ? 'legal' : 'privacy'
+const relatedLabel =
+	relatedRoute === 'privacy' ? t('footer.linkPrivacy') : t('footer.linkLegalMentions')
 ---
 
 <Layout title={title} description={description} route={route}>
-	<section class="wrapper py-24">
-		<div class="mx-auto max-w-[720px]">
-			<h1 class="mb-3 text-display-lg">{heading}</h1>
-			<p class="mb-12 text-caption text-text-muted">{t('legal.updatedOn')} {updatedAt}</p>
-			<div class="legal-prose">
-				<slot />
+	<section class="relative overflow-hidden border-b border-hairline bg-sunken">
+		<GradientMesh />
+		<div class="wrapper relative z-10 py-14 md:py-20">
+			<nav aria-label={t('legal.breadcrumbAria')} class="mb-6 flex flex-wrap items-center gap-2 text-caption text-text-muted">
+				<a class="transition-colors hover:text-text-primary" href={localizedPath('home', lang)}>
+					{t('legal.breadcrumbHome')}
+				</a>
+				<span aria-hidden="true">/</span>
+				<span class="font-semibold text-text-secondary">{heading}</span>
+			</nav>
+
+			<p class="anim-rise mb-3 text-eyebrow text-text-brand">{eyebrow}</p>
+			<h1 class="anim-rise mb-5 max-w-[18ch] text-display-lg" style="animation-delay: 0.06s;">
+				{heading}
+			</h1>
+			<p class="anim-rise max-w-[640px] text-body-lg text-text-secondary" style="animation-delay: 0.12s;">
+				{intro}
+			</p>
+
+			<div class="anim-rise mt-8 flex flex-wrap items-center gap-3" style="animation-delay: 0.18s;">
+				<span class="inline-flex items-center gap-2 rounded-pill border border-hairline bg-canvas px-4 py-2 text-caption text-text-secondary shadow-elevation-1">
+					<svg aria-hidden="true" class="h-3.5 w-3.5 text-indigo-500" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+						<circle cx="8" cy="8" r="6.25"></circle>
+						<path d="M8 4.5V8l2.25 1.75" stroke-linecap="round"></path>
+					</svg>
+					{t('legal.updatedOn')} <strong class="font-semibold text-text-primary">{updatedAt}</strong>
+				</span>
+				<a
+					class="inline-flex items-center gap-2 rounded-pill border border-hairline bg-canvas px-4 py-2 text-caption text-text-secondary shadow-elevation-1 transition-colors hover:border-indigo-200 hover:text-text-brand"
+					href={`mailto:${email}`}
+				>
+					<svg aria-hidden="true" class="h-3.5 w-3.5 text-indigo-500" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+						<rect x="1.75" y="3.25" width="12.5" height="9.5" rx="1.5"></rect>
+						<path d="m2.5 4.5 5.5 4 5.5-4" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+					{email}
+				</a>
 			</div>
 		</div>
 	</section>
+
+	<div class="wrapper grid gap-10 py-14 lg:grid-cols-[236px_minmax(0,1fr)] lg:gap-16 lg:py-20">
+		<aside class="hidden lg:sticky lg:top-28 lg:block lg:self-start">
+			<p class="mb-4 text-eyebrow text-text-muted">{t('legal.tocTitle')}</p>
+			<ol class="border-l border-hairline">
+				{
+					sections.map((section, index) => (
+						<li>
+							<a
+								data-toc-link
+								href={`#${section.id}`}
+								class="toc-link -ml-px flex gap-2 border-l-2 border-transparent py-1.5 pl-4 text-body-sm text-text-muted transition-colors hover:text-text-primary"
+							>
+								<span class="text-caption text-text-muted text-tabular" aria-hidden="true">
+									{String(index + 1).padStart(2, '0')}
+								</span>
+								<span>{section.title}</span>
+							</a>
+						</li>
+					))
+				}
+			</ol>
+		</aside>
+
+		<div class="flex min-w-0 flex-col gap-5">
+			<details class="rounded-xl border border-hairline bg-sunken px-5 py-4 lg:hidden">
+				<summary class="cursor-pointer list-none text-eyebrow text-text-primary">
+					<span class="flex items-center justify-between gap-3">
+						{t('legal.tocTitle')}
+						<svg aria-hidden="true" class="h-4 w-4 text-text-muted" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+							<path d="m4 6 4 4 4-4" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</span>
+				</summary>
+				<ol class="mt-4 flex flex-col gap-2 border-t border-hairline pt-4">
+					{
+						sections.map((section, index) => (
+							<li class="flex gap-2 text-body-sm text-text-secondary">
+								<span class="text-caption text-text-muted text-tabular" aria-hidden="true">
+									{String(index + 1).padStart(2, '0')}
+								</span>
+								<a class="hover:text-text-brand" href={`#${section.id}`}>
+									{section.title}
+								</a>
+							</li>
+						))
+					}
+				</ol>
+			</details>
+
+			<slot />
+
+			<div
+				data-reveal
+				class="relative mt-4 overflow-hidden rounded-xl p-8 text-white md:p-10"
+				style="background: var(--gradient-brand);"
+			>
+				<div
+					aria-hidden="true"
+					class="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-white opacity-[0.12] blur-[2px]"
+				>
+				</div>
+				<div class="relative z-10">
+					<p class="mb-3 text-eyebrow text-white/70">{t('legal.helpEyebrow')}</p>
+					<h2 class="mb-3 max-w-[24ch] text-display-md text-white">{t('legal.helpHeading')}</h2>
+					<p class="mb-8 max-w-[52ch] text-body-md text-indigo-100">{t('legal.helpBody')}</p>
+					<div class="flex flex-wrap items-center gap-x-7 gap-y-4">
+						<Button href={localizedPath('contact', lang)} variant="on-dark">
+							{t('legal.helpCta')}
+						</Button>
+						<a
+							class="text-body-md font-semibold text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-white"
+							href={localizedPath(relatedRoute, lang)}
+						>
+							{relatedLabel} <span aria-hidden="true">→</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </Layout>
+
+<style>
+	/* Chevron du sommaire mobile : rotation à l'ouverture, marqueur natif masqué. */
+	summary::-webkit-details-marker {
+		display: none;
+	}
+	details[open] summary svg {
+		transform: rotate(180deg);
+	}
+	summary svg {
+		transition: transform 0.2s ease;
+	}
+
+	/* Section active du sommaire, pilotée par l'IntersectionObserver ci-dessous. */
+	.toc-link[aria-current='true'] {
+		border-color: var(--indigo-500);
+		color: var(--text-primary);
+		font-weight: 600;
+	}
+</style>
+
+<script>
+	const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]'))
+	const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-legal-section]'))
+
+	if (links.length && sections.length) {
+		const linkById = new Map(links.map((link) => [link.hash.slice(1), link]))
+		const visible = new Set<HTMLElement>()
+		let currentId: string | null = null
+
+		const setActive = (id: string) => {
+			if (id === currentId) return
+			currentId = id
+			links.forEach((link) => link.removeAttribute('aria-current'))
+			linkById.get(id)?.setAttribute('aria-current', 'true')
+		}
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) visible.add(entry.target as HTMLElement)
+					else visible.delete(entry.target as HTMLElement)
+				}
+				/* On garde la première section visible dans l'ordre du document : sans ça,
+				   l'ordre des entrées de l'observer ferait sauter le repère d'avant en arrière. */
+				const first = sections.find((section) => visible.has(section))
+				if (first) setActive(first.id)
+			},
+			{ rootMargin: '-100px 0px -65% 0px' },
+		)
+
+		/* Repère par défaut : en haut de page, aucune section n'est encore dans la zone
+		   d'observation, et un sommaire sans repère paraîtrait cassé. */
+		setActive(sections[0].id)
+		sections.forEach((section) => observer.observe(section))
+	}
+</script>

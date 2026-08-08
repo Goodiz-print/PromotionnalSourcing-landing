@@ -1,0 +1,42 @@
+---
+interface LegalSectionEntry {
+  id: string
+  title: string
+}
+
+interface Props {
+  /** Même tableau que celui passé au LegalLayout : le titre et le numéro en sont déduits,
+      pour qu'un sommaire et une carte ne puissent jamais diverger. */
+  sections: readonly LegalSectionEntry[]
+  id: string
+}
+
+const { sections, id } = Astro.props
+const index = sections.findIndex((section) => section.id === id)
+
+if (index === -1) {
+  throw new Error(`LegalSection: id "${id}" absent du tableau sections.`)
+}
+
+const { title } = sections[index]
+const number = String(index + 1).padStart(2, '0')
+---
+
+<section
+	id={id}
+	data-legal-section
+	class="scroll-mt-28 rounded-xl border border-hairline bg-card p-6 shadow-elevation-1 transition-shadow duration-300 hover:shadow-elevation-2 md:p-9"
+>
+	<div class="mb-5 flex items-start gap-4">
+		<span
+			aria-hidden="true"
+			class="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-md bg-brand-subtle text-caption font-bold text-indigo-600 text-tabular"
+		>
+			{number}
+		</span>
+		<h2 class="text-heading-lg">{title}</h2>
+	</div>
+	<div class="legal-prose">
+		<slot />
+	</div>
+</section>

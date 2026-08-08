@@ -1,70 +1,96 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro'
+import LegalSection from '../components/LegalSection.astro'
 import { useTranslations } from '../i18n/utils'
 import { localizedPath } from '../i18n/routes'
 
 const t = useTranslations(Astro.currentLocale)
 const lang = Astro.currentLocale
 const email = 'contact@promotional-sourcing.eu'
+
+const sections = [
+  { id: 'editeur', title: 'Éditeur du site' },
+  { id: 'siege', title: 'Adresse du siège social' },
+  { id: 'immatriculation', title: 'Immatriculation' },
+  { id: 'tva', title: 'Numéro de T.V.A.' },
+  { id: 'activite', title: 'Activité' },
+  { id: 'hebergeur', title: 'Hébergeur du site' },
+  { id: 'contact', title: 'Nous contacter' },
+  { id: 'propriete-intellectuelle', title: 'Propriété intellectuelle' },
+  { id: 'donnees-personnelles', title: 'Données personnelles' },
+] as const
 ---
 
 <LegalLayout
 	title={t('legal.seoTitle')}
 	description={t('legal.seoDescription')}
 	heading="Mentions légales"
+	eyebrow="Informations légales"
+	intro="Identité de l'éditeur du site promotional-sourcing.eu, de son hébergeur, et règles d'usage de son contenu."
 	route="legal"
 	updatedAt="7 août 2026"
+	sections={sections}
 >
-	<h2>Éditeur du site promotional-sourcing.eu</h2>
-	<p>PROMOTIONAL SOURCING, société par actions simplifiée</p>
+	<LegalSection sections={sections} id="editeur">
+		<p>PROMOTIONAL SOURCING, société par actions simplifiée</p>
+		<p>Site : promotional-sourcing.eu</p>
+	</LegalSection>
 
-	<h2>Adresse du siège social</h2>
-	<address>
-		PROMOTIONAL SOURCING<br />
-		72 quai de Bacalan<br />
-		33300 Bordeaux — France
-	</address>
+	<LegalSection sections={sections} id="siege">
+		<address>
+			PROMOTIONAL SOURCING<br />
+			72 quai de Bacalan<br />
+			33300 Bordeaux — France
+		</address>
+	</LegalSection>
 
-	<h2>Immatriculation</h2>
-	<p>
-		SIREN 108 093 790 — RCS Bordeaux<br />
-		SIRET (siège) : 108 093 790 00013<br />
-		Code NAF/APE : 6312Z — Portails internet
-	</p>
+	<LegalSection sections={sections} id="immatriculation">
+		<p>
+			SIREN 108 093 790 — RCS Bordeaux<br />
+			SIRET (siège) : 108 093 790 00013<br />
+			Code NAF/APE : 6312Z — Portails internet
+		</p>
+	</LegalSection>
 
-	<h2>Numéro d'identification T.V.A. intracommunautaire</h2>
-	<p>FR03 108 093 790</p>
+	<LegalSection sections={sections} id="tva">
+		<p>Numéro d'identification T.V.A. intracommunautaire : FR03 108 093 790</p>
+	</LegalSection>
 
-	<h2>Activité</h2>
-	<p>
-		Édition et exploitation d'une plateforme web de sourcing de produits promotionnels, mise en
-		relation entre acheteurs professionnels et fournisseurs.
-	</p>
+	<LegalSection sections={sections} id="activite">
+		<p>
+			Édition et exploitation d'une plateforme web de sourcing de produits promotionnels, mise en
+			relation entre acheteurs professionnels et fournisseurs.
+		</p>
+	</LegalSection>
 
-	<h2>Hébergeur du site</h2>
-	<address>
-		Netlify, Inc.<br />
-		512 2nd Street, Suite 200<br />
-		San Francisco, CA 94107 — États-Unis<br />
-		<a href="https://www.netlify.com" rel="noopener noreferrer" target="_blank">netlify.com</a>
-	</address>
+	<LegalSection sections={sections} id="hebergeur">
+		<address>
+			Netlify, Inc.<br />
+			512 2nd Street, Suite 200<br />
+			San Francisco, CA 94107 — États-Unis<br />
+			<a href="https://www.netlify.com" rel="noopener noreferrer" target="_blank">netlify.com</a>
+		</address>
+	</LegalSection>
 
-	<h2>Nous contacter</h2>
-	<p>E-mail : <a href={`mailto:${email}`}>{email}</a></p>
+	<LegalSection sections={sections} id="contact">
+		<p>E-mail : <a href={`mailto:${email}`}>{email}</a></p>
+	</LegalSection>
 
-	<h2>Propriété intellectuelle</h2>
-	<p>
-		L'ensemble des éléments composant le site promotional-sourcing.eu (textes, graphismes, logos,
-		images, structure) est la propriété exclusive de PROMOTIONAL SOURCING ou fait l'objet d'une
-		autorisation d'utilisation. Toute reproduction, représentation ou diffusion, totale ou
-		partielle, sans autorisation écrite préalable est interdite et constitue une contrefaçon au
-		sens des articles L.335-2 et suivants du Code de la propriété intellectuelle.
-	</p>
+	<LegalSection sections={sections} id="propriete-intellectuelle">
+		<p>
+			L'ensemble des éléments composant le site promotional-sourcing.eu (textes, graphismes, logos,
+			images, structure) est la propriété exclusive de PROMOTIONAL SOURCING ou fait l'objet d'une
+			autorisation d'utilisation. Toute reproduction, représentation ou diffusion, totale ou
+			partielle, sans autorisation écrite préalable est interdite et constitue une contrefaçon au
+			sens des articles L.335-2 et suivants du Code de la propriété intellectuelle.
+		</p>
+	</LegalSection>
 
-	<h2>Données personnelles</h2>
-	<p>
-		PROMOTIONAL SOURCING accorde une grande importance à la protection et à la sécurité de vos
-		données personnelles. Pour en savoir plus sur la collecte et le traitement de vos données,
-		consultez notre <a href={localizedPath('privacy', lang)}>Politique de confidentialité</a>.
-	</p>
+	<LegalSection sections={sections} id="donnees-personnelles">
+		<p>
+			PROMOTIONAL SOURCING accorde une grande importance à la protection et à la sécurité de vos
+			données personnelles. Pour en savoir plus sur la collecte et le traitement de vos données,
+			consultez notre <a href={localizedPath('privacy', lang)}>Politique de confidentialité</a>.
+		</p>
+	</LegalSection>
 </LegalLayout>

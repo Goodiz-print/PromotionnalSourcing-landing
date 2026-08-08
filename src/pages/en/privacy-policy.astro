@@ -1,142 +1,163 @@
 ---
 import LegalLayout from '../../layouts/LegalLayout.astro'
+import LegalSection from '../../components/LegalSection.astro'
 import { useTranslations } from '../../i18n/utils'
 import { localizedPath } from '../../i18n/routes'
 
 const t = useTranslations(Astro.currentLocale)
 const lang = Astro.currentLocale
 const email = 'contact@promotional-sourcing.eu'
+
+const sections = [
+  { id: 'controller', title: 'Data controller' },
+  { id: 'data-collected', title: 'Data we collect' },
+  { id: 'purposes', title: 'Purposes and legal bases' },
+  { id: 'recipients', title: 'Recipients and processors' },
+  { id: 'retention', title: 'Retention periods' },
+  { id: 'cookies', title: 'Cookies and analytics' },
+  { id: 'security', title: 'Security' },
+  { id: 'your-rights', title: 'Your rights' },
+  { id: 'complaints', title: 'Complaints' },
+  { id: 'changes', title: 'Changes to this policy' },
+] as const
 ---
 
 <LegalLayout
 	title={t('privacy.seoTitle')}
 	description={t('privacy.seoDescription')}
 	heading="Privacy policy"
+	eyebrow="Data protection"
+	intro="How PROMOTIONAL SOURCING collects, uses and protects the personal data of visitors to promotional-sourcing.eu, in accordance with the GDPR and French data protection law."
 	route="privacy"
 	updatedAt="7 August 2026"
+	sections={sections}
 >
-	<p>
-		This policy explains how PROMOTIONAL SOURCING collects, uses and protects the personal data of
-		visitors to promotional-sourcing.eu, in accordance with the General Data Protection Regulation
-		(GDPR) and French data protection law.
-	</p>
+	<LegalSection sections={sections} id="controller">
+		<address>
+			PROMOTIONAL SOURCING, société par actions simplifiée<br />
+			72 quai de Bacalan, 33300 Bordeaux — France<br />
+			SIREN 108 093 790 — Bordeaux Trade and Companies Register<br />
+			Email: <a href={`mailto:${email}`}>{email}</a>
+		</address>
+		<p>
+			Given its size and the nature of its processing activities, PROMOTIONAL SOURCING is not
+			required to appoint a Data Protection Officer. Any question regarding your data can be sent to
+			the address above.
+		</p>
+	</LegalSection>
 
-	<h2>1. Data controller</h2>
-	<address>
-		PROMOTIONAL SOURCING, société par actions simplifiée<br />
-		72 quai de Bacalan, 33300 Bordeaux — France<br />
-		SIREN 108 093 790 — Bordeaux Trade and Companies Register<br />
-		Email: <a href={`mailto:${email}`}>{email}</a>
-	</address>
-	<p>
-		Given its size and the nature of its processing activities, PROMOTIONAL SOURCING is not
-		required to appoint a Data Protection Officer. Any question regarding your data can be sent to
-		the address above.
-	</p>
+	<LegalSection sections={sections} id="data-collected">
+		<p>We only collect data that you provide to us voluntarily:</p>
+		<ul>
+			<li>
+				<strong>Through the contact form</strong>: full name, company, capacity (agency, supplier or
+				other), work email address, phone number (optional) and the content of your message.
+			</li>
+			<li>
+				<strong>Technical data</strong>: connection logs generated automatically by our host (IP
+				address, date and time of request, pages viewed, browser type), for security and
+				site-reliability purposes.
+			</li>
+		</ul>
+		<p>
+			No field goes beyond what is strictly necessary to handle your enquiry. We do not collect any
+			special category data within the meaning of Article 9 of the GDPR.
+		</p>
+	</LegalSection>
 
-	<h2>2. Data we collect</h2>
-	<p>We only collect data that you provide to us voluntarily:</p>
-	<ul>
-		<li>
-			<strong>Through the contact form</strong>: full name, company, capacity (agency, supplier or
-			other), work email address, phone number (optional) and the content of your message.
-		</li>
-		<li>
-			<strong>Technical data</strong>: connection logs generated automatically by our host (IP
-			address, date and time of request, pages viewed, browser type), for security and
-			site-reliability purposes.
-		</li>
-	</ul>
-	<p>
-		No field goes beyond what is strictly necessary to handle your enquiry. We do not collect any
-		special category data within the meaning of Article 9 of the GDPR.
-	</p>
+	<LegalSection sections={sections} id="purposes">
+		<ul>
+			<li>
+				<strong>Responding to your enquiry and managing the business relationship</strong> — legal
+				basis: the legitimate interest of PROMOTIONAL SOURCING (Article 6(1)(f) GDPR) in responding
+				to a professional enquiry that you initiated yourself.
+			</li>
+			<li>
+				<strong>Ensuring the security and availability of the website</strong> — legal basis:
+				legitimate interest (Article 6(1)(f) GDPR).
+			</li>
+		</ul>
+		<p>Your data is never sold, rented or shared with third parties for marketing purposes.</p>
+	</LegalSection>
 
-	<h2>3. Purposes and legal bases</h2>
-	<ul>
-		<li>
-			<strong>Responding to your enquiry and managing the business relationship</strong> — legal
-			basis: the legitimate interest of PROMOTIONAL SOURCING (Article 6(1)(f) GDPR) in responding
-			to a professional enquiry that you initiated yourself.
-		</li>
-		<li>
-			<strong>Ensuring the security and availability of the website</strong> — legal basis:
-			legitimate interest (Article 6(1)(f) GDPR).
-		</li>
-	</ul>
-	<p>Your data is never sold, rented or shared with third parties for marketing purposes.</p>
+	<LegalSection sections={sections} id="recipients">
+		<p>
+			Your data is processed by authorised staff within PROMOTIONAL SOURCING. We use the following
+			processors:
+		</p>
+		<ul>
+			<li>
+				<strong>Netlify, Inc.</strong> (512 2nd Street, Suite 200, San Francisco, CA 94107, United
+				States) — website hosting and collection of contact-form submissions. This involves a
+				transfer of data outside the European Union, covered by the European Commission's Standard
+				Contractual Clauses and by Netlify's certification under the
+				<span>EU–U.S. Data Privacy Framework</span>.
+			</li>
+		</ul>
+		<p>
+			Your data may also be disclosed to administrative or judicial authorities where required by
+			law.
+		</p>
+	</LegalSection>
 
-	<h2>4. Recipients and processors</h2>
-	<p>
-		Your data is processed by authorised staff within PROMOTIONAL SOURCING. We use the following
-		processors:
-	</p>
-	<ul>
-		<li>
-			<strong>Netlify, Inc.</strong> (512 2nd Street, Suite 200, San Francisco, CA 94107, United
-			States) — website hosting and collection of contact-form submissions. This involves a
-			transfer of data outside the European Union, covered by the European Commission's Standard
-			Contractual Clauses and by Netlify's certification under the
-			<span>EU–U.S. Data Privacy Framework</span>.
-		</li>
-	</ul>
-	<p>
-		Your data may also be disclosed to administrative or judicial authorities where required by
-		law.
-	</p>
+	<LegalSection sections={sections} id="retention">
+		<ul>
+			<li>
+				<strong>Contact enquiries</strong>: 3 years from our last exchange with you, in line with
+				the French data protection authority's (CNIL) recommendation for B2B prospecting.
+			</li>
+			<li><strong>Connection logs</strong>: 12 months maximum.</li>
+		</ul>
+		<p>After these periods, your data is deleted or anonymised.</p>
+	</LegalSection>
 
-	<h2>5. Retention periods</h2>
-	<ul>
-		<li>
-			<strong>Contact enquiries</strong>: 3 years from our last exchange with you, in line with
-			the French data protection authority's (CNIL) recommendation for B2B prospecting.
-		</li>
-		<li><strong>Connection logs</strong>: 12 months maximum.</li>
-	</ul>
-	<p>After these periods, your data is deleted or anonymised.</p>
+	<LegalSection sections={sections} id="cookies">
+		<p>
+			<strong>promotional-sourcing.eu does not set any cookies</strong> and uses no analytics,
+			advertising or third-party tracking tools. No prior consent is therefore required simply to
+			browse the site, and no cookie banner is needed.
+		</p>
+	</LegalSection>
 
-	<h2>6. Cookies and analytics</h2>
-	<p>
-		<strong>promotional-sourcing.eu does not set any cookies</strong> and uses no analytics,
-		advertising or third-party tracking tools. No prior consent is therefore required simply to
-		browse the site, and no cookie banner is needed.
-	</p>
+	<LegalSection sections={sections} id="security">
+		<p>
+			The website is served entirely over HTTPS. Access to enquiries received via the form is
+			restricted to authorised staff at PROMOTIONAL SOURCING and protected by authentication.
+		</p>
+	</LegalSection>
 
-	<h2>7. Security</h2>
-	<p>
-		The website is served entirely over HTTPS. Access to enquiries received via the form is
-		restricted to authorised staff at PROMOTIONAL SOURCING and protected by authentication.
-	</p>
+	<LegalSection sections={sections} id="your-rights">
+		<p>Under Articles 15 to 22 of the GDPR, you have the following rights over your data:</p>
+		<ul>
+			<li>the right of access and to obtain a copy of your data;</li>
+			<li>the right to rectification of inaccurate or incomplete data;</li>
+			<li>the right to erasure (the "right to be forgotten");</li>
+			<li>the right to restriction of processing;</li>
+			<li>the right to object to processing based on legitimate interest;</li>
+			<li>the right to data portability;</li>
+			<li>the right to give instructions on what happens to your data after your death.</li>
+		</ul>
+		<p>
+			To exercise these rights, write to <a href={`mailto:${email}`}>{email}</a> or to the postal
+			address given in section 1. We will respond within one month. Proof of identity may be
+			requested if there is reasonable doubt as to your identity.
+		</p>
+	</LegalSection>
 
-	<h2>8. Your rights</h2>
-	<p>Under Articles 15 to 22 of the GDPR, you have the following rights over your data:</p>
-	<ul>
-		<li>the right of access and to obtain a copy of your data;</li>
-		<li>the right to rectification of inaccurate or incomplete data;</li>
-		<li>the right to erasure (the "right to be forgotten");</li>
-		<li>the right to restriction of processing;</li>
-		<li>the right to object to processing based on legitimate interest;</li>
-		<li>the right to data portability;</li>
-		<li>the right to give instructions on what happens to your data after your death.</li>
-	</ul>
-	<p>
-		To exercise these rights, write to <a href={`mailto:${email}`}>{email}</a> or to the postal
-		address given in section 1. We will respond within one month. Proof of identity may be
-		requested if there is reasonable doubt as to your identity.
-	</p>
+	<LegalSection sections={sections} id="complaints">
+		<p>
+			If, after contacting us, you believe your rights have not been respected, you may lodge a
+			complaint with the French data protection authority (CNIL) — 3 place de Fontenoy, TSA 80715,
+			75334 Paris Cedex 07 —
+			<a href="https://www.cnil.fr" rel="noopener noreferrer" target="_blank">cnil.fr</a>.
+		</p>
+	</LegalSection>
 
-	<h2>9. Complaints</h2>
-	<p>
-		If, after contacting us, you believe your rights have not been respected, you may lodge a
-		complaint with the French data protection authority (CNIL) — 3 place de Fontenoy, TSA 80715,
-		75334 Paris Cedex 07 —
-		<a href="https://www.cnil.fr" rel="noopener noreferrer" target="_blank">cnil.fr</a>.
-	</p>
-
-	<h2>10. Changes to this policy</h2>
-	<p>
-		This policy may change, in particular when the platform launches. The date of the latest update
-		appears at the top of this page. See also our
-		<a href={localizedPath('legal', lang)}>legal notice</a>.
-	</p>
+	<LegalSection sections={sections} id="changes">
+		<p>
+			This policy may change, in particular when the platform launches. The date of the latest update
+			appears at the top of this page. See also our
+			<a href={localizedPath('legal', lang)}>legal notice</a>.
+		</p>
+	</LegalSection>
 </LegalLayout>
