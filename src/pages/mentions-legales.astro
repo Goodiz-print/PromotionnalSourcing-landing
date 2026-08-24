@@ -7,6 +7,8 @@ import { localizedPath } from '../i18n/routes'
 const t = useTranslations(Astro.currentLocale)
 const lang = Astro.currentLocale
 const email = 'contact@promotional-sourcing.eu'
+const phone = '06 59 20 93 71'
+const phoneHref = 'tel:+33659209371'
 
 const sections = [
   { id: 'editeur', title: 'Éditeur du site' },
@@ -34,6 +36,7 @@ const sections = [
 	<LegalSection sections={sections} id="editeur">
 		<p>PROMOTIONAL SOURCING, société par actions simplifiée</p>
 		<p>Site : promotional-sourcing.eu</p>
+		<p>Directeur de la publication : Virgile Accomando</p>
 	</LegalSection>
 
 	<LegalSection sections={sections} id="siege">
@@ -73,6 +76,7 @@ const sections = [
 	</LegalSection>
 
 	<LegalSection sections={sections} id="contact">
+		<p>Téléphone : <a href={phoneHref}>{phone}</a></p>
 		<p>E-mail : <a href={`mailto:${email}`}>{email}</a></p>
 	</LegalSection>
 
