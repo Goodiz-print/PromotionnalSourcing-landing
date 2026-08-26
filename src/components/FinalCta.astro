@@ -1,8 +1,11 @@
 ---
-import ContactCta from './ContactCta.astro'
+import Button from './Button.astro'
 import { useTranslations } from '../i18n/utils'
+import { localizedPath } from '../i18n/routes'
+import { defaultLang } from '../i18n/ui'
 
 const t = useTranslations(Astro.currentLocale)
+const lang = Astro.currentLocale ?? defaultLang
 ---
 
 <section id="contact" class="relative overflow-hidden px-6 py-[88px] text-center md:px-10" style="background: var(--gradient-brand);">
@@ -22,6 +25,6 @@ const t = useTranslations(Astro.currentLocale)
 		<p class="mx-auto mb-9 max-w-[560px] text-body-lg text-indigo-100">
 			{t('finalCta.descriptionBefore')}<b class="text-yellow-300">{t('finalCta.descriptionHighlight')}</b>{t('finalCta.descriptionAfter')}
 		</p>
-		<ContactCta variant="on-dark" />
+		<Button variant="on-dark" href={`${localizedPath('contact', lang)}?type=partenariat`}>{t('finalCta.cta')}</Button>
 	</div>
 </section>

@@ -1,0 +1,89 @@
+---
+import Button from './Button.astro'
+import { useTranslations } from '../i18n/utils'
+import { localizedPath } from '../i18n/routes'
+import { defaultLang } from '../i18n/ui'
+
+const t = useTranslations(Astro.currentLocale)
+const lang = Astro.currentLocale ?? defaultLang
+---
+
+<form method="POST" action="/.netlify/functions/contact" class="mx-auto w-full max-w-[620px] text-left">
+	<input type="hidden" name="locale" value={lang} />
+
+	{/* Piège à bots : masqué visuellement et retiré de l'ordre de tabulation. */}
+	<p class="hidden">
+		<label>{t('contact.honeypot')} <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+	</p>
+
+	<div class="grid gap-4 sm:grid-cols-2">
+		<div>
+			<label class="mb-1.5 block text-body-sm font-semibold text-text-primary" for="contact-name">
+				{t('contact.fieldName')} *
+			</label>
+			<input class="field-control" type="text" id="contact-name" name="name" required autocomplete="name" />
+		</div>
+		<div>
+			<label class="mb-1.5 block text-body-sm font-semibold text-text-primary" for="contact-company">
+				{t('contact.fieldCompany')} *
+			</label>
+			<input class="field-control" type="text" id="contact-company" name="company" required autocomplete="organization" />
+		</div>
+		<div>
+			<label class="mb-1.5 block text-body-sm font-semibold text-text-primary" for="contact-email">
+				{t('contact.fieldEmail')} *
+			</label>
+			<input class="field-control" type="email" id="contact-email" name="email" required autocomplete="email" />
+		</div>
+		<div>
+			<label class="mb-1.5 block text-body-sm font-semibold text-text-primary" for="contact-phone">
+				{t('contact.fieldPhone')} <span class="font-normal text-text-muted">({t('contact.fieldPhoneOptional')})</span>
+			</label>
+			<input class="field-control" type="tel" id="contact-phone" name="phone" autocomplete="tel" />
+		</div>
+		<div class="sm:col-span-2">
+			<label class="mb-1.5 block text-body-sm font-semibold text-text-primary" for="contact-type">
+				{t('contact.fieldType')} *
+			</label>
+			<select class="field-control" id="contact-type" name="type" required data-request-type>
+				<option value="contact" selected>{t('contact.fieldTypeContact')}</option>
+				<option value="partenariat">{t('contact.fieldTypePartnership')}</option>
+			</select>
+		</div>
+		<div class="sm:col-span-2">
+			<label class="mb-1.5 block text-body-sm font-semibold text-text-primary" for="contact-message">
+				{t('contact.fieldMessage')} *
+			</label>
+			<textarea
+				class="field-control resize-y"
+				id="contact-message"
+				name="message"
+				required
+				rows="5"
+				placeholder={t('contact.fieldMessagePlaceholder')}></textarea>
+		</div>
+	</div>
+
+	<p class="mt-3 text-caption text-text-muted">{t('contact.requiredHint')}</p>
+
+	<div class="mt-6 flex flex-wrap items-center justify-center gap-4 sm:justify-start">
+		<Button type="submit" variant="primary">{t('contact.submit')}</Button>
+		<p class="max-w-[320px] text-caption text-text-muted">
+			{t('contact.privacyBefore')}<a
+				class="text-text-brand underline underline-offset-2"
+				href={localizedPath('privacy', lang)}>{t('contact.privacyLink')}</a
+			>{t('contact.privacyAfter')}
+		</p>
+	</div>
+</form>
+
+<script>
+	// Pré-sélection du type de demande depuis les CTA « partenariat » (/contact?type=partenariat).
+	if (new URLSearchParams(location.search).get('type') === 'partenariat') {
+		document
+			.querySelectorAll<HTMLSelectElement>('[data-request-type]')
+			.forEach((select) => {
+				select.value = 'partenariat'
+			})
+	}
+</script>

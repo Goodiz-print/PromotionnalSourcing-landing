@@ -1,5 +1,5 @@
 ---
-import ContactCta from './ContactCta.astro'
+import ContactForm from './ContactForm.astro'
 import { useTranslations } from '../i18n/utils'
 
 const t = useTranslations(Astro.currentLocale)
@@ -16,7 +16,14 @@ const email = 'contact@promotional-sourcing.eu'
 	<div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-16">
 		<div data-reveal>
 			<h2 class="mb-6 text-heading-lg">{t('contact.formHeading')}</h2>
-			<ContactCta variant="default" />
+			<p
+				data-form-error
+				hidden
+				class="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-body-sm text-red-700"
+			>
+				{t('contact.errorBanner')}
+			</p>
+			<ContactForm />
 		</div>
 
 		<aside class="flex flex-col gap-8 rounded-xl border border-hairline bg-sunken p-7 lg:self-start">
@@ -41,3 +48,10 @@ const email = 'contact@promotional-sourcing.eu'
 		</aside>
 	</div>
 </section>
+
+<script>
+	// Affiche la bannière d'erreur après une redirection /contact?error=1 depuis la fonction d'envoi.
+	if (new URLSearchParams(location.search).has('error')) {
+		document.querySelector('[data-form-error]')?.removeAttribute('hidden')
+	}
+</script>
