@@ -171,8 +171,8 @@ export const ui = {
     'productMockup.tags': ['Matière recyclée', 'Certifié GRS', 'Stock Europe'],
     'productMockup.products': [
       { name: 'Sac tote coton bio 220g', country: 'France' },
-      { name: 'Sac isotherme polyester recyclé', country: 'Suède' },
-      { name: 'Serviette de plage recyclée', country: 'Espagne' },
+      { name: 'Sac tote coton 140g couleur moutarde', country: 'Portugal' },
+      { name: 'Sac tote coton à soufflet 140g', country: 'Espagne' },
     ],
     'productMockup.aiChip': 'Recherche IA',
     'productMockup.verifiedLabel': 'Fournisseur vérifié',
@@ -337,8 +337,8 @@ export const ui = {
     'productMockup.tags': ['Recycled material', 'GRS certified', 'Europe stock'],
     'productMockup.products': [
       { name: 'Organic cotton tote bag 220g', country: 'France' },
-      { name: 'Recycled polyester cooler bag', country: 'Sweden' },
-      { name: 'Recycled beach towel', country: 'Spain' },
+      { name: 'Mustard 140g cotton tote bag', country: 'Portugal' },
+      { name: '140g cotton tote bag with gusset', country: 'Spain' },
     ],
     'productMockup.aiChip': 'AI search',
     'productMockup.verifiedLabel': 'Verified supplier',
