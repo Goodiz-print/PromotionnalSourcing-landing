@@ -35,7 +35,7 @@ export const ui = {
     'nav.loginTitle': 'Disponible au lancement',
     'nav.soon': 'Bientôt',
 
-    'hero.eyebrow': 'Lancement : janvier 2027',
+    'hero.eyebrow': 'Lancement : 2027',
     'hero.titleLine1': "Le sourcing d'objets promotionnels.",
     'hero.titleWord1': 'Simplifié.',
     'hero.titleWord2': 'Intelligent.',
@@ -95,7 +95,7 @@ export const ui = {
       "Pas d'abonnement, pas de développement de votre côté : rejoindre la plateforme est simple et gratuit.",
     'suppliers.cta': 'Référencer mon catalogue',
 
-    'finalCta.badge': 'Lancement prévu : janvier 2027',
+    'finalCta.badge': 'Lancement prévu : 2027',
     'finalCta.heading': 'Nous construisons la nouvelle référence du sourcing de goodies en Europe.',
     'finalCta.descriptionBefore': 'Fournisseurs : rejoignez les premiers partenaires et bénéficiez d’une ',
     'finalCta.descriptionHighlight': 'visibilité prioritaire',
@@ -204,7 +204,7 @@ export const ui = {
     'nav.loginTitle': 'Available at launch',
     'nav.soon': 'Soon',
 
-    'hero.eyebrow': 'Launching: January 2027',
+    'hero.eyebrow': 'Launching: 2027',
     'hero.titleLine1': 'Sourcing promotional products.',
     'hero.titleWord1': 'Simplified.',
     'hero.titleWord2': 'Intelligent.',
@@ -261,7 +261,7 @@ export const ui = {
     'suppliers.point4Desc': 'No subscription, no development on your end: joining the platform is simple and free.',
     'suppliers.cta': 'List my catalogue',
 
-    'finalCta.badge': 'Launching: January 2027',
+    'finalCta.badge': 'Launching: 2027',
     'finalCta.heading': 'We are building the new reference for promotional sourcing in Europe.',
     'finalCta.descriptionBefore': 'Suppliers: join the first partners and get ',
     'finalCta.descriptionHighlight': 'priority visibility',
