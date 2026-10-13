@@ -1,8 +1,8 @@
 ---
 import { Image } from 'astro:assets'
 import toteBagCoton from '../assets/images/mo2197-09.jpg'
-import sacIsotherme from '../assets/images/impr_1515772-PDP_12.webp'
-import serviettePlage from '../assets/images/mo2059-12.jpg'
+import toteBagMoutarde from '../assets/images/tote-bag-coton-moutarde.jpg'
+import toteBagSoufflet from '../assets/images/tote-bag-coton-soufflet.jpg'
 import { useTranslations } from '../i18n/utils'
 
 const t = useTranslations(Astro.currentLocale)
@@ -12,8 +12,8 @@ const productLabels = t('productMockup.products')
 
 const products = [
   { ...productLabels[0], verified: true, price: '2,10', image: toteBagCoton, focus: 'center' },
-  { ...productLabels[1], verified: true, price: '6,90', image: sacIsotherme, focus: 'center' },
-  { ...productLabels[2], verified: false, price: '4,50', image: serviettePlage, focus: 'center' },
+  { ...productLabels[1], verified: true, price: '1,85', image: toteBagMoutarde, focus: 'center' },
+  { ...productLabels[2], verified: false, price: '2,40', image: toteBagSoufflet, focus: 'center' },
 ]
 ---
 
