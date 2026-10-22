@@ -168,7 +168,7 @@ export const ui = {
       'Notre équipe répond aux demandes juridiques et aux questions sur vos données sous 48 h ouvrées.',
     'legal.helpCta': 'Nous contacter',
 
-    'productMockup.tags': ['Matière recyclée', 'Certifié GRS', 'Stock Europe'],
+    'productMockup.tags': ['Coton biologique', 'Certifié GOTS', 'Stock Europe'],
     'productMockup.products': [
       { name: 'Sac tote coton bio 220g', country: 'France' },
       { name: 'Sac tote coton 140g couleur moutarde', country: 'Portugal' },
@@ -182,7 +182,7 @@ export const ui = {
     'productMockup.footerCompare': 'Comparaison instantanée entre fournisseurs',
     'productMockup.footerFlag': "Aperçu de l'interface",
     'productMockup.ariaLabel':
-      "Aperçu d'une recherche sur promotional-sourcing.eu : un sac tote en coton bio, un sac isotherme en polyester recyclé et une serviette de plage recyclée, filtrés par matière recyclée, certification GRS et stock Europe, avec fournisseur vérifié, pays et prix.",
+      "Aperçu d'une recherche sur promotional-sourcing.eu : un sac tote en coton bio, un sac isotherme en polyester recyclé et une serviette de plage recyclée, filtrés par coton biologique, certification GOTS et stock Europe, avec fournisseur vérifié, pays et prix.",
   },
   en: {
     'seo.title': 'Promotional Sourcing.eu — Sourcing promotional products, finally reliable',
@@ -334,7 +334,7 @@ export const ui = {
       'Our team answers legal enquiries and questions about your data within 48 business hours.',
     'legal.helpCta': 'Contact us',
 
-    'productMockup.tags': ['Recycled material', 'GRS certified', 'Europe stock'],
+    'productMockup.tags': ['Organic cotton', 'GOTS certified', 'Europe stock'],
     'productMockup.products': [
       { name: 'Organic cotton tote bag 220g', country: 'France' },
       { name: 'Mustard 140g cotton tote bag', country: 'Portugal' },
@@ -348,6 +348,6 @@ export const ui = {
     'productMockup.footerCompare': 'Instant comparison across suppliers',
     'productMockup.footerFlag': 'Interface preview',
     'productMockup.ariaLabel':
-      'Preview of a search on promotional-sourcing.eu: an organic cotton tote bag, a recycled polyester cooler bag and a recycled beach towel, filtered by recycled material, GRS certification and Europe stock, with verified supplier, country and price.',
+      'Preview of a search on promotional-sourcing.eu: an organic cotton tote bag, a recycled polyester cooler bag and a recycled beach towel, filtered by organic cotton, GOTS certification and Europe stock, with verified supplier, country and price.',
   },
 } as const
